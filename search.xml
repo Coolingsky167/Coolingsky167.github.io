@@ -11,7 +11,7 @@
 <h2 id="3-操作流程"><a href="#3-操作流程" class="headerlink" title="3. 操作流程"></a>3. 操作流程</h2><h3 id="3-1-安装docker"><a href="#3-1-安装docker" class="headerlink" title="3.1 安装docker"></a>3.1 安装docker</h3><p>本人使用的是腾讯云服务器，操作系统是ubuntu18.04.4 LTS</p>
 <figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">apt-<span class="builtin-name">get</span> install docker </span><br></pre></td></tr></table></figure>
 
-<p>ps. 具体怎么安装有点忘了 不行自己搜索”ubuntu docer安装”</p>
+<p>ps. 具体怎么安装有点忘了 不行自己搜索”ubuntu docker安装”</p>
 <h3 id="3-2-拉取Jenkins镜像"><a href="#3-2-拉取Jenkins镜像" class="headerlink" title="3.2 拉取Jenkins镜像"></a>3.2 拉取Jenkins镜像</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -p 8080:8080 jenkinsci/blueocean</span><br></pre></td></tr></table></figure>
 
 <p>此时系统中应该已经有jenkins的镜像，为了给后面Tomcat也留个端口，可以添加一些端口以便使用.</p>
