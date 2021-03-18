@@ -173,79 +173,9 @@
         <h1 id="Jenkins"><a href="#Jenkins" class="headerlink" title="Jenkins"></a>Jenkins</h1><p>文档路径：<a target="_blank" rel="noopener" href="https://www.jenkins.io/zh/doc/book/installing/">https://www.jenkins.io/zh/doc/book/installing/</a></p>
 <h2 id="1-什么是CI"><a href="#1-什么是CI" class="headerlink" title="1. 什么是CI"></a>1. 什么是CI</h2><p>持续集成(Continuous integration)是一种软件开发实践，即团队开发成员经常集成他们的工作，通常每个成员每天至少集成一次，也就意味着每天可能会发生多次集成。每次集成都通过自动化的构建（包括编译，发布，自动化测试）来验证，从而尽早地发现集成错误。</p>
 <h2 id="2-实验目的"><a href="#2-实验目的" class="headerlink" title="2. 实验目的"></a>2. 实验目的</h2><p>本次试验将采用一个简单的maven项目，通过在docker上拉取Jenkins镜像，并且在docker中配置Tomcat，自动拉取Gitlab的代码，实现持续集成。</p>
-<h2 id="3-操作流程"><a href="#3-操作流程" class="headerlink" title="3. 操作流程"></a>3. 操作流程</h2><h3 id="3-1-安装docker"><a href="#3-1-安装docker" class="headerlink" title="3.1 安装docker"></a>3.1 安装docker</h3><p>本人使用的是腾讯云服务器，操作系统是ubuntu18.04.4 LTS</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-<span class="builtin-name">get</span> install docker </span><br></pre></td></tr></table></figure>
-
-<p>ps. 具体怎么安装有点忘了 不行自己搜索”ubuntu docer安装”</p>
-<h3 id="3-2-拉取Jenkins镜像"><a href="#3-2-拉取Jenkins镜像" class="headerlink" title="3.2 拉取Jenkins镜像"></a>3.2 拉取Jenkins镜像</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 8080:8080 jenkinsci/blueocean</span><br></pre></td></tr></table></figure>
-
-<p>此时系统中应该已经有jenkins的镜像，为了给后面Tomcat也留个端口，可以添加一些端口以便使用.</p>
-<p>把下面这个加到上面的指令中，因为水平有限，一旦容器创建就不会再添加端口映射了</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-p 8088:8088</span><br></pre></td></tr></table></figure>
-
-<p>查看系统中已经有的镜像&amp;存在的容器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker image ls</span><br><span class="line">docker ps -a </span><br></pre></td></tr></table></figure>
-
-<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318185732804.png" alt="image-20210318185732804"></p>
-<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318185635903.png" alt="image-20210318185635903"></p>
-<p>如果想要为Jenkins镜像再创建容器：</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">run</span><span class="bash"> &#123;IMAGE ID&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="3-3-访问8080端口"><a href="#3-3-访问8080端口" class="headerlink" title="3.3 访问8080端口"></a>3.3 访问8080端口</h3><p>此时启动创建好的镜像，访问8080端口。（服务器就公网ip:8080,本地就localhost）</p>
-<p>这时候会有一个一长串的码，他会提示你位置，复制位置cat输出一下就可以，然后按照指示创建账号。</p>
-<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318190205753.png" alt="image-20210318190205753"></p>
-<p>根据创建好的账号登录即可。</p>
-<h3 id="3-4-配置Maven"><a href="#3-4-配置Maven" class="headerlink" title="3.4 配置Maven"></a>3.4 配置Maven</h3><p>容器内是自带JDK环境的，可以 java -version确认一下</p>
-<p>进入容器内部指令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -ti --user root &#123;容器id&#125; sh</span><br></pre></td></tr></table></figure>
-
-
-
-<p>下载maven，安装到任意路径下，配置环境变量（相关知识自行搜索maven安装）</p>
-<p>我这里把maven安装到了</p>
-<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318190457509.png" alt="image-20210318190457509"></p>
-<p>这里我可能走了弯路，我是通过scp指令先将maven安装包发到服务器上，再通过docker cp将文件复制进去解压缩等。</p>
-<p>配置环境变量(一定要添加在下面，我也不知道为啥，反正写在前面死活不行)：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318190742886.png" alt="image-20210318190742886"></p>
-<p>注意：maven最好换个源（到maven路径下找到conf/settings.xml）直接把它删了替换成同名文件：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">settings</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://maven.apache.org/SETTINGS/1.0.0&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>alimaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>aliyun maven<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="3-5-到Jenkins中再配置配置"><a href="#3-5-到Jenkins中再配置配置" class="headerlink" title="3.5 到Jenkins中再配置配置"></a>3.5 到Jenkins中再配置配置</h3><h4 id="3-5-1-系统管理-全局工具配置"><a href="#3-5-1-系统管理-全局工具配置" class="headerlink" title="3.5.1 系统管理-全局工具配置"></a>3.5.1 系统管理-全局工具配置</h4><p>查找某个环境变量位置可以：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$JAVA_HOME</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="Maven配置"><a href="#Maven配置" class="headerlink" title="Maven配置"></a>Maven配置</h5><p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318191206251.png" alt="image-20210318191206251"></p>
-<h5 id="JDK"><a href="#JDK" class="headerlink" title="JDK"></a>JDK</h5><p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318191234396.png" alt="image-20210318191234396"></p>
-<h4 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h4><p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318191422233.png" alt="image-20210318191422233"></p>
-<h4 id="3-5-1-系统管理-系统配置"><a href="#3-5-1-系统管理-系统配置" class="headerlink" title="3.5.1 系统管理-系统配置"></a>3.5.1 系统管理-系统配置</h4><p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318191524512.png" alt="image-20210318191524512"></p>
-<h3 id="3-6-Gitlab上整一个Maven项目"><a href="#3-6-Gitlab上整一个Maven项目" class="headerlink" title="3.6 Gitlab上整一个Maven项目"></a>3.6 Gitlab上整一个Maven项目</h3><p>到Jenkins上新建任务-流水线，我们可以先试一下，选择应用保存。</p>
-<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318192907370.png" alt="image-20210318192907370"></p>
-<p>点击“立即构建”。</p>
-<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318192956758.png" alt="image-20210318192956758"></p>
-<p>构建完成，并且可以到控制台查看输出 。</p>
-<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318193027967.png" alt="image-20210318193027967"></p>
-<p>好了。下面我们实现三个功能：</p>
-<ol>
-<li>从gitlab拉取代码</li>
-<li>maven构建打成war包</li>
-<li>部署到Tomcat服务器</li>
-</ol>
-<p>值得高兴的是，Jenkins给了一个超级好用的功能，自动生成流水线脚本。</p>
-<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318193335414.png" alt="image-20210318193335414"></p>
-<p>点击“流水线语法”，我们开始（分别对应上述三个阶段）：</p>
-<ol>
-<li>在Repoitory中填写自己gitlab的“clone”的http连接，在Credentials中添加自己的账户密码</li>
-</ol>
-<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318193539503.png" alt="image-20210318193539503"></p>
-<ol start="2">
-<li>shell命令 maven clean package (p.s. maven相关知识自己去学习)</li>
-<li>在credentials中添加自己tomcat管理员的账号密码。具体添加方法百度。在Tomcat URL中添加自己的tomcat地址。（一般情况下是8080，我这里把tomcat文件也放到了docker同一个容器中，所以8080冲突，就把端口改成了8088）</li>
-</ol>
-<p>p.s 这里关于tomcat的操作大概有添加管理员，改端口两步。具体步骤就…（自己做的时候一点一点搜下来，没想到写成博客要这么多，懒了，这里不难）</p>
-<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318193715939.png" alt="image-20210318193715939"></p>
-<p>之后到ip:端口访问tomcat 到web-app里找，就可以访问啦。</p>
-
+        
+          <a class="article-more-a" href="/2021/03/16/Jenkins%E9%85%8D%E7%BD%AE/#more">more >></a>
+        
       
 
       
