@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Coolingsky的博客</title>
+  <title>Tag: Java | Coolingsky的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="A man can be destroyed but not defeated">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Coolingsky的博客">
-<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:url" content="http://example.com/tags/Java/index.html">
 <meta property="og:site_name" content="Coolingsky的博客">
 <meta property="og:description" content="A man can be destroyed but not defeated">
 <meta property="og:locale" content="zh_CN">
@@ -150,56 +150,34 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-JAVA-collection" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
     
-      <header class="article-header">
-        
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2021" class="archive-year">2021</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2021/03/19/JAVA-collection/" class="archive-article-date">
+  	<time datetime="2021-03-19T12:37:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-19</time>
+</a>
+        </div>
+    	 
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/19/JAVA-collection/">JAVA collection</a>
+      <a class="archive-article-title" href="/2021/03/19/JAVA-collection/">JAVA collection</a>
     </h1>
   
 
-        
-        <a href="/2021/03/19/JAVA-collection/" class="archive-article-date">
-  	<time datetime="2021-03-19T12:37:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-整体架构"><a href="#1-整体架构" class="headerlink" title="1. 整体架构"></a>1. 整体架构</h1><p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210319204042645.png" alt="image-20210319204042645"></p>
-<h1 id="2-Set"><a href="#2-Set" class="headerlink" title="2. Set"></a>2. Set</h1><p>Set继承于Collection接口，是一个不允许出现重复元素，并且无序的集合，主要有HashSet和TreeSet两大实现类。</p>
-<h2 id="2-1-HashSet"><a href="#2-1-HashSet" class="headerlink" title="2.1 HashSet"></a>2.1 HashSet</h2><ul>
-<li>不允许出现重复因素；<ul>
-<li>在向HashMap中添加元素时，先判断key的hashCode值是否相同，如果相同，则调用equals()、==进行判断，若相同则覆盖原有元素；如果不同，则直接向Map中添加元素；</li>
-</ul>
-</li>
-<li>允许插入Null值；</li>
-<li>元素无序（添加顺序和遍历顺序不一致）；</li>
-<li>线程不安全，若2个线程同时操作HashSet，必须通过代码实现同步；</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.HashSet;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">hashSet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] agrs)</span></span>&#123;</span><br><span class="line">        <span class="comment">//创建HashSet集合：</span></span><br><span class="line">        Set&lt;String&gt; hashSet = <span class="keyword">new</span> HashSet&lt;String&gt;();</span><br><span class="line">        System.out.println(<span class="string">&quot;HashSet初始容量大小：&quot;</span>+hashSet.size());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//元素添加：</span></span><br><span class="line">        hashSet.add(<span class="string">&quot;my&quot;</span>);</span><br><span class="line">        hashSet.add(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">        hashSet.add(<span class="string">&quot;is&quot;</span>);</span><br><span class="line">        hashSet.add(<span class="string">&quot;Coolingsky&quot;</span>);</span><br><span class="line">        hashSet.add(<span class="string">&quot;,&quot;</span>);</span><br><span class="line">        hashSet.add(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">        hashSet.add(<span class="string">&quot;world&quot;</span>);</span><br><span class="line">        hashSet.add(<span class="string">&quot;!&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;HashSet容量大小：&quot;</span>+hashSet.size());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//迭代器遍历：</span></span><br><span class="line">        Iterator&lt;String&gt; iterator = hashSet.iterator();</span><br><span class="line">        <span class="keyword">while</span> (iterator.hasNext())&#123;</span><br><span class="line">            String str = iterator.next();</span><br><span class="line">            System.out.println(str);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//增强for循环</span></span><br><span class="line">        <span class="keyword">for</span>(String str:hashSet)&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="string">&quot;Coolingsky&quot;</span>.equals(str))&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;get Coolingsky:&quot;</span>+str);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(str);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//元素删除：</span></span><br><span class="line">        hashSet.remove(<span class="string">&quot;Coolingsky&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;HashSet元素大小：&quot;</span> + hashSet.size());</span><br><span class="line">        hashSet.clear();</span><br><span class="line">        System.out.println(<span class="string">&quot;HashSet元素大小：&quot;</span> + hashSet.size());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//集合判断：</span></span><br><span class="line">        <span class="keyword">boolean</span> isEmpty = hashSet.isEmpty();</span><br><span class="line">        System.out.println(<span class="string">&quot;HashSet是否为空：&quot;</span> + isEmpty);</span><br><span class="line">        <span class="keyword">boolean</span> isContains = hashSet.contains(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;HashSet是否包含&#x27;hello&#x27;：&quot;</span> + isContains);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="2-2-TreeSet"><a href="#2-2-TreeSet" class="headerlink" title="2.2 TreeSet"></a>2.2 TreeSet</h2><ul>
-<li>对插入的元素进行排序，是一个有序的集合（主要与HashSet的区别）;</li>
-<li>底层使用红黑树结构，而不是哈希表结构；</li>
-<li>允许插入Null值；</li>
-<li>不允许插入重复元素；</li>
-<li>线程不安全；</li>
-</ul>
-<p>//红黑树是什么博主还不知道-_-</p>
-<p>//To be continued..</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -211,119 +189,19 @@
 		</ul>
 	</div>
 
-      
+          
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/19/JAVA-collection/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
-    <article id="post-Jenkins配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
+    </div></section>
+  
+
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/16/Jenkins%E9%85%8D%E7%BD%AE/">Jenkins配置</a>
-    </h1>
-  
-
-        
-        <a href="/2021/03/16/Jenkins%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2021-03-16T14:49:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>官方文档路径：<a target="_blank" rel="noopener" href="https://www.jenkins.io/zh/doc/book/installing/">https://www.jenkins.io/zh/doc/book/installing/</a></p>
-<h2 id="1-什么是CI"><a href="#1-什么是CI" class="headerlink" title="1. 什么是CI"></a>1. 什么是CI</h2><p>持续集成(Continuous integration)是一种软件开发实践，即团队开发成员经常集成他们的工作，通常每个成员每天至少集成一次，也就意味着每天可能会发生多次集成。每次集成都通过自动化的构建（包括编译，发布，自动化测试）来验证，从而尽早地发现集成错误。</p>
-<h2 id="2-实验目的"><a href="#2-实验目的" class="headerlink" title="2. 实验目的"></a>2. 实验目的</h2><p>本次试验将采用一个简单的maven项目，通过在docker上拉取Jenkins镜像，并且在docker中配置Tomcat，自动拉取Gitlab的代码，实现持续集成。</p>
-        
-          <a class="article-more-a" href="/2021/03/16/Jenkins%E9%85%8D%E7%BD%AE/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Jenkins</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/16/Jenkins%E9%85%8D%E7%BD%AE/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-  
 
 
           </div>
@@ -357,10 +235,10 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
+		isHome: false,
 		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

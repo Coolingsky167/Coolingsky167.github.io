@@ -6,17 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Coolingsky的博客</title>
+  <title>JAVA collection | Coolingsky的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="A man can be destroyed but not defeated">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Coolingsky的博客">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="1. 整体架构 2. SetSet继承于Collection接口，是一个不允许出现重复元素，并且无序的集合，主要有HashSet和TreeSet两大实现类。 2.1 HashSet 不允许出现重复因素； 在向HashMap中添加元素时，先判断key的hashCode值是否相同，如果相同，则调用equals()、&#x3D;&#x3D;进行判断，若相同则覆盖原有元素；如果不同，则直接向Map中添加元素；   允许插入N">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JAVA collection">
+<meta property="og:url" content="http://example.com/2021/03/19/JAVA-collection/index.html">
 <meta property="og:site_name" content="Coolingsky的博客">
-<meta property="og:description" content="A man can be destroyed but not defeated">
+<meta property="og:description" content="1. 整体架构 2. SetSet继承于Collection接口，是一个不允许出现重复元素，并且无序的集合，主要有HashSet和TreeSet两大实现类。 2.1 HashSet 不允许出现重复因素； 在向HashMap中添加元素时，先判断key的hashCode值是否相同，如果相同，则调用equals()、&#x3D;&#x3D;进行判断，若相同则覆盖原有元素；如果不同，则直接向Map中添加元素；   允许插入N">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210319204042645.png">
+<meta property="article:published_time" content="2021-03-19T12:37:17.000Z">
+<meta property="article:modified_time" content="2021-03-19T12:57:50.260Z">
 <meta property="article:author" content="Coolingsky">
+<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210319204042645.png">
   
     <link rel="alternative" href="/atom.xml" title="Coolingsky的博客" type="application/atom+xml">
   
@@ -148,16 +153,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-JAVA-collection" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-JAVA-collection" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/19/JAVA-collection/">JAVA collection</a>
+    <h1 class="article-title" itemprop="name">
+      JAVA collection
     </h1>
   
 
@@ -196,6 +199,32 @@
       
 
       
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃KFC<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/IMG_1989.JPG">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
     </div>
     <div class="article-info article-info-index">
       
@@ -214,16 +243,24 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/19/JAVA-collection/">展开全文 >></a>
-        </p>
-      
 
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2021/03/16/Jenkins%E9%85%8D%E7%BD%AE/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Jenkins配置</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -238,91 +275,32 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Jenkins配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/16/Jenkins%E9%85%8D%E7%BD%AE/">Jenkins配置</a>
-    </h1>
-  
-
-        
-        <a href="/2021/03/16/Jenkins%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2021-03-16T14:49:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>官方文档路径：<a target="_blank" rel="noopener" href="https://www.jenkins.io/zh/doc/book/installing/">https://www.jenkins.io/zh/doc/book/installing/</a></p>
-<h2 id="1-什么是CI"><a href="#1-什么是CI" class="headerlink" title="1. 什么是CI"></a>1. 什么是CI</h2><p>持续集成(Continuous integration)是一种软件开发实践，即团队开发成员经常集成他们的工作，通常每个成员每天至少集成一次，也就意味着每天可能会发生多次集成。每次集成都通过自动化的构建（包括编译，发布，自动化测试）来验证，从而尽早地发现集成错误。</p>
-<h2 id="2-实验目的"><a href="#2-实验目的" class="headerlink" title="2. 实验目的"></a>2. 实验目的</h2><p>本次试验将采用一个简单的maven项目，通过在docker上拉取Jenkins镜像，并且在docker中配置Tomcat，自动拉取Gitlab的代码，实现持续集成。</p>
-        
-          <a class="article-more-a" href="/2021/03/16/Jenkins%E9%85%8D%E7%BD%AE/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Jenkins</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/16/Jenkins%E9%85%8D%E7%BD%AE/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">1. 整体架构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Set"><span class="toc-number">2.</span> <span class="toc-text">2. Set</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-HashSet"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 HashSet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-TreeSet"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 TreeSet</span></a></li></ol></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
+  
+  
+  
 
   
+
+  
+
   
 
 
@@ -357,8 +335,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
