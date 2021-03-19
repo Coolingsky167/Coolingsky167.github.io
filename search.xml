@@ -88,7 +88,10 @@
   <entry>
     <title>JAVA collection</title>
     <url>/2021/03/19/JAVA-collection/</url>
-    <content><![CDATA[<h1 id="1-整体架构"><a href="#1-整体架构" class="headerlink" title="1. 整体架构"></a>1. 整体架构</h1><p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210319204042645.png" alt="image-20210319204042645"></p>
+    <content><![CDATA[<p>本篇介绍Java collection接口下的几种常用数据结构</p>
+<a id="more"></a>
+
+<h1 id="1-整体架构"><a href="#1-整体架构" class="headerlink" title="1. 整体架构"></a>1. 整体架构</h1><p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210319204042645.png" alt="image-20210319204042645"></p>
 <h1 id="2-Set"><a href="#2-Set" class="headerlink" title="2. Set"></a>2. Set</h1><p>Set继承于Collection接口，是一个不允许出现重复元素，并且无序的集合，主要有HashSet和TreeSet两大实现类。</p>
 <h2 id="2-1-HashSet"><a href="#2-1-HashSet" class="headerlink" title="2.1 HashSet"></a>2.1 HashSet</h2><ul>
 <li>不允许出现重复因素；<ul>
