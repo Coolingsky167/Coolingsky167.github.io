@@ -111,11 +111,65 @@
 <li>不允许插入重复元素；</li>
 <li>线程不安全；</li>
 </ul>
-<p>//红黑树是什么博主还不知道-_-</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">treeset</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] agrs)</span></span>&#123;</span><br><span class="line">        TreeSet&lt;String&gt; treeSet = <span class="keyword">new</span> TreeSet&lt;String&gt;();</span><br><span class="line">        System.out.println(<span class="string">&quot;TreeSet初始化容量大小：&quot;</span>+treeSet.size());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//元素添加：</span></span><br><span class="line">        treeSet.add(<span class="string">&quot;my&quot;</span>);</span><br><span class="line">        treeSet.add(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">        treeSet.add(<span class="string">&quot;Coolingsky&quot;</span>);</span><br><span class="line">        treeSet.add(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">        treeSet.add(<span class="string">&quot;world&quot;</span>);</span><br><span class="line">        treeSet.add(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">        treeSet.add(<span class="string">&quot;2&quot;</span>);</span><br><span class="line">        treeSet.add(<span class="string">&quot;3&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;TreeSet容量大小：&quot;</span> + treeSet.size());</span><br><span class="line">        System.out.println(<span class="string">&quot;TreeSet元素顺序为：&quot;</span> + treeSet.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//增加for循环遍历：</span></span><br><span class="line">        <span class="keyword">for</span>(String str:treeSet)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;遍历元素：&quot;</span>+str);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//迭代器遍历：升序</span></span><br><span class="line">        Iterator&lt;String&gt; iteratorAesc = treeSet.iterator();</span><br><span class="line">        <span class="keyword">while</span>(iteratorAesc.hasNext())&#123;</span><br><span class="line">            String str = iteratorAesc.next();</span><br><span class="line">            System.out.println(<span class="string">&quot;遍历元素升序：&quot;</span>+str);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//迭代器遍历：降序</span></span><br><span class="line">        Iterator&lt;String&gt; iteratorDesc = treeSet.descendingIterator();</span><br><span class="line">        <span class="keyword">while</span>(iteratorDesc.hasNext())&#123;</span><br><span class="line">            String str = iteratorDesc.next();</span><br><span class="line">            System.out.println(<span class="string">&quot;遍历元素降序：&quot;</span>+str);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//元素获取:实现NavigableSet接口</span></span><br><span class="line">        String firstEle = treeSet.first();<span class="comment">//获取TreeSet头节点：</span></span><br><span class="line">        System.out.println(<span class="string">&quot;TreeSet头节点为：&quot;</span> + firstEle);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取指定元素之前的所有元素集合：(不包含指定元素)</span></span><br><span class="line">        SortedSet&lt;String&gt; headSet = treeSet.headSet(<span class="string">&quot;Coolingsky&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;Coolingsky节点之前的元素为：&quot;</span>+headSet.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取给定元素之间的集合：（包含头，不包含尾）</span></span><br><span class="line">        SortedSet subSet = treeSet.subSet(<span class="string">&quot;1&quot;</span>,<span class="string">&quot;world&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;1--world之间节点元素为：&quot;</span>+subSet.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//集合判断：</span></span><br><span class="line">        <span class="keyword">boolean</span> isEmpty = treeSet.isEmpty();</span><br><span class="line">        System.out.println(<span class="string">&quot;TreeSet是否为空：&quot;</span>+isEmpty);</span><br><span class="line">        <span class="keyword">boolean</span> isContain = treeSet.contains(<span class="string">&quot;who&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;TreeSet是否包含who元素：&quot;</span>+isContain);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//元素删除：</span></span><br><span class="line">        <span class="keyword">boolean</span> CoolingskyRemove = treeSet.remove(<span class="string">&quot;Coolingsky&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;Coolingsky元素是否被删除 &quot;</span>+CoolingskyRemove);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//集合中不存在的元素，删除返回false</span></span><br><span class="line">        <span class="keyword">boolean</span> whoRemove = treeSet.remove(<span class="string">&quot;who&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;who元素是否被删除 &quot;</span>+whoRemove);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//删除并返回第一个元素：如果set集合不存在元素，则返回null</span></span><br><span class="line">        String pollFirst = treeSet.pollFirst();</span><br><span class="line">        System.out.println(<span class="string">&quot;删除的第一个元素：&quot;</span>+pollFirst);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//删除并返回最后一个元素：如果set集合不存在元素，则返回null</span></span><br><span class="line">        String pollLast = treeSet.pollLast();</span><br><span class="line">        System.out.println(<span class="string">&quot;删除的最后一个元素：&quot;</span>+pollLast);</span><br><span class="line"></span><br><span class="line">        treeSet.clear();<span class="comment">//清空集合:</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
 <p>//To be continued..</p>
 ]]></content>
       <tags>
         <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>便利蜂笔试</title>
+    <url>/2021/03/20/%E4%BE%BF%E5%88%A9%E8%9C%82%E7%AC%94%E8%AF%95/</url>
+    <content><![CDATA[<p>2021-春招</p>
+<p>便利蜂笔试回忆</p>
+<a id="more"></a>
+
+<p>15个选择（30分）+三道编程（70分）</p>
+<p>选择题全是瞎猜的。。编程题感觉写了一题结果超时了而且没有全部ac</p>
+<p>最离谱的是想不起来怎么用JAVA读输入..最后用python写的</p>
+<p>下面是回忆</p>
+<h2 id="选择题"><a href="#选择题" class="headerlink" title="选择题"></a>选择题</h2><p>网络+cpp基础知识+数据库+集成测试工具+UML+…想不起来了</p>
+<p>比如http属于第几层</p>
+<p>数据库的xx操作体现四大特点的哪个</p>
+<p>CPP主要是虚函数 类初始化顺序等</p>
+<h2 id="编程题"><a href="#编程题" class="headerlink" title="编程题"></a>编程题</h2><ol>
+<li></li>
+</ol>
+<blockquote>
+<p> 假设有一个矩阵，矩阵由 0 和 1 数字组成。其中1代表这个节点可达，0代表这个节点不可达，从左上角第一个节点出发到右下角最后一个节点，只能上下左右移动，初始节点数为 1，移动一步节点数加 1，问最少需要经过多少节点可以达到。请实现计算最短路径的函数。如果不可达返回0。</p>
+</blockquote>
+<p>输入</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>;<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>;<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>;<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>输出</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">7</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><blockquote>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line">    <span class="meta">在便利店中顾客的结账时间是很重要的指标。结账时间由排队等待时间，和顾客操作付款时间两部分组成。程序输入为顾客列表</span> <span class="string">customers，每一位顾客 customer[i] 包含两个数值 arriveTime, payDuration。</span></span><br><span class="line"><span class="attr">arriveTime</span> <span class="string">表示顾客挑选完商品去结账的时刻；</span></span><br><span class="line"><span class="attr">payDuration</span> <span class="string">表示顾客操作付款的时间。</span></span><br><span class="line"><span class="attr">请计算所有顾客的总结账时间。</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ol>
+<p>输入</p>
+<figure class="highlight basic"><table><tr><td class="code"><pre><span class="line"><span class="symbol">3 </span></span><br><span class="line"><span class="number">1</span>,<span class="number">2</span> </span><br><span class="line"><span class="number">2</span>,<span class="number">5</span> </span><br><span class="line"><span class="number">4</span>,<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>输出</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">15</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li></li>
+</ol>
+<blockquote>
+<p>给定一组词组，每个词组包含id和字符串的映射，现输入另一组词组，要求找出新的词组与老的词组的diff关系，diff要求如下：<br>1、id相同且字符串相同的两个词组视为相同<br>2、id相同，且字符串不同的输出modify+id<br>3、新的词组id在老的词组id中不存在的，视为新增，输出add+id<br>4、老的词组id在新的词组id中不存在的，视为删除，输出delete+id</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>春招</tag>
+        <tag>实习</tag>
       </tags>
   </entry>
 </search>
