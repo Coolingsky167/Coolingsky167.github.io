@@ -4,10 +4,10 @@
     <title>Jenkins配置</title>
     <url>/2021/03/16/Jenkins%E9%85%8D%E7%BD%AE/</url>
     <content><![CDATA[<p>官方文档路径：<a href="https://www.jenkins.io/zh/doc/book/installing/">https://www.jenkins.io/zh/doc/book/installing/</a></p>
-<h2 id="1-什么是CI"><a href="#1-什么是CI" class="headerlink" title="1. 什么是CI"></a>1. 什么是CI</h2><p>持续集成(Continuous integration)是一种软件开发实践，即团队开发成员经常集成他们的工作，通常每个成员每天至少集成一次，也就意味着每天可能会发生多次集成。每次集成都通过自动化的构建（包括编译，发布，自动化测试）来验证，从而尽早地发现集成错误。</p>
-<h2 id="2-实验目的"><a href="#2-实验目的" class="headerlink" title="2. 实验目的"></a>2. 实验目的</h2><p>本次试验将采用一个简单的maven项目，通过在docker上拉取Jenkins镜像，并且在docker中配置Tomcat，自动拉取Gitlab的代码，实现持续集成。</p>
+<h2 id="1-实验目的"><a href="#1-实验目的" class="headerlink" title="1. 实验目的"></a>1. 实验目的</h2><p>本次试验将采用一个简单的maven项目，通过在docker上拉取Jenkins镜像，并且在docker中配置Tomcat，自动拉取Gitlab的代码，实现持续集成。</p>
 <a id="more"></a>
 
+<h2 id="2-什么是CI"><a href="#2-什么是CI" class="headerlink" title="2. 什么是CI"></a>2. 什么是CI</h2><p>持续集成(Continuous integration)是一种软件开发实践，即团队开发成员经常集成他们的工作，通常每个成员每天至少集成一次，也就意味着每天可能会发生多次集成。每次集成都通过自动化的构建（包括编译，发布，自动化测试）来验证，从而尽早地发现集成错误。</p>
 <h2 id="3-操作流程"><a href="#3-操作流程" class="headerlink" title="3. 操作流程"></a>3. 操作流程</h2><h3 id="3-1-安装docker"><a href="#3-1-安装docker" class="headerlink" title="3.1 安装docker"></a>3.1 安装docker</h3><p>本人使用的是腾讯云服务器，操作系统是ubuntu18.04.4 LTS</p>
 <figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">apt-<span class="builtin-name">get</span> install docker </span><br></pre></td></tr></table></figure>
 
@@ -170,6 +170,18 @@
       <tags>
         <tag>春招</tag>
         <tag>实习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>leetcode新手村#1</title>
+    <url>/2021/03/22/leetcode%E6%96%B0%E6%89%8B%E6%9D%91#1/</url>
+    <content><![CDATA[<ol>
+<li>#141 <a href="https://leetcode-cn.com/problems/linked-list-cycle/">环形链表</a></li>
+</ol>
+]]></content>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>双指针</tag>
       </tags>
   </entry>
 </search>
