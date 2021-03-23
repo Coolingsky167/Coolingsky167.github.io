@@ -1,0 +1,181 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>leetcode新手村(1) | Coolingsky的博客</title><meta name="keywords" content="leetcode,双指针"><meta name="author" content="Coolingsky"><meta name="copyright" content="Coolingsky"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="#141 环形链表   看待这道题的第一个思路是弄一个hashset，遍历一次链表，扫到一个就加一个，碰到已经存在的就说明有环  12345678910111213141516public class Solution &amp;#123;    public boolean hasCycle(ListNode head) &amp;#123;        boolean hasCycle &#x3D; false;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcode新手村(1)">
+<meta property="og:url" content="http://example.com/2021/03/23/leetcode%E6%96%B0%E6%89%8B%E6%9D%91-1/index.html">
+<meta property="og:site_name" content="Coolingsky的博客">
+<meta property="og:description" content="#141 环形链表   看待这道题的第一个思路是弄一个hashset，遍历一次链表，扫到一个就加一个，碰到已经存在的就说明有环  12345678910111213141516public class Solution &amp;#123;    public boolean hasCycle(ListNode head) &amp;#123;        boolean hasCycle &#x3D; false;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/u=252794242,2949543763&fm=11&gp=0.jpg">
+<meta property="article:published_time" content="2021-03-23T10:30:02.000Z">
+<meta property="article:modified_time" content="2021-03-23T10:30:56.058Z">
+<meta property="article:author" content="Coolingsky">
+<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="双指针">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/u=252794242,2949543763&fm=11&gp=0.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2021/03/23/leetcode%E6%96%B0%E6%89%8B%E6%9D%91-1/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2021-03-23 18:30:56'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/fnym.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="mailto:1029370923@qq.com"><i class="fa-fw fas fa-paper-plane"></i><span> 戳我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/u=252794242,2949543763&amp;fm=11&amp;gp=0.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Coolingsky的博客</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="mailto:1029370923@qq.com"><i class="fa-fw fas fa-paper-plane"></i><span> 戳我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">leetcode新手村(1)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-03-23T10:30:02.000Z" title="发表于 2021-03-23 18:30:02">2021-03-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-03-23T10:30:56.058Z" title="更新于 2021-03-23 18:30:56">2021-03-23</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><ol>
+<li>#141 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/linked-list-cycle/">环形链表</a></li>
+</ol>
+<ul>
+<li>看待这道题的第一个思路是弄一个hashset，遍历一次链表，扫到一个就加一个，碰到已经存在的就说明有环</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> hasCycle = <span class="keyword">false</span>;</span><br><span class="line">        ListNode current = head;</span><br><span class="line">        Set&lt;ListNode&gt; Nodeset = <span class="keyword">new</span> HashSet&lt;ListNode&gt;();</span><br><span class="line">        <span class="keyword">while</span>(current!=<span class="keyword">null</span>&amp;&amp;current.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(Nodeset.contains(current))&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            Nodeset.add(current);</span><br><span class="line">            current=current.next;</span><br><span class="line">        </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> hasCycle;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>想着双指针 就想到的一个离谱的方法 想象一下你和另外一个人从宿舍到操场上跑步 操场是一个环 只要你们速度不一样 就一定会相遇…</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head==<span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        ListNode fast=head;</span><br><span class="line">        ListNode slow=head;</span><br><span class="line">        <span class="keyword">while</span>(fast.next!=<span class="keyword">null</span>&amp;&amp;fast.next.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            fast=fast.next.next;</span><br><span class="line">            slow=slow.next;</span><br><span class="line">            <span class="keyword">if</span>(fast==slow)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>两个思路的差距还是明显的</p>
+<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210322173304057.png" alt="image-20210322173304057"></p>
+<p>然后就看题解，看到提出找到入环点的问题，然后搜了一堆，发现乱七八糟没看懂。</p>
+<p>后来意外的发现这就是#142题，难度是中等，<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/linked-list-cycle-ii/solution/linked-list-cycle-ii-kuai-man-zhi-zhen-shuang-zhi-/">评论有个题解</a>非常的清晰，比网上一堆博客清晰多了。这里暂时先不写。（p.s. 我的同学说他面试鹅厂的时候考到了这个（2021春招））</p>
+<ol start="2">
+<li>#344 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-string/">反转字符串</a></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reverseString</span><span class="params">(<span class="keyword">char</span>[] s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right=s.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">char</span> temp;</span><br><span class="line">        <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">            temp=s[left];</span><br><span class="line">            s[left]=s[right];</span><br><span class="line">            s[right]=temp;</span><br><span class="line">            left++;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="2">
+<li>#881 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/boats-to-save-people/">救生艇</a></li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Coolingsky</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2021/03/23/leetcode%E6%96%B0%E6%89%8B%E6%9D%91-1/">http://example.com/2021/03/23/leetcode%E6%96%B0%E6%89%8B%E6%9D%91-1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Coolingsky的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/leetcode/">leetcode</a><a class="post-meta__tags" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a></div><div class="post_share"><div class="social-share" data-image="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/u=252794242,2949543763&amp;fm=11&amp;gp=0.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.JPG" target="_blank"><img class="post-qr-code-img" src="/img/alipay.JPG" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/03/20/%E4%BE%BF%E5%88%A9%E8%9C%82%E7%AC%94%E8%AF%95/"><img class="next-cover" src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/sd.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">便利蜂笔试</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/fnym.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Coolingsky</div><div class="author-info__description">A man can be destroyed but not defeated</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Coolingsky167" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1029370923@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">Welcome to Coolingsky's tech blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/03/23/leetcode%E6%96%B0%E6%89%8B%E6%9D%91-1/" title="leetcode新手村(1)"><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/u=252794242,2949543763&amp;fm=11&amp;gp=0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="leetcode新手村(1)"/></a><div class="content"><a class="title" href="/2021/03/23/leetcode%E6%96%B0%E6%89%8B%E6%9D%91-1/" title="leetcode新手村(1)">leetcode新手村(1)</a><time datetime="2021-03-23T10:30:02.000Z" title="发表于 2021-03-23 18:30:02">2021-03-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/20/%E4%BE%BF%E5%88%A9%E8%9C%82%E7%AC%94%E8%AF%95/" title="便利蜂笔试"><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/sd.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="便利蜂笔试"/></a><div class="content"><a class="title" href="/2021/03/20/%E4%BE%BF%E5%88%A9%E8%9C%82%E7%AC%94%E8%AF%95/" title="便利蜂笔试">便利蜂笔试</a><time datetime="2021-03-20T07:45:53.000Z" title="发表于 2021-03-20 15:45:53">2021-03-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/19/JAVA-collection/" title="JAVA collection"><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/u=252794242,2949543763&amp;fm=11&amp;gp=0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JAVA collection"/></a><div class="content"><a class="title" href="/2021/03/19/JAVA-collection/" title="JAVA collection">JAVA collection</a><time datetime="2021-03-19T12:37:17.000Z" title="发表于 2021-03-19 20:37:17">2021-03-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/16/Jenkins%E9%85%8D%E7%BD%AE/" title="Jenkins配置"><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/sd.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Jenkins配置"/></a><div class="content"><a class="title" href="/2021/03/16/Jenkins%E9%85%8D%E7%BD%AE/" title="Jenkins配置">Jenkins配置</a><time datetime="2021-03-16T14:49:14.000Z" title="发表于 2021-03-16 22:49:14">2021-03-16</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/u=252794242,2949543763&amp;fm=11&amp;gp=0.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Coolingsky</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Welcome.</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
