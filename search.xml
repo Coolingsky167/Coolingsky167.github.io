@@ -173,11 +173,8 @@
 <p>数据库的xx操作体现四大特点的哪个</p>
 <p>CPP主要是虚函数 类初始化顺序等</p>
 <h2 id="编程题"><a href="#编程题" class="headerlink" title="编程题"></a>编程题</h2><ol>
-<li></li>
+<li>假设有一个矩阵，矩阵由 0 和 1 数字组成。其中1代表这个节点可达，0代表这个节点不可达，从左上角第一个节点出发到右下角最后一个节点，只能上下左右移动，初始节点数为 1，移动一步节点数加 1，问最少需要经过多少节点可以达到。请实现计算最短路径的函数。如果不可达返回0。</li>
 </ol>
-<blockquote>
-<p> 假设有一个矩阵，矩阵由 0 和 1 数字组成。其中1代表这个节点可达，0代表这个节点不可达，从左上角第一个节点出发到右下角最后一个节点，只能上下左右移动，初始节点数为 1，移动一步节点数加 1，问最少需要经过多少节点可以达到。请实现计算最短路径的函数。如果不可达返回0。</p>
-</blockquote>
 <p>输入</p>
 <figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>;<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>;<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>;<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
 
@@ -185,11 +182,13 @@
 <figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">7</span></span><br></pre></td></tr></table></figure>
 
 <ol start="2">
-<li><blockquote>
-<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line">    <span class="meta">在便利店中顾客的结账时间是很重要的指标。结账时间由排队等待时间，和顾客操作付款时间两部分组成。程序输入为顾客列表</span> <span class="string">customers，每一位顾客 customer[i] 包含两个数值 arriveTime, payDuration。</span></span><br><span class="line"><span class="attr">arriveTime</span> <span class="string">表示顾客挑选完商品去结账的时刻；</span></span><br><span class="line"><span class="attr">payDuration</span> <span class="string">表示顾客操作付款的时间。</span></span><br><span class="line"><span class="attr">请计算所有顾客的总结账时间。</span></span><br></pre></td></tr></table></figure>
-</blockquote>
+<li><p>在便利店中顾客的结账时间是很重要的指标。结账时间由排队等待时间，和顾客操作付款时间两部分组成。程序输入为顾客列表 customers，每一位顾客 customer[i] 包含两个数值 arriveTime, payDuration。 请计算所有顾客的总结账时间。</p>
 </li>
 </ol>
+<ul>
+<li>arriveTime 表示顾客挑选完商品去结账的时刻；</li>
+<li>payDuration 表示顾客操作付款的时间。</li>
+</ul>
 <p>输入</p>
 <figure class="highlight basic"><table><tr><td class="code"><pre><span class="line"><span class="symbol">3 </span></span><br><span class="line"><span class="number">1</span>,<span class="number">2</span> </span><br><span class="line"><span class="number">2</span>,<span class="number">5</span> </span><br><span class="line"><span class="number">4</span>,<span class="number">3</span></span><br></pre></td></tr></table></figure>
 
@@ -197,11 +196,9 @@
 <figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">15</span></span><br></pre></td></tr></table></figure>
 
 <ol start="3">
-<li></li>
+<li><p>给定一组词组，每个词组包含id和字符串的映射，现输入另一组词组，要求找出新的词组与老的词组的diff关系，diff要求如下：<br>1、id相同且字符串相同的两个词组视为相同<br>2、id相同，且字符串不同的输出modify+id<br>3、新的词组id在老的词组id中不存在的，视为新增，输出add+id<br>4、老的词组id在新的词组id中不存在的，视为删除，输出delete+id</p>
+</li>
 </ol>
-<blockquote>
-<p>给定一组词组，每个词组包含id和字符串的映射，现输入另一组词组，要求找出新的词组与老的词组的diff关系，diff要求如下：<br>1、id相同且字符串相同的两个词组视为相同<br>2、id相同，且字符串不同的输出modify+id<br>3、新的词组id在老的词组id中不存在的，视为新增，输出add+id<br>4、老的词组id在新的词组id中不存在的，视为删除，输出delete+id</p>
-</blockquote>
 ]]></content>
       <categories>
         <category>面试笔记</category>
