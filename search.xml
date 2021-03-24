@@ -1,42 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>leetcode新手村(1)</title>
-    <url>/2021/03/23/leetcode%E6%96%B0%E6%89%8B%E6%9D%91-1/</url>
-    <content><![CDATA[<ol>
-<li>#141 <a href="https://leetcode-cn.com/problems/linked-list-cycle/">环形链表</a></li>
-</ol>
-<ul>
-<li>看待这道题的第一个思路是弄一个hashset，遍历一次链表，扫到一个就加一个，碰到已经存在的就说明有环</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> hasCycle = <span class="keyword">false</span>;</span><br><span class="line">        ListNode current = head;</span><br><span class="line">        Set&lt;ListNode&gt; Nodeset = <span class="keyword">new</span> HashSet&lt;ListNode&gt;();</span><br><span class="line">        <span class="keyword">while</span>(current!=<span class="keyword">null</span>&amp;&amp;current.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(Nodeset.contains(current))&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            Nodeset.add(current);</span><br><span class="line">            current=current.next;</span><br><span class="line">        </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> hasCycle;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>想着双指针 就想到的一个离谱的方法 想象一下你和另外一个人从宿舍到操场上跑步 操场是一个环 只要你们速度不一样 就一定会相遇…</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head==<span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        ListNode fast=head;</span><br><span class="line">        ListNode slow=head;</span><br><span class="line">        <span class="keyword">while</span>(fast.next!=<span class="keyword">null</span>&amp;&amp;fast.next.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            fast=fast.next.next;</span><br><span class="line">            slow=slow.next;</span><br><span class="line">            <span class="keyword">if</span>(fast==slow)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>两个思路的差距还是明显的</p>
-<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210322173304057.png" alt="image-20210322173304057"></p>
-<p>然后就看题解，看到提出找到入环点的问题，然后搜了一堆，发现乱七八糟没看懂。</p>
-<p>后来意外的发现这就是#142题，难度是中等，<a href="https://leetcode-cn.com/problems/linked-list-cycle-ii/solution/linked-list-cycle-ii-kuai-man-zhi-zhen-shuang-zhi-/">评论有个题解</a>非常的清晰，比网上一堆博客清晰多了。这里暂时先不写。（p.s. 我的同学说他面试鹅厂的时候考到了这个（2021春招））</p>
-<ol start="2">
-<li>#344 <a href="https://leetcode-cn.com/problems/reverse-string/">反转字符串</a></li>
-</ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reverseString</span><span class="params">(<span class="keyword">char</span>[] s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right=s.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">char</span> temp;</span><br><span class="line">        <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">            temp=s[left];</span><br><span class="line">            s[left]=s[right];</span><br><span class="line">            s[right]=temp;</span><br><span class="line">            left++;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<ol start="2">
-<li>#881 <a href="https://leetcode-cn.com/problems/boats-to-save-people/">救生艇</a></li>
-</ol>
-]]></content>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>双指针</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JAVA collection</title>
     <url>/2021/03/19/JAVA-collection/</url>
     <content><![CDATA[<p>本篇介绍Java collection接口下的几种常用数据结构</p>
@@ -73,54 +37,39 @@
       </tags>
   </entry>
   <entry>
-    <title>便利蜂笔试</title>
-    <url>/2021/03/20/%E4%BE%BF%E5%88%A9%E8%9C%82%E7%AC%94%E8%AF%95/</url>
-    <content><![CDATA[<p>2021-春招</p>
-<p>便利蜂笔试回忆</p>
-<a id="more"></a>
-
-<p>15个选择（30分）+三道编程（70分）</p>
-<p>选择题全是瞎猜的。。编程题感觉写了一题结果超时了而且没有全部ac</p>
-<p>最离谱的是想不起来怎么用JAVA读输入..最后用python写的</p>
-<p>下面是回忆</p>
-<h2 id="选择题"><a href="#选择题" class="headerlink" title="选择题"></a>选择题</h2><p>网络+cpp基础知识+数据库+集成测试工具+UML+…想不起来了</p>
-<p>比如http属于第几层</p>
-<p>数据库的xx操作体现四大特点的哪个</p>
-<p>CPP主要是虚函数 类初始化顺序等</p>
-<h2 id="编程题"><a href="#编程题" class="headerlink" title="编程题"></a>编程题</h2><ol>
-<li>假设有一个矩阵，矩阵由 0 和 1 数字组成。其中1代表这个节点可达，0代表这个节点不可达，从左上角第一个节点出发到右下角最后一个节点，只能上下左右移动，初始节点数为 1，移动一步节点数加 1，问最少需要经过多少节点可以达到。请实现计算最短路径的函数。如果不可达返回0。</li>
-</ol>
-<p>输入</p>
-<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>;<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>;<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>;<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<p>输出</p>
-<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">7</span></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li><p>在便利店中顾客的结账时间是很重要的指标。结账时间由排队等待时间，和顾客操作付款时间两部分组成。程序输入为顾客列表 customers，每一位顾客 customer[i] 包含两个数值 arriveTime, payDuration。 请计算所有顾客的总结账时间。</p>
-</li>
+    <title>leetcode新手村(1)</title>
+    <url>/2021/03/23/leetcode%E6%96%B0%E6%89%8B%E6%9D%91-1/</url>
+    <content><![CDATA[<ol>
+<li>#141 <a href="https://leetcode-cn.com/problems/linked-list-cycle/">环形链表</a></li>
 </ol>
 <ul>
-<li>arriveTime 表示顾客挑选完商品去结账的时刻；</li>
-<li>payDuration 表示顾客操作付款的时间。</li>
+<li>看待这道题的第一个思路是弄一个hashset，遍历一次链表，扫到一个就加一个，碰到已经存在的就说明有环</li>
 </ul>
-<p>输入</p>
-<figure class="highlight basic"><table><tr><td class="code"><pre><span class="line"><span class="symbol">3 </span></span><br><span class="line"><span class="number">1</span>,<span class="number">2</span> </span><br><span class="line"><span class="number">2</span>,<span class="number">5</span> </span><br><span class="line"><span class="number">4</span>,<span class="number">3</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> hasCycle = <span class="keyword">false</span>;</span><br><span class="line">        ListNode current = head;</span><br><span class="line">        Set&lt;ListNode&gt; Nodeset = <span class="keyword">new</span> HashSet&lt;ListNode&gt;();</span><br><span class="line">        <span class="keyword">while</span>(current!=<span class="keyword">null</span>&amp;&amp;current.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(Nodeset.contains(current))&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            Nodeset.add(current);</span><br><span class="line">            current=current.next;</span><br><span class="line">        </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> hasCycle;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>输出</p>
-<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">15</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>想着双指针 就想到的一个离谱的方法 想象一下你和另外一个人从宿舍到操场上跑步 操场是一个环 只要你们速度不一样 就一定会相遇…</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head==<span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        ListNode fast=head;</span><br><span class="line">        ListNode slow=head;</span><br><span class="line">        <span class="keyword">while</span>(fast.next!=<span class="keyword">null</span>&amp;&amp;fast.next.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            fast=fast.next.next;</span><br><span class="line">            slow=slow.next;</span><br><span class="line">            <span class="keyword">if</span>(fast==slow)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<ol start="3">
-<li><p>给定一组词组，每个词组包含id和字符串的映射，现输入另一组词组，要求找出新的词组与老的词组的diff关系，diff要求如下：<br>1、id相同且字符串相同的两个词组视为相同<br>2、id相同，且字符串不同的输出modify+id<br>3、新的词组id在老的词组id中不存在的，视为新增，输出add+id<br>4、老的词组id在新的词组id中不存在的，视为删除，输出delete+id</p>
-</li>
+<p>两个思路的差距还是明显的</p>
+<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210322173304057.png" alt="image-20210322173304057"></p>
+<p>然后就看题解，看到提出找到入环点的问题，然后搜了一堆，发现乱七八糟没看懂。</p>
+<p>后来意外的发现这就是#142题，难度是中等，<a href="https://leetcode-cn.com/problems/linked-list-cycle-ii/solution/linked-list-cycle-ii-kuai-man-zhi-zhen-shuang-zhi-/">评论有个题解</a>非常的清晰，比网上一堆博客清晰多了。这里暂时先不写。（p.s. 我的同学说他面试鹅厂的时候考到了这个（2021春招））</p>
+<ol start="2">
+<li>#344 <a href="https://leetcode-cn.com/problems/reverse-string/">反转字符串</a></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reverseString</span><span class="params">(<span class="keyword">char</span>[] s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right=s.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">char</span> temp;</span><br><span class="line">        <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">            temp=s[left];</span><br><span class="line">            s[left]=s[right];</span><br><span class="line">            s[right]=temp;</span><br><span class="line">            left++;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="2">
+<li>#881 <a href="https://leetcode-cn.com/problems/boats-to-save-people/">救生艇</a></li>
 </ol>
 ]]></content>
-      <categories>
-        <category>面试笔记</category>
-      </categories>
       <tags>
-        <tag>春招</tag>
-        <tag>实习</tag>
+        <tag>leetcode</tag>
+        <tag>双指针</tag>
       </tags>
   </entry>
   <entry>
@@ -206,6 +155,77 @@
 ]]></content>
       <tags>
         <tag>Jenkins</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>便利蜂笔试</title>
+    <url>/2021/03/20/%E4%BE%BF%E5%88%A9%E8%9C%82%E7%AC%94%E8%AF%95/</url>
+    <content><![CDATA[<p>2021-春招</p>
+<p>便利蜂笔试回忆</p>
+<a id="more"></a>
+
+<p>15个选择（30分）+三道编程（70分）</p>
+<p>选择题全是瞎猜的。。编程题感觉写了一题结果超时了而且没有全部ac</p>
+<p>最离谱的是想不起来怎么用JAVA读输入..最后用python写的</p>
+<p>下面是回忆</p>
+<h2 id="选择题"><a href="#选择题" class="headerlink" title="选择题"></a>选择题</h2><p>网络+cpp基础知识+数据库+集成测试工具+UML+…想不起来了</p>
+<p>比如http属于第几层</p>
+<p>数据库的xx操作体现四大特点的哪个</p>
+<p>CPP主要是虚函数 类初始化顺序等</p>
+<h2 id="编程题"><a href="#编程题" class="headerlink" title="编程题"></a>编程题</h2><ol>
+<li>假设有一个矩阵，矩阵由 0 和 1 数字组成。其中1代表这个节点可达，0代表这个节点不可达，从左上角第一个节点出发到右下角最后一个节点，只能上下左右移动，初始节点数为 1，移动一步节点数加 1，问最少需要经过多少节点可以达到。请实现计算最短路径的函数。如果不可达返回0。</li>
+</ol>
+<p>输入</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>;<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>;<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>;<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>输出</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">7</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>在便利店中顾客的结账时间是很重要的指标。结账时间由排队等待时间，和顾客操作付款时间两部分组成。程序输入为顾客列表 customers，每一位顾客 customer[i] 包含两个数值 arriveTime, payDuration。 请计算所有顾客的总结账时间。</p>
+</li>
+</ol>
+<ul>
+<li>arriveTime 表示顾客挑选完商品去结账的时刻；</li>
+<li>payDuration 表示顾客操作付款的时间。</li>
+</ul>
+<p>输入</p>
+<figure class="highlight basic"><table><tr><td class="code"><pre><span class="line"><span class="symbol">3 </span></span><br><span class="line"><span class="number">1</span>,<span class="number">2</span> </span><br><span class="line"><span class="number">2</span>,<span class="number">5</span> </span><br><span class="line"><span class="number">4</span>,<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>输出</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">15</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>给定一组词组，每个词组包含id和字符串的映射，现输入另一组词组，要求找出新的词组与老的词组的diff关系，diff要求如下：<br>1、id相同且字符串相同的两个词组视为相同<br>2、id相同，且字符串不同的输出modify+id<br>3、新的词组id在老的词组id中不存在的，视为新增，输出add+id<br>4、老的词组id在新的词组id中不存在的，视为删除，输出delete+id</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>面试笔记</category>
+      </categories>
+      <tags>
+        <tag>春招</tag>
+        <tag>实习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>阿里笔试</title>
+    <url>/2021/03/24/%E9%98%BF%E9%87%8C%E7%AC%94%E8%AF%95/</url>
+    <content><![CDATA[<p>2021-3-24</p>
+<p>阿里笔试两道题，这次整体偏简单，但是好像有点离谱</p>
+<p>我还是0分</p>
+<h3 id="第一道题："><a href="#第一道题：" class="headerlink" title="第一道题："></a>第一道题：</h3><p> 牛牛喜欢跳格子，希望我帮他计算出跳n个格子的最大值，  </p>
+<p> 题意：  </p>
+<p>有n个格子，跳1格只能拿跳到的那一格的一半分（如果不能整除则向上取整），跳2格可以拿第2格的全部分，问跳n格最多能拿多少分。  </p>
+<h3 id="第二道题："><a href="#第二道题：" class="headerlink" title="第二道题："></a>第二道题：</h3><p>   给你二叉树的权值，前序遍历以及中序遍历的值，还原出二叉树，且找出子树中对称的且权重最大的子树，输出其权值和。</p>
+<p>第二题直接没看</p>
+<p>第一题感觉做出来了ac全是0</p>
+<p>跑到牛客网上看了，和大佬全ac的区别好像是题目意思丢掉的分数向上取整。</p>
+<p>人气晕了。</p>
+]]></content>
+      <tags>
+        <tag>春招</tag>
+        <tag>实习</tag>
       </tags>
   </entry>
 </search>
