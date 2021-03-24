@@ -120,6 +120,42 @@
       </tags>
   </entry>
   <entry>
+    <title>leetcode新手村(1)</title>
+    <url>/2021/03/23/leetcode%E6%96%B0%E6%89%8B%E6%9D%91-1/</url>
+    <content><![CDATA[<ol>
+<li>#141 <a href="https://leetcode-cn.com/problems/linked-list-cycle/">环形链表</a></li>
+</ol>
+<ul>
+<li>看待这道题的第一个思路是弄一个hashset，遍历一次链表，扫到一个就加一个，碰到已经存在的就说明有环</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> hasCycle = <span class="keyword">false</span>;</span><br><span class="line">        ListNode current = head;</span><br><span class="line">        Set&lt;ListNode&gt; Nodeset = <span class="keyword">new</span> HashSet&lt;ListNode&gt;();</span><br><span class="line">        <span class="keyword">while</span>(current!=<span class="keyword">null</span>&amp;&amp;current.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(Nodeset.contains(current))&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            Nodeset.add(current);</span><br><span class="line">            current=current.next;</span><br><span class="line">        </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> hasCycle;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>想着双指针 就想到的一个离谱的方法 想象一下你和另外一个人从宿舍到操场上跑步 操场是一个环 只要你们速度不一样 就一定会相遇…</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head==<span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        ListNode fast=head;</span><br><span class="line">        ListNode slow=head;</span><br><span class="line">        <span class="keyword">while</span>(fast.next!=<span class="keyword">null</span>&amp;&amp;fast.next.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            fast=fast.next.next;</span><br><span class="line">            slow=slow.next;</span><br><span class="line">            <span class="keyword">if</span>(fast==slow)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>两个思路的差距还是明显的</p>
+<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210322173304057.png" alt="image-20210322173304057"></p>
+<p>然后就看题解，看到提出找到入环点的问题，然后搜了一堆，发现乱七八糟没看懂。</p>
+<p>后来意外的发现这就是#142题，难度是中等，<a href="https://leetcode-cn.com/problems/linked-list-cycle-ii/solution/linked-list-cycle-ii-kuai-man-zhi-zhen-shuang-zhi-/">评论有个题解</a>非常的清晰，比网上一堆博客清晰多了。这里暂时先不写。（p.s. 我的同学说他面试鹅厂的时候考到了这个（2021春招））</p>
+<ol start="2">
+<li>#344 <a href="https://leetcode-cn.com/problems/reverse-string/">反转字符串</a></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reverseString</span><span class="params">(<span class="keyword">char</span>[] s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right=s.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">char</span> temp;</span><br><span class="line">        <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">            temp=s[left];</span><br><span class="line">            s[left]=s[right];</span><br><span class="line">            s[right]=temp;</span><br><span class="line">            left++;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="2">
+<li>#881 <a href="https://leetcode-cn.com/problems/boats-to-save-people/">救生艇</a></li>
+</ol>
+]]></content>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>双指针</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>便利蜂笔试</title>
     <url>/2021/03/20/%E4%BE%BF%E5%88%A9%E8%9C%82%E7%AC%94%E8%AF%95/</url>
     <content><![CDATA[<p>2021-春招</p>
@@ -168,42 +204,6 @@
       <tags>
         <tag>春招</tag>
         <tag>实习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>leetcode新手村(1)</title>
-    <url>/2021/03/23/leetcode%E6%96%B0%E6%89%8B%E6%9D%91-1/</url>
-    <content><![CDATA[<ol>
-<li>#141 <a href="https://leetcode-cn.com/problems/linked-list-cycle/">环形链表</a></li>
-</ol>
-<ul>
-<li>看待这道题的第一个思路是弄一个hashset，遍历一次链表，扫到一个就加一个，碰到已经存在的就说明有环</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> hasCycle = <span class="keyword">false</span>;</span><br><span class="line">        ListNode current = head;</span><br><span class="line">        Set&lt;ListNode&gt; Nodeset = <span class="keyword">new</span> HashSet&lt;ListNode&gt;();</span><br><span class="line">        <span class="keyword">while</span>(current!=<span class="keyword">null</span>&amp;&amp;current.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(Nodeset.contains(current))&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            Nodeset.add(current);</span><br><span class="line">            current=current.next;</span><br><span class="line">        </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> hasCycle;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>想着双指针 就想到的一个离谱的方法 想象一下你和另外一个人从宿舍到操场上跑步 操场是一个环 只要你们速度不一样 就一定会相遇…</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head==<span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        ListNode fast=head;</span><br><span class="line">        ListNode slow=head;</span><br><span class="line">        <span class="keyword">while</span>(fast.next!=<span class="keyword">null</span>&amp;&amp;fast.next.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            fast=fast.next.next;</span><br><span class="line">            slow=slow.next;</span><br><span class="line">            <span class="keyword">if</span>(fast==slow)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>两个思路的差距还是明显的</p>
-<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210322173304057.png" alt="image-20210322173304057"></p>
-<p>然后就看题解，看到提出找到入环点的问题，然后搜了一堆，发现乱七八糟没看懂。</p>
-<p>后来意外的发现这就是#142题，难度是中等，<a href="https://leetcode-cn.com/problems/linked-list-cycle-ii/solution/linked-list-cycle-ii-kuai-man-zhi-zhen-shuang-zhi-/">评论有个题解</a>非常的清晰，比网上一堆博客清晰多了。这里暂时先不写。（p.s. 我的同学说他面试鹅厂的时候考到了这个（2021春招））</p>
-<ol start="2">
-<li>#344 <a href="https://leetcode-cn.com/problems/reverse-string/">反转字符串</a></li>
-</ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reverseString</span><span class="params">(<span class="keyword">char</span>[] s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right=s.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">char</span> temp;</span><br><span class="line">        <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">            temp=s[left];</span><br><span class="line">            s[left]=s[right];</span><br><span class="line">            s[right]=temp;</span><br><span class="line">            left++;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<ol start="2">
-<li>#881 <a href="https://leetcode-cn.com/problems/boats-to-save-people/">救生艇</a></li>
-</ol>
-]]></content>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>双指针</tag>
       </tags>
   </entry>
   <entry>
