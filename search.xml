@@ -1,39 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>JAVA collection</title>
-    <url>/2021/03/19/JAVA-collection/</url>
-    <content><![CDATA[<p>本篇介绍Java collection接口下的几种常用数据结构</p>
+    <title>Jenkins配置</title>
+    <url>/2021/03/16/Jenkins%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<p>官方文档路径：<a href="https://www.jenkins.io/zh/doc/book/installing/">https://www.jenkins.io/zh/doc/book/installing/</a></p>
+<h2 id="1-实验目的"><a href="#1-实验目的" class="headerlink" title="1. 实验目的"></a>1. 实验目的</h2><p>本次试验将采用一个简单的maven项目，通过在docker上拉取Jenkins镜像，并且在docker中配置Tomcat，自动拉取Gitlab的代码，实现持续集成。</p>
 <a id="more"></a>
 
-<h1 id="1-整体架构"><a href="#1-整体架构" class="headerlink" title="1. 整体架构"></a>1. 整体架构</h1><p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210319204042645.png" alt="image-20210319204042645"></p>
-<h1 id="2-Set"><a href="#2-Set" class="headerlink" title="2. Set"></a>2. Set</h1><p>Set继承于Collection接口，是一个不允许出现重复元素，并且无序的集合，主要有HashSet和TreeSet两大实现类。</p>
-<h2 id="2-1-HashSet"><a href="#2-1-HashSet" class="headerlink" title="2.1 HashSet"></a>2.1 HashSet</h2><ul>
-<li>不允许出现重复因素；<ul>
-<li>在向HashMap中添加元素时，先判断key的hashCode值是否相同，如果相同，则调用equals()、==进行判断，若相同则覆盖原有元素；如果不同，则直接向Map中添加元素；</li>
-</ul>
-</li>
-<li>允许插入Null值；</li>
-<li>元素无序（添加顺序和遍历顺序不一致）；</li>
-<li>线程不安全，若2个线程同时操作HashSet，必须通过代码实现同步；</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.HashSet;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">hashSet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] agrs)</span></span>&#123;</span><br><span class="line">        <span class="comment">//创建HashSet集合：</span></span><br><span class="line">        Set&lt;String&gt; hashSet = <span class="keyword">new</span> HashSet&lt;String&gt;();</span><br><span class="line">        System.out.println(<span class="string">&quot;HashSet初始容量大小：&quot;</span>+hashSet.size());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//元素添加：</span></span><br><span class="line">        hashSet.add(<span class="string">&quot;my&quot;</span>);</span><br><span class="line">        hashSet.add(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">        hashSet.add(<span class="string">&quot;is&quot;</span>);</span><br><span class="line">        hashSet.add(<span class="string">&quot;Coolingsky&quot;</span>);</span><br><span class="line">        hashSet.add(<span class="string">&quot;,&quot;</span>);</span><br><span class="line">        hashSet.add(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">        hashSet.add(<span class="string">&quot;world&quot;</span>);</span><br><span class="line">        hashSet.add(<span class="string">&quot;!&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;HashSet容量大小：&quot;</span>+hashSet.size());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//迭代器遍历：</span></span><br><span class="line">        Iterator&lt;String&gt; iterator = hashSet.iterator();</span><br><span class="line">        <span class="keyword">while</span> (iterator.hasNext())&#123;</span><br><span class="line">            String str = iterator.next();</span><br><span class="line">            System.out.println(str);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//增强for循环</span></span><br><span class="line">        <span class="keyword">for</span>(String str:hashSet)&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="string">&quot;Coolingsky&quot;</span>.equals(str))&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;get Coolingsky:&quot;</span>+str);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(str);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//元素删除：</span></span><br><span class="line">        hashSet.remove(<span class="string">&quot;Coolingsky&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;HashSet元素大小：&quot;</span> + hashSet.size());</span><br><span class="line">        hashSet.clear();</span><br><span class="line">        System.out.println(<span class="string">&quot;HashSet元素大小：&quot;</span> + hashSet.size());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//集合判断：</span></span><br><span class="line">        <span class="keyword">boolean</span> isEmpty = hashSet.isEmpty();</span><br><span class="line">        System.out.println(<span class="string">&quot;HashSet是否为空：&quot;</span> + isEmpty);</span><br><span class="line">        <span class="keyword">boolean</span> isContains = hashSet.contains(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;HashSet是否包含&#x27;hello&#x27;：&quot;</span> + isContains);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="2-什么是CI"><a href="#2-什么是CI" class="headerlink" title="2. 什么是CI"></a>2. 什么是CI</h2><p>持续集成(Continuous integration)是一种软件开发实践，即团队开发成员经常集成他们的工作，通常每个成员每天至少集成一次，也就意味着每天可能会发生多次集成。每次集成都通过自动化的构建（包括编译，发布，自动化测试）来验证，从而尽早地发现集成错误。</p>
+<h2 id="3-操作流程"><a href="#3-操作流程" class="headerlink" title="3. 操作流程"></a>3. 操作流程</h2><h3 id="3-1-安装docker"><a href="#3-1-安装docker" class="headerlink" title="3.1 安装docker"></a>3.1 安装docker</h3><p>本人使用的是腾讯云服务器，操作系统是ubuntu18.04.4 LTS</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">apt-<span class="builtin-name">get</span> install docker </span><br></pre></td></tr></table></figure>
 
-<h2 id="2-2-TreeSet"><a href="#2-2-TreeSet" class="headerlink" title="2.2 TreeSet"></a>2.2 TreeSet</h2><ul>
-<li>对插入的元素进行排序，是一个有序的集合（主要与HashSet的区别）;</li>
-<li>底层使用红黑树结构，而不是哈希表结构；</li>
-<li>允许插入Null值；</li>
-<li>不允许插入重复元素；</li>
-<li>线程不安全；</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">treeset</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] agrs)</span></span>&#123;</span><br><span class="line">        TreeSet&lt;String&gt; treeSet = <span class="keyword">new</span> TreeSet&lt;String&gt;();</span><br><span class="line">        System.out.println(<span class="string">&quot;TreeSet初始化容量大小：&quot;</span>+treeSet.size());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//元素添加：</span></span><br><span class="line">        treeSet.add(<span class="string">&quot;my&quot;</span>);</span><br><span class="line">        treeSet.add(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">        treeSet.add(<span class="string">&quot;Coolingsky&quot;</span>);</span><br><span class="line">        treeSet.add(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">        treeSet.add(<span class="string">&quot;world&quot;</span>);</span><br><span class="line">        treeSet.add(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">        treeSet.add(<span class="string">&quot;2&quot;</span>);</span><br><span class="line">        treeSet.add(<span class="string">&quot;3&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;TreeSet容量大小：&quot;</span> + treeSet.size());</span><br><span class="line">        System.out.println(<span class="string">&quot;TreeSet元素顺序为：&quot;</span> + treeSet.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//增加for循环遍历：</span></span><br><span class="line">        <span class="keyword">for</span>(String str:treeSet)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;遍历元素：&quot;</span>+str);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//迭代器遍历：升序</span></span><br><span class="line">        Iterator&lt;String&gt; iteratorAesc = treeSet.iterator();</span><br><span class="line">        <span class="keyword">while</span>(iteratorAesc.hasNext())&#123;</span><br><span class="line">            String str = iteratorAesc.next();</span><br><span class="line">            System.out.println(<span class="string">&quot;遍历元素升序：&quot;</span>+str);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//迭代器遍历：降序</span></span><br><span class="line">        Iterator&lt;String&gt; iteratorDesc = treeSet.descendingIterator();</span><br><span class="line">        <span class="keyword">while</span>(iteratorDesc.hasNext())&#123;</span><br><span class="line">            String str = iteratorDesc.next();</span><br><span class="line">            System.out.println(<span class="string">&quot;遍历元素降序：&quot;</span>+str);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//元素获取:实现NavigableSet接口</span></span><br><span class="line">        String firstEle = treeSet.first();<span class="comment">//获取TreeSet头节点：</span></span><br><span class="line">        System.out.println(<span class="string">&quot;TreeSet头节点为：&quot;</span> + firstEle);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取指定元素之前的所有元素集合：(不包含指定元素)</span></span><br><span class="line">        SortedSet&lt;String&gt; headSet = treeSet.headSet(<span class="string">&quot;Coolingsky&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;Coolingsky节点之前的元素为：&quot;</span>+headSet.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取给定元素之间的集合：（包含头，不包含尾）</span></span><br><span class="line">        SortedSet subSet = treeSet.subSet(<span class="string">&quot;1&quot;</span>,<span class="string">&quot;world&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;1--world之间节点元素为：&quot;</span>+subSet.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//集合判断：</span></span><br><span class="line">        <span class="keyword">boolean</span> isEmpty = treeSet.isEmpty();</span><br><span class="line">        System.out.println(<span class="string">&quot;TreeSet是否为空：&quot;</span>+isEmpty);</span><br><span class="line">        <span class="keyword">boolean</span> isContain = treeSet.contains(<span class="string">&quot;who&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;TreeSet是否包含who元素：&quot;</span>+isContain);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//元素删除：</span></span><br><span class="line">        <span class="keyword">boolean</span> CoolingskyRemove = treeSet.remove(<span class="string">&quot;Coolingsky&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;Coolingsky元素是否被删除 &quot;</span>+CoolingskyRemove);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//集合中不存在的元素，删除返回false</span></span><br><span class="line">        <span class="keyword">boolean</span> whoRemove = treeSet.remove(<span class="string">&quot;who&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;who元素是否被删除 &quot;</span>+whoRemove);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//删除并返回第一个元素：如果set集合不存在元素，则返回null</span></span><br><span class="line">        String pollFirst = treeSet.pollFirst();</span><br><span class="line">        System.out.println(<span class="string">&quot;删除的第一个元素：&quot;</span>+pollFirst);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//删除并返回最后一个元素：如果set集合不存在元素，则返回null</span></span><br><span class="line">        String pollLast = treeSet.pollLast();</span><br><span class="line">        System.out.println(<span class="string">&quot;删除的最后一个元素：&quot;</span>+pollLast);</span><br><span class="line"></span><br><span class="line">        treeSet.clear();<span class="comment">//清空集合:</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>ps. 具体怎么安装有点忘了 不行自己搜索”ubuntu docker安装”</p>
+<h3 id="3-2-拉取Jenkins镜像"><a href="#3-2-拉取Jenkins镜像" class="headerlink" title="3.2 拉取Jenkins镜像"></a>3.2 拉取Jenkins镜像</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -p 8080:8080 jenkinsci/blueocean</span><br></pre></td></tr></table></figure>
+
+<p>此时系统中应该已经有jenkins的镜像，为了给后面Tomcat也留个端口，可以添加一些端口以便使用.</p>
+<p>把下面这个加到上面的指令中，因为水平有限，一旦容器创建就不会再添加端口映射了</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-p 8088:8088</span><br></pre></td></tr></table></figure>
+
+<p>查看系统中已经有的镜像&amp;存在的容器：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker image ls</span><br><span class="line">docker ps -a </span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/bed/image-20210324151451460.png" alt="image-20210324151451460"></p>
+<p>如果想要为Jenkins镜像再创建容器：</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">docker <span class="keyword">run</span><span class="bash"> &#123;IMAGE ID&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-访问8080端口"><a href="#3-3-访问8080端口" class="headerlink" title="3.3 访问8080端口"></a>3.3 访问8080端口</h3><p>此时启动创建好的镜像，访问8080端口。（服务器就公网ip:8080,本地就localhost）</p>
+<p>这时候会有一个一长串的码，他会提示你位置，复制位置cat输出一下就可以，然后按照指示创建账号。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/bed/image-20210324151506345.png" alt="image-20210324151506345"></p>
+<p>根据创建好的账号登录即可。</p>
+<h3 id="3-4-配置Maven"><a href="#3-4-配置Maven" class="headerlink" title="3.4 配置Maven"></a>3.4 配置Maven</h3><p>容器内是自带JDK环境的，可以 java -version确认一下</p>
+<p>进入容器内部指令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker exec -ti --user root &#123;容器id&#125; sh</span><br></pre></td></tr></table></figure>
 
 
 
-<p>//To be continued..</p>
+<p>下载maven，安装到任意路径下，配置环境变量（相关知识自行搜索maven安装）</p>
+<p>我这里把maven安装到了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/bed/image-20210324151526445.png" alt="image-20210324151526445"></p>
+<p>这里我可能走了弯路，我是通过scp指令先将maven安装包发到服务器上，再通过docker cp将文件复制进去解压缩等。</p>
+<p>配置环境变量(一定要添加在下面，我也不知道为啥，反正写在前面死活不行)：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vi /etc/profile</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/bed/image-20210324151538447.png" alt="image-20210324151538447"></p>
+<p>注意：maven最好换个源（到maven路径下找到conf/settings.xml）直接把它删了替换成同名文件：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"> <span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">settings</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://maven.apache.org/SETTINGS/1.0.0&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>alimaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>aliyun maven<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-5-到Jenkins中再配置配置"><a href="#3-5-到Jenkins中再配置配置" class="headerlink" title="3.5 到Jenkins中再配置配置"></a>3.5 到Jenkins中再配置配置</h3><h4 id="3-5-1-系统管理-全局工具配置"><a href="#3-5-1-系统管理-全局工具配置" class="headerlink" title="3.5.1 系统管理-全局工具配置"></a>3.5.1 系统管理-全局工具配置</h4><p>查找某个环境变量位置可以：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$JAVA_HOME</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="Maven配置"><a href="#Maven配置" class="headerlink" title="Maven配置"></a>Maven配置</h5><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/bed/image-20210324151607702.png" alt="image-20210324151607702"></p>
+<h5 id="JDK"><a href="#JDK" class="headerlink" title="JDK"></a>JDK</h5><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/bed/image-20210324151633074.png" alt="image-20210324151633074"></p>
+<h4 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h4><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/bed/image-20210324151643485.png" alt="image-20210324151643485"></p>
+<h4 id="3-5-1-系统管理-系统配置"><a href="#3-5-1-系统管理-系统配置" class="headerlink" title="3.5.1 系统管理-系统配置"></a>3.5.1 系统管理-系统配置</h4><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/bed/image-20210324151659247.png" alt="image-20210324151659247"></p>
+<h3 id="3-6-Gitlab上整一个Maven项目"><a href="#3-6-Gitlab上整一个Maven项目" class="headerlink" title="3.6 Gitlab上整一个Maven项目"></a>3.6 Gitlab上整一个Maven项目</h3><p>到Jenkins上新建任务-流水线，我们可以先试一下，选择应用保存。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/bed/image-20210324151737342.png" alt="image-20210324151737342"></p>
+<p>点击“立即构建”。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/bed/image-20210324151756143.png" alt="image-20210324151756143"></p>
+<p>构建完成，并且可以到控制台查看输出 。</p>
+<p>好了。下面我们实现三个功能：</p>
+<ol>
+<li>从gitlab拉取代码</li>
+<li>maven构建打成war包</li>
+<li>部署到Tomcat服务器</li>
+</ol>
+<p>值得高兴的是，Jenkins给了一个超级好用的功能，自动生成流水线脚本。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/bed/image-20210324151824044.png" alt="image-20210324151824044"></p>
+<p>点击“流水线语法”，我们开始（分别对应上述三个阶段）：</p>
+<ol>
+<li>在Repoitory中填写自己gitlab的“clone”的http连接，在Credentials中添加自己的账户密码</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/bed/image-20210324151839432.png" alt="image-20210324151839432"></p>
+<ol start="2">
+<li>shell命令 maven clean package (p.s. maven相关知识自己去学习)</li>
+<li>在credentials中添加自己tomcat管理员的账号密码。具体添加方法百度。在Tomcat URL中添加自己的tomcat地址。（一般情况下是8080，我这里把tomcat文件也放到了docker同一个容器中，所以8080冲突，就把端口改成了8088）</li>
+</ol>
+<p>p.s 这里关于tomcat的操作大概有添加管理员，改端口两步。具体步骤就…（自己做的时候一点一点搜下来，没想到写成博客要这么多，懒了，这里不难）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/bed/image-20210324151850753.png" alt="image-20210324151850753"></p>
+<p>之后到ip:端口访问tomcat 到web-app里找，就可以访问啦。</p>
 ]]></content>
       <tags>
-        <tag>Java</tag>
+        <tag>Jenkins</tag>
       </tags>
   </entry>
   <entry>
@@ -70,91 +117,6 @@
       <tags>
         <tag>leetcode</tag>
         <tag>双指针</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Jenkins配置</title>
-    <url>/2021/03/16/Jenkins%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<p>官方文档路径：<a href="https://www.jenkins.io/zh/doc/book/installing/">https://www.jenkins.io/zh/doc/book/installing/</a></p>
-<h2 id="1-实验目的"><a href="#1-实验目的" class="headerlink" title="1. 实验目的"></a>1. 实验目的</h2><p>本次试验将采用一个简单的maven项目，通过在docker上拉取Jenkins镜像，并且在docker中配置Tomcat，自动拉取Gitlab的代码，实现持续集成。</p>
-<a id="more"></a>
-
-<h2 id="2-什么是CI"><a href="#2-什么是CI" class="headerlink" title="2. 什么是CI"></a>2. 什么是CI</h2><p>持续集成(Continuous integration)是一种软件开发实践，即团队开发成员经常集成他们的工作，通常每个成员每天至少集成一次，也就意味着每天可能会发生多次集成。每次集成都通过自动化的构建（包括编译，发布，自动化测试）来验证，从而尽早地发现集成错误。</p>
-<h2 id="3-操作流程"><a href="#3-操作流程" class="headerlink" title="3. 操作流程"></a>3. 操作流程</h2><h3 id="3-1-安装docker"><a href="#3-1-安装docker" class="headerlink" title="3.1 安装docker"></a>3.1 安装docker</h3><p>本人使用的是腾讯云服务器，操作系统是ubuntu18.04.4 LTS</p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">apt-<span class="builtin-name">get</span> install docker </span><br></pre></td></tr></table></figure>
-
-<p>ps. 具体怎么安装有点忘了 不行自己搜索”ubuntu docker安装”</p>
-<h3 id="3-2-拉取Jenkins镜像"><a href="#3-2-拉取Jenkins镜像" class="headerlink" title="3.2 拉取Jenkins镜像"></a>3.2 拉取Jenkins镜像</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -p 8080:8080 jenkinsci/blueocean</span><br></pre></td></tr></table></figure>
-
-<p>此时系统中应该已经有jenkins的镜像，为了给后面Tomcat也留个端口，可以添加一些端口以便使用.</p>
-<p>把下面这个加到上面的指令中，因为水平有限，一旦容器创建就不会再添加端口映射了</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-p 8088:8088</span><br></pre></td></tr></table></figure>
-
-<p>查看系统中已经有的镜像&amp;存在的容器：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker image ls</span><br><span class="line">docker ps -a </span><br></pre></td></tr></table></figure>
-
-<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318185732804.png" alt="image-20210318185732804"></p>
-<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318185635903.png" alt="image-20210318185635903"></p>
-<p>如果想要为Jenkins镜像再创建容器：</p>
-<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">docker <span class="keyword">run</span><span class="bash"> &#123;IMAGE ID&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="3-3-访问8080端口"><a href="#3-3-访问8080端口" class="headerlink" title="3.3 访问8080端口"></a>3.3 访问8080端口</h3><p>此时启动创建好的镜像，访问8080端口。（服务器就公网ip:8080,本地就localhost）</p>
-<p>这时候会有一个一长串的码，他会提示你位置，复制位置cat输出一下就可以，然后按照指示创建账号。</p>
-<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318190205753.png" alt="image-20210318190205753"></p>
-<p>根据创建好的账号登录即可。</p>
-<h3 id="3-4-配置Maven"><a href="#3-4-配置Maven" class="headerlink" title="3.4 配置Maven"></a>3.4 配置Maven</h3><p>容器内是自带JDK环境的，可以 java -version确认一下</p>
-<p>进入容器内部指令：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker exec -ti --user root &#123;容器id&#125; sh</span><br></pre></td></tr></table></figure>
-
-
-
-<p>下载maven，安装到任意路径下，配置环境变量（相关知识自行搜索maven安装）</p>
-<p>我这里把maven安装到了</p>
-<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318190457509.png" alt="image-20210318190457509"></p>
-<p>这里我可能走了弯路，我是通过scp指令先将maven安装包发到服务器上，再通过docker cp将文件复制进去解压缩等。</p>
-<p>配置环境变量(一定要添加在下面，我也不知道为啥，反正写在前面死活不行)：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vi /etc/profile</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318190742886.png" alt="image-20210318190742886"></p>
-<p>注意：maven最好换个源（到maven路径下找到conf/settings.xml）直接把它删了替换成同名文件：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"> <span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">settings</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://maven.apache.org/SETTINGS/1.0.0&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>alimaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>aliyun maven<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="3-5-到Jenkins中再配置配置"><a href="#3-5-到Jenkins中再配置配置" class="headerlink" title="3.5 到Jenkins中再配置配置"></a>3.5 到Jenkins中再配置配置</h3><h4 id="3-5-1-系统管理-全局工具配置"><a href="#3-5-1-系统管理-全局工具配置" class="headerlink" title="3.5.1 系统管理-全局工具配置"></a>3.5.1 系统管理-全局工具配置</h4><p>查找某个环境变量位置可以：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$JAVA_HOME</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="Maven配置"><a href="#Maven配置" class="headerlink" title="Maven配置"></a>Maven配置</h5><p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318191206251.png" alt="image-20210318191206251"></p>
-<h5 id="JDK"><a href="#JDK" class="headerlink" title="JDK"></a>JDK</h5><p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318191234396.png" alt="image-20210318191234396"></p>
-<h4 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h4><p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318191422233.png" alt="image-20210318191422233"></p>
-<h4 id="3-5-1-系统管理-系统配置"><a href="#3-5-1-系统管理-系统配置" class="headerlink" title="3.5.1 系统管理-系统配置"></a>3.5.1 系统管理-系统配置</h4><p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318191524512.png" alt="image-20210318191524512"></p>
-<h3 id="3-6-Gitlab上整一个Maven项目"><a href="#3-6-Gitlab上整一个Maven项目" class="headerlink" title="3.6 Gitlab上整一个Maven项目"></a>3.6 Gitlab上整一个Maven项目</h3><p>到Jenkins上新建任务-流水线，我们可以先试一下，选择应用保存。</p>
-<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318192907370.png" alt="image-20210318192907370"></p>
-<p>点击“立即构建”。</p>
-<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318192956758.png" alt="image-20210318192956758"></p>
-<p>构建完成，并且可以到控制台查看输出 。</p>
-<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318193027967.png" alt="image-20210318193027967"></p>
-<p>好了。下面我们实现三个功能：</p>
-<ol>
-<li>从gitlab拉取代码</li>
-<li>maven构建打成war包</li>
-<li>部署到Tomcat服务器</li>
-</ol>
-<p>值得高兴的是，Jenkins给了一个超级好用的功能，自动生成流水线脚本。</p>
-<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318193335414.png" alt="image-20210318193335414"></p>
-<p>点击“流水线语法”，我们开始（分别对应上述三个阶段）：</p>
-<ol>
-<li>在Repoitory中填写自己gitlab的“clone”的http连接，在Credentials中添加自己的账户密码</li>
-</ol>
-<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318193539503.png" alt="image-20210318193539503"></p>
-<ol start="2">
-<li>shell命令 maven clean package (p.s. maven相关知识自己去学习)</li>
-<li>在credentials中添加自己tomcat管理员的账号密码。具体添加方法百度。在Tomcat URL中添加自己的tomcat地址。（一般情况下是8080，我这里把tomcat文件也放到了docker同一个容器中，所以8080冲突，就把端口改成了8088）</li>
-</ol>
-<p>p.s 这里关于tomcat的操作大概有添加管理员，改端口两步。具体步骤就…（自己做的时候一点一点搜下来，没想到写成博客要这么多，懒了，这里不难）</p>
-<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210318193715939.png" alt="image-20210318193715939"></p>
-<p>之后到ip:端口访问tomcat 到web-app里找，就可以访问啦。</p>
-]]></content>
-      <tags>
-        <tag>Jenkins</tag>
       </tags>
   </entry>
   <entry>
@@ -206,6 +168,42 @@
       <tags>
         <tag>春招</tag>
         <tag>实习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JAVA collection</title>
+    <url>/2021/03/19/JAVA-collection/</url>
+    <content><![CDATA[<p>本篇介绍Java collection接口下的几种常用数据结构</p>
+<a id="more"></a>
+
+<h1 id="1-整体架构"><a href="#1-整体架构" class="headerlink" title="1. 整体架构"></a>1. 整体架构</h1><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/bed/image-20210324151412198.png" alt="image-20210324151412198"></p>
+<h1 id="2-Set"><a href="#2-Set" class="headerlink" title="2. Set"></a>2. Set</h1><p>Set继承于Collection接口，是一个不允许出现重复元素，并且无序的集合，主要有HashSet和TreeSet两大实现类。</p>
+<h2 id="2-1-HashSet"><a href="#2-1-HashSet" class="headerlink" title="2.1 HashSet"></a>2.1 HashSet</h2><ul>
+<li>不允许出现重复因素；<ul>
+<li>在向HashMap中添加元素时，先判断key的hashCode值是否相同，如果相同，则调用equals()、==进行判断，若相同则覆盖原有元素；如果不同，则直接向Map中添加元素；</li>
+</ul>
+</li>
+<li>允许插入Null值；</li>
+<li>元素无序（添加顺序和遍历顺序不一致）；</li>
+<li>线程不安全，若2个线程同时操作HashSet，必须通过代码实现同步；</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.HashSet;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">hashSet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] agrs)</span></span>&#123;</span><br><span class="line">        <span class="comment">//创建HashSet集合：</span></span><br><span class="line">        Set&lt;String&gt; hashSet = <span class="keyword">new</span> HashSet&lt;String&gt;();</span><br><span class="line">        System.out.println(<span class="string">&quot;HashSet初始容量大小：&quot;</span>+hashSet.size());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//元素添加：</span></span><br><span class="line">        hashSet.add(<span class="string">&quot;my&quot;</span>);</span><br><span class="line">        hashSet.add(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">        hashSet.add(<span class="string">&quot;is&quot;</span>);</span><br><span class="line">        hashSet.add(<span class="string">&quot;Coolingsky&quot;</span>);</span><br><span class="line">        hashSet.add(<span class="string">&quot;,&quot;</span>);</span><br><span class="line">        hashSet.add(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">        hashSet.add(<span class="string">&quot;world&quot;</span>);</span><br><span class="line">        hashSet.add(<span class="string">&quot;!&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;HashSet容量大小：&quot;</span>+hashSet.size());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//迭代器遍历：</span></span><br><span class="line">        Iterator&lt;String&gt; iterator = hashSet.iterator();</span><br><span class="line">        <span class="keyword">while</span> (iterator.hasNext())&#123;</span><br><span class="line">            String str = iterator.next();</span><br><span class="line">            System.out.println(str);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//增强for循环</span></span><br><span class="line">        <span class="keyword">for</span>(String str:hashSet)&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="string">&quot;Coolingsky&quot;</span>.equals(str))&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;get Coolingsky:&quot;</span>+str);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(str);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//元素删除：</span></span><br><span class="line">        hashSet.remove(<span class="string">&quot;Coolingsky&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;HashSet元素大小：&quot;</span> + hashSet.size());</span><br><span class="line">        hashSet.clear();</span><br><span class="line">        System.out.println(<span class="string">&quot;HashSet元素大小：&quot;</span> + hashSet.size());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//集合判断：</span></span><br><span class="line">        <span class="keyword">boolean</span> isEmpty = hashSet.isEmpty();</span><br><span class="line">        System.out.println(<span class="string">&quot;HashSet是否为空：&quot;</span> + isEmpty);</span><br><span class="line">        <span class="keyword">boolean</span> isContains = hashSet.contains(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;HashSet是否包含&#x27;hello&#x27;：&quot;</span> + isContains);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-TreeSet"><a href="#2-2-TreeSet" class="headerlink" title="2.2 TreeSet"></a>2.2 TreeSet</h2><ul>
+<li>对插入的元素进行排序，是一个有序的集合（主要与HashSet的区别）;</li>
+<li>底层使用红黑树结构，而不是哈希表结构；</li>
+<li>允许插入Null值；</li>
+<li>不允许插入重复元素；</li>
+<li>线程不安全；</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">treeset</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] agrs)</span></span>&#123;</span><br><span class="line">        TreeSet&lt;String&gt; treeSet = <span class="keyword">new</span> TreeSet&lt;String&gt;();</span><br><span class="line">        System.out.println(<span class="string">&quot;TreeSet初始化容量大小：&quot;</span>+treeSet.size());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//元素添加：</span></span><br><span class="line">        treeSet.add(<span class="string">&quot;my&quot;</span>);</span><br><span class="line">        treeSet.add(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">        treeSet.add(<span class="string">&quot;Coolingsky&quot;</span>);</span><br><span class="line">        treeSet.add(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">        treeSet.add(<span class="string">&quot;world&quot;</span>);</span><br><span class="line">        treeSet.add(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">        treeSet.add(<span class="string">&quot;2&quot;</span>);</span><br><span class="line">        treeSet.add(<span class="string">&quot;3&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;TreeSet容量大小：&quot;</span> + treeSet.size());</span><br><span class="line">        System.out.println(<span class="string">&quot;TreeSet元素顺序为：&quot;</span> + treeSet.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//增加for循环遍历：</span></span><br><span class="line">        <span class="keyword">for</span>(String str:treeSet)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;遍历元素：&quot;</span>+str);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//迭代器遍历：升序</span></span><br><span class="line">        Iterator&lt;String&gt; iteratorAesc = treeSet.iterator();</span><br><span class="line">        <span class="keyword">while</span>(iteratorAesc.hasNext())&#123;</span><br><span class="line">            String str = iteratorAesc.next();</span><br><span class="line">            System.out.println(<span class="string">&quot;遍历元素升序：&quot;</span>+str);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//迭代器遍历：降序</span></span><br><span class="line">        Iterator&lt;String&gt; iteratorDesc = treeSet.descendingIterator();</span><br><span class="line">        <span class="keyword">while</span>(iteratorDesc.hasNext())&#123;</span><br><span class="line">            String str = iteratorDesc.next();</span><br><span class="line">            System.out.println(<span class="string">&quot;遍历元素降序：&quot;</span>+str);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//元素获取:实现NavigableSet接口</span></span><br><span class="line">        String firstEle = treeSet.first();<span class="comment">//获取TreeSet头节点：</span></span><br><span class="line">        System.out.println(<span class="string">&quot;TreeSet头节点为：&quot;</span> + firstEle);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取指定元素之前的所有元素集合：(不包含指定元素)</span></span><br><span class="line">        SortedSet&lt;String&gt; headSet = treeSet.headSet(<span class="string">&quot;Coolingsky&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;Coolingsky节点之前的元素为：&quot;</span>+headSet.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取给定元素之间的集合：（包含头，不包含尾）</span></span><br><span class="line">        SortedSet subSet = treeSet.subSet(<span class="string">&quot;1&quot;</span>,<span class="string">&quot;world&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;1--world之间节点元素为：&quot;</span>+subSet.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//集合判断：</span></span><br><span class="line">        <span class="keyword">boolean</span> isEmpty = treeSet.isEmpty();</span><br><span class="line">        System.out.println(<span class="string">&quot;TreeSet是否为空：&quot;</span>+isEmpty);</span><br><span class="line">        <span class="keyword">boolean</span> isContain = treeSet.contains(<span class="string">&quot;who&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;TreeSet是否包含who元素：&quot;</span>+isContain);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//元素删除：</span></span><br><span class="line">        <span class="keyword">boolean</span> CoolingskyRemove = treeSet.remove(<span class="string">&quot;Coolingsky&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;Coolingsky元素是否被删除 &quot;</span>+CoolingskyRemove);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//集合中不存在的元素，删除返回false</span></span><br><span class="line">        <span class="keyword">boolean</span> whoRemove = treeSet.remove(<span class="string">&quot;who&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;who元素是否被删除 &quot;</span>+whoRemove);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//删除并返回第一个元素：如果set集合不存在元素，则返回null</span></span><br><span class="line">        String pollFirst = treeSet.pollFirst();</span><br><span class="line">        System.out.println(<span class="string">&quot;删除的第一个元素：&quot;</span>+pollFirst);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//删除并返回最后一个元素：如果set集合不存在元素，则返回null</span></span><br><span class="line">        String pollLast = treeSet.pollLast();</span><br><span class="line">        System.out.println(<span class="string">&quot;删除的最后一个元素：&quot;</span>+pollLast);</span><br><span class="line"></span><br><span class="line">        treeSet.clear();<span class="comment">//清空集合:</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>//To be continued..</p>
+]]></content>
+      <tags>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
