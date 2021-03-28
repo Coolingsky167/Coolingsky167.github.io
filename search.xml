@@ -1,42 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>leetcode新手村(1)</title>
-    <url>/2021/03/23/leetcode%E6%96%B0%E6%89%8B%E6%9D%91-1/</url>
-    <content><![CDATA[<ol>
-<li>#141 <a href="https://leetcode-cn.com/problems/linked-list-cycle/">环形链表</a></li>
-</ol>
-<ul>
-<li>看待这道题的第一个思路是弄一个hashset，遍历一次链表，扫到一个就加一个，碰到已经存在的就说明有环</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> hasCycle = <span class="keyword">false</span>;</span><br><span class="line">        ListNode current = head;</span><br><span class="line">        Set&lt;ListNode&gt; Nodeset = <span class="keyword">new</span> HashSet&lt;ListNode&gt;();</span><br><span class="line">        <span class="keyword">while</span>(current!=<span class="keyword">null</span>&amp;&amp;current.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(Nodeset.contains(current))&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            Nodeset.add(current);</span><br><span class="line">            current=current.next;</span><br><span class="line">        </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> hasCycle;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>想着双指针 就想到的一个离谱的方法 想象一下你和另外一个人从宿舍到操场上跑步 操场是一个环 只要你们速度不一样 就一定会相遇…</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head==<span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        ListNode fast=head;</span><br><span class="line">        ListNode slow=head;</span><br><span class="line">        <span class="keyword">while</span>(fast.next!=<span class="keyword">null</span>&amp;&amp;fast.next.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            fast=fast.next.next;</span><br><span class="line">            slow=slow.next;</span><br><span class="line">            <span class="keyword">if</span>(fast==slow)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>两个思路的差距还是明显的</p>
-<p><img src="https://image-coolingsky.oss-cn-beijing.aliyuncs.com/img/image-20210322173304057.png" alt="image-20210322173304057"></p>
-<p>然后就看题解，看到提出找到入环点的问题，然后搜了一堆，发现乱七八糟没看懂。</p>
-<p>后来意外的发现这就是#142题，难度是中等，<a href="https://leetcode-cn.com/problems/linked-list-cycle-ii/solution/linked-list-cycle-ii-kuai-man-zhi-zhen-shuang-zhi-/">评论有个题解</a>非常的清晰，比网上一堆博客清晰多了。这里暂时先不写。（p.s. 我的同学说他面试鹅厂的时候考到了这个（2021春招））</p>
-<ol start="2">
-<li>#344 <a href="https://leetcode-cn.com/problems/reverse-string/">反转字符串</a></li>
-</ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reverseString</span><span class="params">(<span class="keyword">char</span>[] s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right=s.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">char</span> temp;</span><br><span class="line">        <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">            temp=s[left];</span><br><span class="line">            s[left]=s[right];</span><br><span class="line">            s[right]=temp;</span><br><span class="line">            left++;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<ol start="2">
-<li>#881 <a href="https://leetcode-cn.com/problems/boats-to-save-people/">救生艇</a></li>
-</ol>
-]]></content>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>双指针</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JAVA collection</title>
     <url>/2021/03/19/JAVA-collection/</url>
     <content><![CDATA[<p>本篇介绍Java collection接口下的几种常用数据结构</p>
@@ -197,6 +161,197 @@
 <li><p>给定一组词组，每个词组包含id和字符串的映射，现输入另一组词组，要求找出新的词组与老的词组的diff关系，diff要求如下：<br>1、id相同且字符串相同的两个词组视为相同<br>2、id相同，且字符串不同的输出modify+id<br>3、新的词组id在老的词组id中不存在的，视为新增，输出add+id<br>4、老的词组id在新的词组id中不存在的，视为删除，输出delete+id</p>
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>求职</category>
+      </categories>
+      <tags>
+        <tag>春招</tag>
+        <tag>实习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>leetcode新手村(1)</title>
+    <url>/2021/03/23/leetcode%E6%96%B0%E6%89%8B%E6%9D%91-1/</url>
+    <content><![CDATA[<h2 id="题1"><a href="#题1" class="headerlink" title="题1"></a>题1</h2><ol>
+<li>#141 <a href="https://leetcode-cn.com/problems/linked-list-cycle/">环形链表</a></li>
+</ol>
+<ul>
+<li>看待这道题的第一个思路是弄一个hashset，遍历一次链表，扫到一个就加一个，碰到已经存在的就说明有环</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> hasCycle = <span class="keyword">false</span>;</span><br><span class="line">        ListNode current = head;</span><br><span class="line">        Set&lt;ListNode&gt; Nodeset = <span class="keyword">new</span> HashSet&lt;ListNode&gt;();</span><br><span class="line">        <span class="keyword">while</span>(current!=<span class="keyword">null</span>&amp;&amp;current.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(Nodeset.contains(current))&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            Nodeset.add(current);</span><br><span class="line">            current=current.next;</span><br><span class="line">        </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> hasCycle;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>想着双指针 就想到的一个离谱的方法 想象一下你和另外一个人从宿舍到操场上跑步 操场是一个环 只要你们速度不一样 就一定会相遇…</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head==<span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        ListNode fast=head;</span><br><span class="line">        ListNode slow=head;</span><br><span class="line">        <span class="keyword">while</span>(fast.next!=<span class="keyword">null</span>&amp;&amp;fast.next.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            fast=fast.next.next;</span><br><span class="line">            slow=slow.next;</span><br><span class="line">            <span class="keyword">if</span>(fast==slow)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>两个思路的差距还是明显的。</p>
+<p>然后就看题解，看到提出找到入环点的问题，然后搜了一堆，发现乱七八糟没看懂。</p>
+<p>后来意外的发现这就是#142题，难度是中等，<a href="https://leetcode-cn.com/problems/linked-list-cycle-ii/solution/linked-list-cycle-ii-kuai-man-zhi-zhen-shuang-zhi-/">评论有个题解</a>非常的清晰，比网上一堆博客清晰多了。这里暂时先不写。（p.s. 我的同学说他面试鹅厂的时候考到了这个（2021春招））</p>
+<h2 id="题2"><a href="#题2" class="headerlink" title="题2"></a>题2</h2><ol start="2">
+<li>#344 <a href="https://leetcode-cn.com/problems/reverse-string/">反转字符串</a></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reverseString</span><span class="params">(<span class="keyword">char</span>[] s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right=s.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">char</span> temp;</span><br><span class="line">        <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">            temp=s[left];</span><br><span class="line">            s[left]=s[right];</span><br><span class="line">            s[right]=temp;</span><br><span class="line">            left++;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="题3"><a href="#题3" class="headerlink" title="题3"></a>题3</h2><ol start="3">
+<li>#881 <a href="https://leetcode-cn.com/problems/boats-to-save-people/">救生艇</a></li>
+</ol>
+<p>我的思路是先快速排序，再从两边向中间组队坐船，顺带着复习一波排序，结果还就那个离谱..</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numRescueBoats</span><span class="params">(<span class="keyword">int</span>[] people, <span class="keyword">int</span> limit)</span> </span>&#123;</span><br><span class="line">        quicksort(people);</span><br><span class="line">        <span class="keyword">int</span> count=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> left=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right=people.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">            <span class="keyword">while</span> ( left&lt;right &amp;&amp; people[left]+people[right]&gt;limit)&#123;</span><br><span class="line">                right--;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span> (left&lt;right&amp;&amp;people[left]+people[right]&lt;=limit)&#123;</span><br><span class="line">                right--;</span><br><span class="line">                left++;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (left==right)</span><br><span class="line">            count++;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">quicksort</span><span class="params">(<span class="keyword">int</span>[] arr)</span></span>&#123;</span><br><span class="line">        doSort(arr,<span class="number">0</span>,arr.length-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSort</span><span class="params">(<span class="keyword">int</span>[] arr,<span class="keyword">int</span> low,<span class="keyword">int</span> high)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (low&gt;=high)&#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> left=low;</span><br><span class="line">        <span class="keyword">int</span> right=high;</span><br><span class="line">        <span class="keyword">int</span> pivot=arr[low];</span><br><span class="line">        <span class="comment">// 1 2</span></span><br><span class="line">        <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">            <span class="keyword">while</span> (left&lt;right&amp;&amp;arr[right]&gt;pivot)&#123; <span class="comment">//注意left&lt;right</span></span><br><span class="line">                right--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (left&gt;=right)&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">int</span> tem=arr[left];</span><br><span class="line">            arr[left]=arr[right];</span><br><span class="line">            arr[right]=tem;</span><br><span class="line">            left++;</span><br><span class="line">            <span class="keyword">while</span>(left&lt;right&amp;&amp;arr[left]&lt;pivot)&#123;</span><br><span class="line">                left++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (left&gt;=right)&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            tem=arr[left];</span><br><span class="line">            arr[left]=arr[right];</span><br><span class="line">            arr[right]=tem;</span><br><span class="line">        &#125;</span><br><span class="line">        doSort(arr,low,left-<span class="number">1</span>); <span class="comment">//注意是pivot两侧</span></span><br><span class="line">        doSort(arr,left+<span class="number">1</span>,high);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210327182459708.png" alt="image-20210327182459708"></p>
+<p>所以更好的思路是：</p>
+<p>其实思路是一样的…但是手写排序没必要..在排序后的处理上下面代码更优</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numRescueBoats</span><span class="params">(<span class="keyword">int</span>[] people, <span class="keyword">int</span> limit)</span> </span>&#123;</span><br><span class="line">        Arrays.sort(people);</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = people.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (i &lt;= j) &#123;</span><br><span class="line">            ans++;</span><br><span class="line">            <span class="keyword">if</span> (people[i] + people[j] &lt;= limit)</span><br><span class="line">                i++;</span><br><span class="line">            j--;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>仅仅只是把自己的快速排序换成了Arrays封装的排序，速度就提升了将近40倍？？？</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210327182900393.png" alt="image-20210327182900393"></p>
+<p>补充：</p>
+<ol>
+<li>给class实现一个comparator接口，就可以对象比较.</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> size;</span><br><span class="line">    <span class="keyword">int</span> weight;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Dog</span><span class="params">(<span class="keyword">int</span> s, <span class="keyword">int</span> w)</span></span>&#123;</span><br><span class="line">        size = s;</span><br><span class="line">        weight = w;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DogSizeComparator</span> <span class="keyword">implements</span> <span class="title">Comparator</span>&lt;<span class="title">Dog</span>&gt;</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Dog o1, Dog o2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> o1.size - o2.size;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Dog d1 = <span class="keyword">new</span> Dog(<span class="number">2</span>, <span class="number">50</span>);</span><br><span class="line">        Dog d2 = <span class="keyword">new</span> Dog(<span class="number">1</span>, <span class="number">30</span>);</span><br><span class="line">        Dog d3 = <span class="keyword">new</span> Dog(<span class="number">3</span>, <span class="number">40</span>);</span><br><span class="line">        Dog[] dogArray = &#123;d1, d2, d3&#125;;</span><br><span class="line">        Arrays.sort(dogArray, <span class="keyword">new</span> DogSizeComparator());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Arrays.sort()底层有一个阈值，之下用插入，之上用优化的快速排序（pivot的选择）</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>双指针</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>leetcode新手村-2</title>
+    <url>/2021/03/27/leetcode%E6%96%B0%E6%89%8B%E6%9D%91-2/</url>
+    <content><![CDATA[<p>动态规划，面试官的法宝。</p>
+<h2 id="题1-509"><a href="#题1-509" class="headerlink" title="题1 #509"></a>题1 #509</h2><ol>
+<li>#509 <a href="https://leetcode-cn.com/problems/fibonacci-number/">斐波那契数</a></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fib</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> fib(n-<span class="number">1</span>)+fib(n-<span class="number">2</span>);        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210327190223962.png" alt="image-20210327190223962"></p>
+<p>emmm….递归慢，原因是做了很多重复计算，如果我们用空间换时间，把已经计算的结果记录下来：</p>
+<h2 id="题2-62"><a href="#题2-62" class="headerlink" title="题2 #62"></a>题2 #62</h2><ol start="2">
+<li><h2 id="题3-121"><a href="#题3-121" class="headerlink" title="题3 #121"></a>题3 #121</h2></li>
+<li></li>
+</ol>
+<h2 id="题4-70"><a href="#题4-70" class="headerlink" title="题4 #70"></a>题4 #70</h2><ol start="4">
+<li><h2 id="题5-279"><a href="#题5-279" class="headerlink" title="题5 #279"></a>题5 #279</h2></li>
+<li></li>
+</ol>
+<h2 id="题6-221"><a href="#题6-221" class="headerlink" title="题6 #221"></a>题6 #221</h2><ol start="6">
+<li></li>
+</ol>
+]]></content>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>阿里1面</title>
+    <url>/2021/03/28/%E9%98%BF%E9%87%8C1%E9%9D%A2/</url>
+    <content><![CDATA[<p>2021-3-28</p>
+<p>阿里一面 面试官一直试图明白我到底会什么</p>
+<p>面试官：”我听说你用过xxx，那你知道xxx嘛？”</p>
+<p>我：“不知道”</p>
+<h1 id="问题汇总："><a href="#问题汇总：" class="headerlink" title="问题汇总："></a>问题汇总：</h1><h2 id="1-自我介绍"><a href="#1-自我介绍" class="headerlink" title="1 自我介绍"></a>1 自我介绍</h2><p>介绍学过什么课，做过什么项目</p>
+<h2 id="2-简历中写到NJU酒店管理系统（开始白给）"><a href="#2-简历中写到NJU酒店管理系统（开始白给）" class="headerlink" title="2 简历中写到NJU酒店管理系统（开始白给）"></a>2 简历中写到NJU酒店管理系统（开始白给）</h2><h3 id="2-1-数据库"><a href="#2-1-数据库" class="headerlink" title="2.1 数据库"></a>2.1 数据库</h3><ol>
+<li>介绍一下你们的数据库设计</li>
+<li>这个数据库使用了第几范式</li>
+<li>是否使用了<strong>索引</strong> （踩大坑上了 索引除了知道B+ tree其余一概不知）<ol>
+<li>索引的底层实现结构</li>
+<li>索引设计（查看自己用户信息，查看一年订单，查看酒店优惠）</li>
+<li>（A, B, C）A，B联合索引，select B是否可以</li>
+</ol>
+</li>
+<li>事务的四个特点解释<ol>
+<li>原子性</li>
+<li>一致性</li>
+<li>隔离性<ol>
+<li>四个隔离级别（完全没听过）</li>
+</ol>
+</li>
+<li>持久性</li>
+</ol>
+</li>
+</ol>
+<h3 id="2-2-Springboot"><a href="#2-2-Springboot" class="headerlink" title="2.2 Springboot"></a>2.2 Springboot</h3><ol>
+<li>Spring的作用</li>
+<li>介绍一下IOC</li>
+<li>注入的方式有哪些<ol>
+<li>@autowire 一个接口两个Bean 会出现什么问题如何解决</li>
+</ol>
+</li>
+<li>Bean的生命周期<ol>
+<li>你读过源码吗？没有。那这个问题不问了（本来还能扯一扯）</li>
+</ol>
+</li>
+<li>怎么理解AOP</li>
+<li>AOP 的实现方法有哪些</li>
+<li>比如一个类A有三个方法，M1，M2，M3 对M3切面，M1调用M3，切面是否生效</li>
+</ol>
+<h2 id="3-JAVA基础"><a href="#3-JAVA基础" class="headerlink" title="3 JAVA基础"></a>3 JAVA基础</h2><p>面试官问我对java了解到什么程度，我说只能了解一点点，走成华大道..</p>
+<h3 id="3-1-集合"><a href="#3-1-集合" class="headerlink" title="3.1 集合"></a>3.1 集合</h3><ol>
+<li>你知道java集合有哪些数据结构</li>
+<li>讲一讲hashmap（他问我了解哪个，我说我只看过这个）</li>
+<li>hashmap和hashtable的区别</li>
+<li>currenthashmap和hashmap的区别</li>
+<li>为什么是线程安全的（hashtable，currenthashmap？）</li>
+</ol>
+<h3 id="3-2-线程"><a href="#3-2-线程" class="headerlink" title="3.2 线程"></a>3.2 线程</h3><ol>
+<li><p>使用线程的三种方式</p>
+</li>
+<li><p>runnale和callable的区别</p>
+</li>
+<li><p>线程池</p>
+<p>这里我说我对线程的了解就到这了，面试官就不问了</p>
+</li>
+</ol>
+<h3 id="3-3-JVM"><a href="#3-3-JVM" class="headerlink" title="3.3  JVM"></a>3.3  JVM</h3><p>让我自己说对JVM的了解</p>
+<p>我就拿出了我早晨恶补一小时的JVM体系结构图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210328111654442.png" alt="image-20210328111654442"></p>
+<ol>
+<li>String a=“a” String b=new String（“a”） a==b?</li>
+</ol>
+<p>这里我说不等，因为一个在常量池一个在堆中，他问我怎么样才能相等，我说.equals()</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210328112012176.png" alt="image-20210328112012176"></p>
+<ol start="2">
+<li>s1=”a” s2=”b” s3=”a”+”b” 存储？</li>
+</ol>
+<p>我这里说都在常量池..我现在有点忘了他问的是a+b还是s1+s2</p>
+<p>后者在堆中</p>
+<ol start="3">
+<li><p><strong>类加载器</strong></p>
+<ol>
+<li>类加载方式</li>
+</ol>
+<p>我balabal胡扯一堆，用上了早晨刚看到的名词“双亲委托模式”</p>
+<ol start="2">
+<li>那双亲委托的作用是什么？</li>
+</ol>
+<p>卒。</p>
+<ol start="3">
+<li>举个例子，比如不同目录下的同名类，用了双亲委托和不用有什么区别？</li>
+</ol>
+<p>卒。</p>
+</li>
+</ol>
+<h2 id="4-你有什么想问我的"><a href="#4-你有什么想问我的" class="headerlink" title="4 你有什么想问我的"></a>4 你有什么想问我的</h2><p>开始胡扯，总结一下是希望我掌握：</p>
+<ol>
+<li>数据库是基础，我一直强调索引，你不会balaba，因为这是和实战相关的</li>
+<li>JAVA基础、框架、缓存（Redis）</li>
+<li>分布式框架是加分项，对实习生没有什么要求</li>
+<li>Spring框架多了解原理</li>
+</ol>
+<h2 id="5-总结"><a href="#5-总结" class="headerlink" title="5 总结"></a>5 总结</h2><p>估计阿里面试之旅已经结束，毕竟准备时间顶多四五个小时</p>
+<p>忙着英语考试但是英语也准备的不好…</p>
+<p>面试官整体很nice 也没有狂怼我 只有我孤独的尴尬</p>
+<p>早点考完两个语言考试。</p>
+<p>下次还来。</p>
 ]]></content>
       <categories>
         <category>求职</category>
