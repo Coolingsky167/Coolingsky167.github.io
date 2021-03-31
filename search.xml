@@ -120,57 +120,6 @@
       </tags>
   </entry>
   <entry>
-    <title>便利蜂笔试</title>
-    <url>/2021/03/20/%E4%BE%BF%E5%88%A9%E8%9C%82%E7%AC%94%E8%AF%95/</url>
-    <content><![CDATA[<p>2021-春招</p>
-<p>便利蜂笔试回忆</p>
-<a id="more"></a>
-
-<p>15个选择（30分）+三道编程（70分）</p>
-<p>选择题全是瞎猜的。。编程题感觉写了一题结果超时了而且没有全部ac</p>
-<p>最离谱的是想不起来怎么用JAVA读输入..最后用python写的</p>
-<p>下面是回忆</p>
-<h2 id="选择题"><a href="#选择题" class="headerlink" title="选择题"></a>选择题</h2><p>网络+cpp基础知识+数据库+集成测试工具+UML+…想不起来了</p>
-<p>比如http属于第几层</p>
-<p>数据库的xx操作体现四大特点的哪个</p>
-<p>CPP主要是虚函数 类初始化顺序等</p>
-<h2 id="编程题"><a href="#编程题" class="headerlink" title="编程题"></a>编程题</h2><ol>
-<li>假设有一个矩阵，矩阵由 0 和 1 数字组成。其中1代表这个节点可达，0代表这个节点不可达，从左上角第一个节点出发到右下角最后一个节点，只能上下左右移动，初始节点数为 1，移动一步节点数加 1，问最少需要经过多少节点可以达到。请实现计算最短路径的函数。如果不可达返回0。</li>
-</ol>
-<p>输入</p>
-<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>;<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>;<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>;<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<p>输出</p>
-<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">7</span></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li><p>在便利店中顾客的结账时间是很重要的指标。结账时间由排队等待时间，和顾客操作付款时间两部分组成。程序输入为顾客列表 customers，每一位顾客 customer[i] 包含两个数值 arriveTime, payDuration。 请计算所有顾客的总结账时间。</p>
-</li>
-</ol>
-<ul>
-<li>arriveTime 表示顾客挑选完商品去结账的时刻；</li>
-<li>payDuration 表示顾客操作付款的时间。</li>
-</ul>
-<p>输入</p>
-<figure class="highlight basic"><table><tr><td class="code"><pre><span class="line"><span class="symbol">3 </span></span><br><span class="line"><span class="number">1</span>,<span class="number">2</span> </span><br><span class="line"><span class="number">2</span>,<span class="number">5</span> </span><br><span class="line"><span class="number">4</span>,<span class="number">3</span></span><br></pre></td></tr></table></figure>
-
-<p>输出</p>
-<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">15</span></span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li><p>给定一组词组，每个词组包含id和字符串的映射，现输入另一组词组，要求找出新的词组与老的词组的diff关系，diff要求如下：<br>1、id相同且字符串相同的两个词组视为相同<br>2、id相同，且字符串不同的输出modify+id<br>3、新的词组id在老的词组id中不存在的，视为新增，输出add+id<br>4、老的词组id在新的词组id中不存在的，视为删除，输出delete+id</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>求职</category>
-      </categories>
-      <tags>
-        <tag>春招</tag>
-        <tag>实习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>leetcode新手村(1)</title>
     <url>/2021/03/23/leetcode%E6%96%B0%E6%89%8B%E6%9D%91-1/</url>
     <content><![CDATA[<h2 id="题1"><a href="#题1" class="headerlink" title="题1"></a>题1</h2><ol>
@@ -227,28 +176,96 @@
     <title>leetcode新手村-2</title>
     <url>/2021/03/27/leetcode%E6%96%B0%E6%89%8B%E6%9D%91-2/</url>
     <content><![CDATA[<p>动态规划，面试官的法宝。</p>
-<h2 id="题1-509"><a href="#题1-509" class="headerlink" title="题1 #509"></a>题1 #509</h2><ol>
-<li>#509 <a href="https://leetcode-cn.com/problems/fibonacci-number/">斐波那契数</a></li>
-</ol>
+<h2 id="题1-509"><a href="#题1-509" class="headerlink" title="题1 #509"></a>题1 #509</h2><p>#509 <a href="https://leetcode-cn.com/problems/fibonacci-number/">斐波那契数</a></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fib</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> fib(n-<span class="number">1</span>)+fib(n-<span class="number">2</span>);        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210327190223962.png" alt="image-20210327190223962"></p>
 <p>emmm….递归慢，原因是做了很多重复计算，如果我们用空间换时间，把已经计算的结果记录下来：</p>
-<h2 id="题2-62"><a href="#题2-62" class="headerlink" title="题2 #62"></a>题2 #62</h2><ol start="2">
-<li><h2 id="题3-121"><a href="#题3-121" class="headerlink" title="题3 #121"></a>题3 #121</h2></li>
-<li></li>
-</ol>
-<h2 id="题4-70"><a href="#题4-70" class="headerlink" title="题4 #70"></a>题4 #70</h2><ol start="4">
-<li><h2 id="题5-279"><a href="#题5-279" class="headerlink" title="题5 #279"></a>题5 #279</h2></li>
-<li></li>
-</ol>
-<h2 id="题6-221"><a href="#题6-221" class="headerlink" title="题6 #221"></a>题6 #221</h2><ol start="6">
-<li></li>
-</ol>
-]]></content>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fib</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] book =<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">300</span>];</span><br><span class="line">      <span class="comment">//用vector会更合适- -</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i =<span class="number">0</span>;i&lt;<span class="number">300</span>;i++)&#123;</span><br><span class="line">            book[i]=-<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> doFib(book,n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">doFib</span><span class="params">(<span class="keyword">int</span>[] book,<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (book[n]!=-<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> book[n];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (n==<span class="number">1</span>)&#123;</span><br><span class="line">            book[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (n==<span class="number">0</span>)&#123;</span><br><span class="line">            book[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        book[n]=doFib(book,n-<span class="number">1</span>)+doFib(book,n-<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">return</span> book[n];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// public static void main(String[] args) &#123;</span></span><br><span class="line">    <span class="comment">//     Solution solution =new Solution();</span></span><br><span class="line">    <span class="comment">//     System.out.println(solution.fib(3));</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>![image-20210328170352274](/Users/xuyuxuan/Library/Application Support/typora-user-images/image-20210328170352274.png)</p>
+<h2 id="题2-62"><a href="#题2-62" class="headerlink" title="题2 #62"></a>题2 #62</h2><p>#62 <a href="https://leetcode-cn.com/problems/unique-paths/">不同路径</a></p>
+<p>首先想到的是用组合数做..mxn的格子一共需要走(M+N-2)步，只需要在这些步数中找出（M-1）步走下就行，也就是说需要C（M-1，M+N-2）就可以。</p>
+<p>我本以为几分钟写完，结果没有搜到java内置的Math相关方法</p>
+<p>自己写组合数计算公式疯狂越界，只能边求边化简..</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">uniquePaths</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> a=m+n-<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">long</span> b=m-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (b&gt;a/<span class="number">2</span>)&#123;</span><br><span class="line">            b=a-b;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">long</span> ans=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;b;i++)&#123;</span><br><span class="line">            ans=ans*(a-i);</span><br><span class="line">            ans=ans/(i+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">int</span>)ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>考虑利用动态规划的思想,递归处理，记录已经计算的结果。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">uniquePaths</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span>[][] arr=<span class="keyword">new</span> <span class="keyword">int</span>[m][n];</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)&#123;</span><br><span class="line">           <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j++)&#123;</span><br><span class="line">               arr[i][j]=-<span class="number">1</span>;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">        <span class="keyword">return</span> func(arr,m,n);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span>[][] arr,<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (arr[m-<span class="number">1</span>][n-<span class="number">1</span>]!=-<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> arr[m-<span class="number">1</span>][n-<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (m==<span class="number">1</span>)&#123;</span><br><span class="line">            arr[m-<span class="number">1</span>][n-<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (n==<span class="number">1</span>)&#123;</span><br><span class="line">            arr[m-<span class="number">1</span>][n-<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        arr[m-<span class="number">1</span>][n-<span class="number">1</span>]=func(arr,m-<span class="number">1</span>,n)+func(arr,m,n-<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> arr[m-<span class="number">1</span>][n-<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再精简一点：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">uniquePaths</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[m][n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) dp[<span class="number">0</span>][i] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) dp[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; m; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; n; j++) &#123;</span><br><span class="line">                dp[i][j] = dp[i - <span class="number">1</span>][j] + dp[i][j - <span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[m - <span class="number">1</span>][n - <span class="number">1</span>];  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="题3-121"><a href="#题3-121" class="headerlink" title="题3 #121"></a>题3 #121</h2><p>暴力求解直接超时</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;prices.length-<span class="number">1</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;prices.length;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span> (prices[j]-prices[i]&gt;max)&#123;</span><br><span class="line">                    max=prices[j]-prices[i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>arr[i]视作第i天卖的最大收入，显然等于price[i]-min{price[j]},j&lt;i</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len=prices.length;</span><br><span class="line">        <span class="keyword">int</span>[] minPrice=<span class="keyword">new</span> <span class="keyword">int</span>[len];</span><br><span class="line">        <span class="comment">// minPrice[n]=min&#123;minPrice[n-1],price[n]&#125;</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (i==<span class="number">0</span>)&#123;</span><br><span class="line">                minPrice[i]=prices[i];</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                minPrice[i]=Math.min(minPrice[i-<span class="number">1</span>],prices[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span>[] maxPrice=<span class="keyword">new</span> <span class="keyword">int</span>[len];</span><br><span class="line">        <span class="comment">// maxPrice[n]=prices[n]-minPrice[n]</span></span><br><span class="line">        <span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++)&#123;</span><br><span class="line">            maxPrice[i]=prices[i]-minPrice[i];</span><br><span class="line">            <span class="keyword">if</span> (maxPrice[i]&gt;ans)</span><br><span class="line">                ans=maxPrice[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是效果依旧不是很理想</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210329113233734.png" alt="image-20210329113233734">事实上我们不需数组来存储之前的结果</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len=prices.length;</span><br><span class="line">        <span class="keyword">int</span> minPrice=prices[<span class="number">0</span>];</span><br><span class="line">        <span class="comment">// maxPrice=max&#123;prices[n]-minPrice[n],maxPrice&#125;</span></span><br><span class="line">        <span class="keyword">int</span> maxPrice=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++)&#123;</span><br><span class="line">            minPrice=Math.min(minPrice,prices[i]);</span><br><span class="line">            <span class="keyword">if</span>(prices[i]-minPrice&gt;maxPrice)</span><br><span class="line">                maxPrice=prices[i]-minPrice;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxPrice;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210329114607962.png" alt="image-20210329114607962"></p>
+<h2 id="题4-70"><a href="#题4-70" class="headerlink" title="题4 #70"></a>题4 #70</h2><p>一维数组记笔记 没什么好说的</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">//f(n)=f(n-1)+f(n-2)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">climbStairs</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> arr[]=<span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        <span class="keyword">return</span> doFunc(arr,n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">doFunc</span><span class="params">(<span class="keyword">int</span>[] arr,<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (arr[n-<span class="number">1</span>]!=<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> arr[n-<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (n==<span class="number">1</span>)&#123;</span><br><span class="line">            arr[n-<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (n==<span class="number">2</span>)&#123;</span><br><span class="line">            arr[n-<span class="number">1</span>]=<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        arr[n-<span class="number">1</span>]=doFunc(arr,n-<span class="number">1</span>)+doFunc(arr,n-<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">return</span> arr[n-<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210329115857194.png" alt="image-20210329115857194"></p>
+<h2 id="题5-279"><a href="#题5-279" class="headerlink" title="题5 #279"></a>题5 #279</h2><h2 id="题6-221"><a href="#题6-221" class="headerlink" title="题6 #221"></a>题6 #221</h2>]]></content>
       <tags>
         <tag>leetcode</tag>
         <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>便利蜂笔试</title>
+    <url>/2021/03/20/%E4%BE%BF%E5%88%A9%E8%9C%82%E7%AC%94%E8%AF%95/</url>
+    <content><![CDATA[<p>2021-春招</p>
+<p>便利蜂笔试回忆</p>
+<a id="more"></a>
+
+<p>15个选择（30分）+三道编程（70分）</p>
+<p>选择题全是瞎猜的。。编程题感觉写了一题结果超时了而且没有全部ac</p>
+<p>最离谱的是想不起来怎么用JAVA读输入..最后用python写的</p>
+<p>下面是回忆</p>
+<h2 id="选择题"><a href="#选择题" class="headerlink" title="选择题"></a>选择题</h2><p>网络+cpp基础知识+数据库+集成测试工具+UML+…想不起来了</p>
+<p>比如http属于第几层</p>
+<p>数据库的xx操作体现四大特点的哪个</p>
+<p>CPP主要是虚函数 类初始化顺序等</p>
+<h2 id="编程题"><a href="#编程题" class="headerlink" title="编程题"></a>编程题</h2><ol>
+<li>假设有一个矩阵，矩阵由 0 和 1 数字组成。其中1代表这个节点可达，0代表这个节点不可达，从左上角第一个节点出发到右下角最后一个节点，只能上下左右移动，初始节点数为 1，移动一步节点数加 1，问最少需要经过多少节点可以达到。请实现计算最短路径的函数。如果不可达返回0。</li>
+</ol>
+<p>输入</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>;<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>;<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>;<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>输出</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">7</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>在便利店中顾客的结账时间是很重要的指标。结账时间由排队等待时间，和顾客操作付款时间两部分组成。程序输入为顾客列表 customers，每一位顾客 customer[i] 包含两个数值 arriveTime, payDuration。 请计算所有顾客的总结账时间。</p>
+</li>
+</ol>
+<ul>
+<li>arriveTime 表示顾客挑选完商品去结账的时刻；</li>
+<li>payDuration 表示顾客操作付款的时间。</li>
+</ul>
+<p>输入</p>
+<figure class="highlight basic"><table><tr><td class="code"><pre><span class="line"><span class="symbol">3 </span></span><br><span class="line"><span class="number">1</span>,<span class="number">2</span> </span><br><span class="line"><span class="number">2</span>,<span class="number">5</span> </span><br><span class="line"><span class="number">4</span>,<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>输出</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">15</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>给定一组词组，每个词组包含id和字符串的映射，现输入另一组词组，要求找出新的词组与老的词组的diff关系，diff要求如下：<br>1、id相同且字符串相同的两个词组视为相同<br>2、id相同，且字符串不同的输出modify+id<br>3、新的词组id在老的词组id中不存在的，视为新增，输出add+id<br>4、老的词组id在新的词组id中不存在的，视为删除，输出delete+id</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>求职</category>
+      </categories>
+      <tags>
+        <tag>春招</tag>
+        <tag>实习</tag>
       </tags>
   </entry>
   <entry>
@@ -299,7 +316,7 @@
 <li>你知道java集合有哪些数据结构</li>
 <li>讲一讲hashmap（他问我了解哪个，我说我只看过这个）</li>
 <li>hashmap和hashtable的区别</li>
-<li>currenthashmap和hashmap的区别</li>
+<li>concurrenthashmap和hashmap的区别</li>
 <li>为什么是线程安全的（hashtable，currenthashmap？）</li>
 </ol>
 <h3 id="3-2-线程"><a href="#3-2-线程" class="headerlink" title="3.2 线程"></a>3.2 线程</h3><ol>
@@ -352,6 +369,9 @@
 <p>面试官整体很nice 也没有狂怼我 只有我孤独的尴尬</p>
 <p>早点考完两个语言考试。</p>
 <p>下次还来。</p>
+<p>///</p>
+<p>12点的时候查看已经被挂掉辣</p>
+<p>泪目</p>
 ]]></content>
       <categories>
         <category>求职</category>
