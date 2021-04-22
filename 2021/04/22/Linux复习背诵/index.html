@@ -1,0 +1,585 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>linux程序设计-复习背诵 | Coolingsky的博客</title><meta name="keywords" content="Linux,NJUSE"><meta name="author" content="Coolingsky"><meta name="copyright" content="Coolingsky"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Ch1-1 linux basics11 什么是Linux在GNU通用公共许可证下开发的免费unix类型操作系统。 开源；使用广泛；支持大部分平台 2 常用发行版及其特点 Red Hat  支持和硬件平台多 拥有企业级的支持系统，是商业操作系统 独特的RPM升级方式   Ubuntu  一个简单但强大的操作系统，适合初级用户 对硬件支持最好最全面 默认不能直接root 登陆   Cent OS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux程序设计-复习背诵">
+<meta property="og:url" content="http://example.com/2021/04/22/Linux%E5%A4%8D%E4%B9%A0%E8%83%8C%E8%AF%B5/index.html">
+<meta property="og:site_name" content="Coolingsky的博客">
+<meta property="og:description" content="Ch1-1 linux basics11 什么是Linux在GNU通用公共许可证下开发的免费unix类型操作系统。 开源；使用广泛；支持大部分平台 2 常用发行版及其特点 Red Hat  支持和硬件平台多 拥有企业级的支持系统，是商业操作系统 独特的RPM升级方式   Ubuntu  一个简单但强大的操作系统，适合初级用户 对硬件支持最好最全面 默认不能直接root 登陆   Cent OS">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422204219192.png">
+<meta property="article:published_time" content="2021-04-22T14:49:14.000Z">
+<meta property="article:modified_time" content="2021-04-22T12:42:52.340Z">
+<meta property="article:author" content="Coolingsky">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="NJUSE">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422204219192.png"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/fnym.png"><link rel="canonical" href="http://example.com/2021/04/22/Linux%E5%A4%8D%E4%B9%A0%E8%83%8C%E8%AF%B5/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-04-22 20:42:52'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/fnym.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="mailto:1029370923@qq.com"><i class="fa-fw fas fa-paper-plane"></i><span> 戳我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422204219192.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Coolingsky的博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="mailto:1029370923@qq.com"><i class="fa-fw fas fa-paper-plane"></i><span> 戳我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">linux程序设计-复习背诵</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-04-22T14:49:14.000Z" title="发表于 2021-04-22 22:49:14">2021-04-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-04-22T12:42:52.340Z" title="更新于 2021-04-22 20:42:52">2021-04-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Ch1-1-linux-basics1"><a href="#Ch1-1-linux-basics1" class="headerlink" title="Ch1-1 linux basics1"></a>Ch1-1 linux basics1</h1><h2 id="1-什么是Linux"><a href="#1-什么是Linux" class="headerlink" title="1 什么是Linux"></a>1 什么是Linux</h2><p>在GNU通用公共许可证下开发的免费unix类型操作系统。</p>
+<p>开源；使用广泛；支持大部分平台</p>
+<h2 id="2-常用发行版及其特点"><a href="#2-常用发行版及其特点" class="headerlink" title="2 常用发行版及其特点"></a>2 常用发行版及其特点</h2><ul>
+<li><p>Red Hat</p>
+<ul>
+<li>支持和硬件平台多</li>
+<li>拥有企业级的支持系统，是商业操作系统</li>
+<li>独特的RPM升级方式</li>
+</ul>
+</li>
+<li><p>Ubuntu</p>
+<ul>
+<li>一个简单但强大的操作系统，适合初级用户</li>
+<li>对硬件支持最好最全面</li>
+<li>默认不能直接<em>root</em> 登陆</li>
+</ul>
+</li>
+<li><p>Cent OS</p>
+<ul>
+<li>一个为专家级用户制定的操作平台</li>
+<li>Cent OS是一个免费且开源的发行版</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-引导程序的作用"><a href="#3-引导程序的作用" class="headerlink" title="3 引导程序的作用"></a>3 引导程序的作用</h2><ul>
+<li>一个引导程序装载并且启动Linux内核<ul>
+<li>可以将引导参数传递给Linux内核，比如设备信息</li>
+<li>可以有选择地加载初始根磁盘</li>
+<li>可以引导其他操作系统</li>
+</ul>
+</li>
+<li>常用：LILO(Linux Loader) GRUB(Grand Unified Boot Loader)</li>
+<li>通常在 /dev/hda配置</li>
+</ul>
+<h2 id="4-linux图形界面与命令行界面好处"><a href="#4-linux图形界面与命令行界面好处" class="headerlink" title="4  linux图形界面与命令行界面好处"></a>4  linux图形界面与命令行界面好处</h2><ul>
+<li>图形界面用户友好</li>
+<li>命令行高效、高生产性</li>
+</ul>
+<h2 id="5-apt-get-原理"><a href="#5-apt-get-原理" class="headerlink" title="5  apt-get 原理"></a>5  apt-get 原理</h2><p>扫描本地存放的软件包更新列表（由“apt-get update”命令刷新更新列表，也就是/var/lib/apt/lists/），找到最新版本的软件包；</p>
+<p>进行软件包依赖关系检查，找到支持该软件正常运行的所有软件包；</p>
+<p>从软件源所指 的镜像站点中，下载相关软件包，并存放在/var/cache/apt/archive；</p>
+<p>第四步，解压软件包，并自动完成应用程序的安装和配置。<br>链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/b2eed75b9855">https://www.jianshu.com/p/b2eed75b9855</a></p>
+<h2 id="6-基本命令"><a href="#6-基本命令" class="headerlink" title="6 基本命令"></a>6 基本命令</h2><p><strong>1.1 安装软件涉及到的命令</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210419183613569.png" alt="image-20210419183613569"></p>
+<p><strong>1.2 对目录使用</strong></p>
+<ul>
+<li>pwd</li>
+<li>cd</li>
+<li>mkdir</li>
+<li>rmdir</li>
+<li>ls<ul>
+<li>-l 显示不隐藏的文件与文件夹的详细信息</li>
+<li>-a 显示当前目录下的所有文件及文件夹包括隐藏的.和..等</li>
+<li>-R 将目录下所有的子目录的文件都列出来(递归)</li>
+</ul>
+</li>
+</ul>
+<p>fileTypes权限包括 User Group Others</p>
+<p>各个字段的含义：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210419181016391.png" alt="image-20210419181016391"></p>
+<p><strong>1.3 对文件使用</strong></p>
+<ul>
+<li><p>touch: update the access and/or modification time</p>
+<p>of a files</p>
+</li>
+<li><p>cp: copy files</p>
+</li>
+<li><p>mv: move and <strong>rename files</strong></p>
+</li>
+<li><p>ln: link files. </p>
+</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -s source<span class="selector-class">.txt</span> symbolic.txt</span><br><span class="line">ln -d source<span class="selector-class">.txt</span> hard<span class="selector-class">.txt</span> <span class="comment">//-d 可以省略</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>rm: remove files</li>
+<li>cat: print file contents</li>
+<li>more/less: display files page by page</li>
+</ul>
+<p><strong>1.4 对进程使用</strong></p>
+<ul>
+<li>ps ：命令用于显示当前进程的状态 -a 列出所有进程</li>
+<li>pstree： Linux pstree命令将所有行程以树状图显示，树状图将会以 pid (如果有指定) 或是以 init 这个基本行程为根 (root)，如果有指定使用者 id，则树状图会只显示该使用者所拥有的行程。</li>
+<li>jobs ：jobs命令允许查看shell当前正在处理的作业</li>
+<li>bg：将一个在后台暂停的命令，变成继续执行</li>
+<li>fg：将后台中的命令调至前台继续运行</li>
+<li>ctrl+z：可以将一个正在前台执行的命令放到后台，并且暂停</li>
+<li>nohup：不挂断地运行命令。</li>
+<li>nice renice：以更改过的优先序来执行程序 ｜命令用于重新指定一个或多个行程（Process）的优先序 </li>
+<li>Top：top命令用于实时显示 process 的动态。</li>
+</ul>
+<p><strong>1.5 查询帮助</strong></p>
+<ul>
+<li>man</li>
+<li>info</li>
+</ul>
+<p><strong>1.6 其它一些命令</strong></p>
+<ul>
+<li>passwd 改密码</li>
+<li>mkpasswd 创造随机密码</li>
+<li>date\cal 日期</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210419183757897.png" alt="image-20210419183757897"></p>
+<ul>
+<li><p>who finger 找出谁在系统活跃</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210419183942158.png" alt="image-20210419183942158"></p>
+</li>
+<li><p>echo</p>
+</li>
+<li><p>write walk talk 命令用于传讯息给其他使用者;mesg y/n</p>
+</li>
+</ul>
+<p><strong>编辑文件</strong></p>
+<ul>
+<li>vi</li>
+<li>emacs</li>
+<li>ged</li>
+</ul>
+<h2 id="7-进程的概念"><a href="#7-进程的概念" class="headerlink" title="7 进程的概念"></a>7 进程的概念</h2><p>进程是一个正在执行的程序实例。由执行程序、它的当前值、状态信息以及通过操作系统管理此进程执行情况的资源组成</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $$ 查看当前<span class="keyword">shell</span><span class="bash">进程号</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="8-文件类型"><a href="#8-文件类型" class="headerlink" title="8 文件类型"></a>8 文件类型</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210419184459817.png" alt="image-20210419184459817"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421135755079.png" alt="image-20210421135755079"></p>
+<p>p.s　　FIFO，又称作命名管道（named pipe），它是Linux系统中用于进程间通信的一种方法。</p>
+<h2 id="9-文件夹组织"><a href="#9-文件夹组织" class="headerlink" title="9 文件夹组织"></a>9 文件夹组织</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210419184538635.png" alt="image-20210419184538635"></p>
+<ul>
+<li>home</li>
+<li>dev</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/22730871-e989d57ad227bf0b.png?imageMogr2/auto-orient/strip"></p>
+<h2 id="10-权限"><a href="#10-权限" class="headerlink" title="10 权限"></a>10 权限</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210419184823884.png" alt="image-20210419184823884"></p>
+<p>更换权限：</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod ugo += r file</span><br><span class="line">chmod <span class="number">7</span>(<span class="name">user</span>)<span class="number">6</span>(<span class="name">group</span>)<span class="number">5</span>(<span class="name">users</span>) file</span><br></pre></td></tr></table></figure>
+
+<p>file默认644；directory默认755</p>
+<h2 id="11-层次图"><a href="#11-层次图" class="headerlink" title="11 层次图"></a>11 层次图</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210419185615981.png" alt="image-20210419185615981"></p>
+<h1 id="Ch1-2-Linux-Basics2"><a href="#Ch1-2-Linux-Basics2" class="headerlink" title="Ch1-2 Linux Basics2"></a>Ch1-2 Linux Basics2</h1><h2 id="1-命令"><a href="#1-命令" class="headerlink" title="1 命令"></a>1 命令</h2><ul>
+<li>mknod</li>
+<li>mkfifo</li>
+<li>chown</li>
+<li>chgrp</li>
+<li><strong>find</strong></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-find.html">find</a></p>
+<ul>
+<li><strong>grep</strong></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-grep.html">grep</a></p>
+<ul>
+<li><strong>sed</strong></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-sed.html">sed</a></p>
+<h2 id="2-重定向"><a href="#2-重定向" class="headerlink" title="2 重定向"></a>2 重定向</h2><h3 id="2-1-重定向有哪些种？详细介绍每种的功能"><a href="#2-1-重定向有哪些种？详细介绍每种的功能" class="headerlink" title="2.1 重定向有哪些种？详细介绍每种的功能"></a>2.1 重定向有哪些种？详细介绍每种的功能</h3><ul>
+<li>输出重定向 1</li>
+</ul>
+<p>将某一命令执行的输出保存到文件中，如果已经存在相同的文件，那么覆盖源文件中的内容</p>
+<ul>
+<li>输入重定向 0</li>
+</ul>
+<p>将某一文件的内容作为命令的输入</p>
+<ul>
+<li>错误重定向 2</li>
+</ul>
+<p>将某一命令执行的出错信息输出到指定文件中</p>
+<p>e.g.</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输出/入重定向: &gt; / &lt;</span><br><span class="line">输出/入追加重定向: &gt;&gt; / &lt;&lt;</span><br><span class="line">错误重定向: [命令] <span class="number">2</span>&gt; [文件]</span><br><span class="line">错误追加：<span class="number">2</span>&gt;</span><br><span class="line">同时实现输出和错误重定向: [命令] &amp;&gt; [文件]</span><br><span class="line"></span><br><span class="line">ls <span class="number">2</span>&gt;<span class="number">1</span> 不会报没有<span class="number">2</span>文件的错误，但会输出一个空的文件<span class="number">1</span>；</span><br><span class="line">ls xxx <span class="number">2</span>&gt;<span class="number">1</span> 没有xxx这个文件的错误输出到了<span class="number">1</span>中；</span><br><span class="line">ls xxx <span class="number">2</span>&gt;&amp;<span class="number">1</span> 不会生成<span class="number">1</span>这个文件了，不过错误跑到标准输出了；</span><br><span class="line">ls xxx &gt;<span class="keyword">out</span>.txt <span class="number">2</span>&gt;&amp;<span class="number">1</span>, 实际上可换成 ls xxx <span class="number">1</span>&gt;<span class="keyword">out</span>.txt <span class="number">2</span>&gt;&amp;<span class="number">1</span>；重定向符号&gt;默认是<span class="number">1</span>,错误和输出都传到<span class="keyword">out</span>.txt了。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210420195719386.png" alt="image-20210420195719386"></p>
+<h3 id="2-2-实现机制"><a href="#2-2-实现机制" class="headerlink" title="2.2 实现机制"></a>2.2 实现机制</h3><p>主要通过使用dup2系统调用通过明确指定目标描述符来把一个文件描述符复制为另外一个</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> fd;</span><br><span class="line">    <span class="keyword">int</span> new_fd;</span><br><span class="line"></span><br><span class="line">    fd = open(<span class="string">&quot;./test.file&quot;</span>, O_RDWR | O_CREAT | O_TRUNC, <span class="number">0666</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;fd = %d\n&quot;</span>, fd);</span><br><span class="line"></span><br><span class="line">    dup2(fd, <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;hello world!!\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-管道"><a href="#3-管道" class="headerlink" title="3 管道"></a>3 管道</h2><p>一个进程的输出作为另一个进程的输入</p>
+<h2 id="4-环境变量"><a href="#4-环境变量" class="headerlink" title="4 环境变量"></a>4 环境变量</h2><ul>
+<li>操作环节的参数</li>
+<li>查看和设置环境变量<ul>
+<li>echo env set</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-简单正则"><a href="#5-简单正则" class="headerlink" title="5 简单正则"></a>5 简单正则</h2><h1 id="Ch2-shell-programming"><a href="#Ch2-shell-programming" class="headerlink" title="Ch2 shell programming"></a>Ch2 shell programming</h1><h2 id="1-shell的位置，是一个怎样的程序"><a href="#1-shell的位置，是一个怎样的程序" class="headerlink" title="1 shell的位置，是一个怎样的程序"></a>1 shell的位置，是一个怎样的程序</h2><ul>
+<li>A command interpreter and programming environment</li>
+<li>用户和操作系统之间的接口</li>
+<li>核外程序</li>
+</ul>
+<p>ps. shell的主要功能，拿命令行 哪些是shell自己处理的，哪些是交给shell启动的进程处理</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210420214017272.png" alt="image-20210420214017272"></p>
+<h2 id="2-常见shell"><a href="#2-常见shell" class="headerlink" title="2 常见shell"></a>2 常见shell</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210420213728885.png" alt="image-20210420213728885"></p>
+<h2 id="3-脚本执行的方式"><a href="#3-脚本执行的方式" class="headerlink" title="3 脚本执行的方式 *"></a>3 脚本执行的方式 *</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sh script_file</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> sh是bash别名</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> chmod +x script_file</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./script_file</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 给脚本执行权限</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">source</span> script_file</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> .script_file</span></span><br><span class="line"><span class="meta">#</span><span class="bash">与前两种不同，使用的是当前的shell进程，前两种会新建shell进程执行脚本</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-环境变量-1"><a href="#4-环境变量-1" class="headerlink" title="4 环境变量"></a>4 环境变量</h2><h3 id="4-1-linux读取-amp-配置环境变量"><a href="#4-1-linux读取-amp-配置环境变量" class="headerlink" title="4.1 linux读取&amp;配置环境变量"></a>4.1 linux读取&amp;配置环境变量</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">读取</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">export</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$PATH</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">配置</span></span><br><span class="line"><span class="meta">	#</span><span class="bash"> 方法1</span></span><br><span class="line">export PATH=/home/uusama/mysql/bin:$PATH</span><br><span class="line"><span class="meta">	#</span><span class="bash"> 方法2</span></span><br><span class="line">vim ~/.bashrc</span><br><span class="line">export PATH=$PATH:/home/uusama/mysql/bin</span><br><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-read"><a href="#4-2-read" class="headerlink" title="4.2 read"></a>4.2 read</h3><ul>
+<li><p>Linux read命令用于从标准输入读取数值。</p>
+</li>
+<li><p>read 内部命令被用来从标准输入读取单行数据。这个命令可以用来读取键盘输入，当使用重定向的时候，可以读取文件中的一行数据。</p>
+</li>
+<li><p>-p -t -n -s</p>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-read.html">READ</a></p>
+<h3 id="4-3-引号的用法"><a href="#4-3-引号的用法" class="headerlink" title="4.3 引号的用法"></a>4.3 引号的用法</h3><ul>
+<li>单引号内的所有字符都保持它本身字符的意思，而不 会被bash进行解释，例如，$就是$本身而不再是bash 的变量引用符；\就是\本身而不再是bash的转义字符</li>
+<li>除了$、``（不是单引号）和\外，双引号内的所有字符将保持字符本身的含义而不被bash解释。</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210420215759169.png" alt="image-20210420215759169"></p>
+<h3 id="4-4-常用"><a href="#4-4-常用" class="headerlink" title="4.4 常用"></a>4.4 常用</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210420220030514.png" alt="image-20210420220030514"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210420220206897.png" alt="image-20210420220206897"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210420220220397.png" alt="image-20210420220220397"></p>
+<h2 id="5-语法"><a href="#5-语法" class="headerlink" title="5 语法"></a>5 语法</h2><p>//TODO</p>
+<h3 id="5-1-if-amp-test"><a href="#5-1-if-amp-test" class="headerlink" title="5.1 if &amp; test"></a>5.1 if &amp; test</h3><h3 id="5-2-case"><a href="#5-2-case" class="headerlink" title="5.2 case"></a>5.2 case</h3><h3 id="5-3-for-amp-while-amp-until-amp-selesct"><a href="#5-3-for-amp-while-amp-until-amp-selesct" class="headerlink" title="5.3 for &amp; while &amp; until &amp; selesct"></a>5.3 for &amp; while &amp; until &amp; selesct</h3><h3 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h3><h3 id="即时文档-31-45"><a href="#即时文档-31-45" class="headerlink" title="即时文档 31:45"></a>即时文档 31:45</h3><h1 id="Ch3-0-Linux-Programming-Prerequisite"><a href="#Ch3-0-Linux-Programming-Prerequisite" class="headerlink" title="Ch3-0 Linux Programming Prerequisite"></a>Ch3-0 Linux Programming Prerequisite</h1><h2 id="1-编译的原理"><a href="#1-编译的原理" class="headerlink" title="1 编译的原理"></a>1 编译的原理</h2><p>不会直接考，在一些概念题里涉及到</p>
+<p>#include</p>
+<h2 id="2-GCC-（给编译命令理解，找错）"><a href="#2-GCC-（给编译命令理解，找错）" class="headerlink" title="2 GCC （给编译命令理解，找错）"></a>2 GCC （给编译命令理解，找错）</h2><p><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/gcc-parameter-detail.html">参考</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421094808293.png" alt="image-20210421094808293"></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc [<span class="string">options</span>][<span class="symbol">filenames</span>]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-E</li>
+</ul>
+<p>在正常的情况, GCC不会保留预处理阶段的输出文件，也即<code>.i</code>文件. 然而，可以利用<code>-E</code>选项保留预处理器的输出文件，以用于诊断代码</p>
+<ul>
+<li>-S</li>
+</ul>
+<p>通常情况下，GCC 把汇编语言输出存储到临时文件中，并且在汇编器执行完后立刻删除它们。但是可以使用<code>-S</code>选项，让编译程序在生成汇编语言输出之后立刻停止/</p>
+<ul>
+<li>-c</li>
+</ul>
+<p>执行预处理、编译、汇编而不链接</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421095114368.png" alt="image-20210421095114368"></p>
+<ul>
+<li>-o output_file 指定输出文件名</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gcc [-E|-S|-c] [infile] [-o outfile]</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>-g 产生调试工具必需的符号信息</p>
+</li>
+<li><p>-O/On 在程序编译、链接过程中进行优化处理</p>
+</li>
+<li><p>-wall 显示所有的警告信息</p>
+</li>
+</ul>
+<p>//TODO 下面几个指令需要再详细了解一下</p>
+<ul>
+<li>-Idir 指定额外的头文件搜索路径</li>
+<li>-Ldir 链接时搜索指定的库文件</li>
+<li>-DMACRO[=DEFN]  定义MACRO宏</li>
+</ul>
+<h2 id="3-makefile"><a href="#3-makefile" class="headerlink" title="3 makefile"></a>3 makefile</h2><p>//TODO</p>
+<h1 id="Ch3-1-Linux-System-Programming-File-System"><a href="#Ch3-1-Linux-System-Programming-File-System" class="headerlink" title="Ch3-1 Linux System Programming - File System"></a>Ch3-1 Linux System Programming - File System</h1><h2 id="1-VFS"><a href="#1-VFS" class="headerlink" title="1 VFS"></a>1 VFS</h2><h3 id="1-1-Virtual-File-System-Switch-VFS"><a href="#1-1-Virtual-File-System-Switch-VFS" class="headerlink" title="1.1 Virtual File System Switch(VFS)"></a>1.1 Virtual File System Switch(VFS)</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421135942713.png" alt="image-20210421135942713"></p>
+<h3 id="1-2-四个组成部分和各自的作用"><a href="#1-2-四个组成部分和各自的作用" class="headerlink" title="1.2 四个组成部分和各自的作用*"></a>1.2 四个组成部分和各自的作用*</h3><ul>
+<li><strong>super block 超级块对象</strong></li>
+</ul>
+<p>存放已安装文件系统的有关信息。对基于磁盘的文件系统，这类对象通常对应于存放在磁盘上的文件系统控制块</p>
+<ul>
+<li><strong>i-ndoe object 索引节点对象</strong></li>
+</ul>
+<p>存放关于具体文件的一般信息。对基于磁盘的文件系统，这类对象通常对应于在磁盘上的文件控制块(file control block）。每个索引节点对象都有一个索引节点号，这个节点号唯一地标识文件系统中的文件。</p>
+<p>p.s</p>
+<p><em>inode由两个主要部分组成</em>：</p>
+<ol>
+<li>描述文件状态的元数据，文件元数据包括文件大小，权限，类型，时间；</li>
+<li>文件数据描述，则用来定义文件数据在磁盘上的存放位置。</li>
+</ol>
+<ul>
+<li><strong>File object 文件对象</strong></li>
+</ul>
+<p>存放打开文件与进程之间进行交互的有关信息。<em>这类信息仅当进程访问文件期间在于内核内存中</em>。</p>
+<p>p.s</p>
+<p>文件对象是否对应磁盘文件？不对应，索引节点对应。</p>
+<ul>
+<li><strong>Dentry object 目录项对象</strong></li>
+</ul>
+<p>存放目录项（也就是文件的特定名称）与对应文件进行链接的有关信息。每个磁盘文件系统都以自己特有的方式将该类信息存在磁盘上。底层文件系统的许多操作严重依赖文件的inode，在进行文件操作前，我们需要根据路径名找到文件对应的inode。我们知道文件系统是树状结构的，因此需要从根目录通过目录树找到要操作的文件或目录，这个遍历过程涉及到磁盘操作，非常耗时。根据局部性原理，很有必要把这个查找过程cache起来，dentry就是为了加快目录遍历操作引入的数据结构。</p>
+<p>p.s 加深理解</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421141310272.png" alt="image-20210421141310272"></p>
+<p>三个不同进程已经打开同一个文件，其中两个进程使用同一个硬链接（我觉得是打开同一路径名文件）。在这种情况下，其中的每个进程都使用自己的文件对象，但只需要两个目录项对象，每个硬链接对应一个目录项对象。这两个目录项对象指向同一个索引节点对象，该索引节点对象标识超级块对象，以及随后的普通磁盘文件。</p>
+<h2 id="2-软链接和硬链接"><a href="#2-软链接和硬链接" class="headerlink" title="2 软链接和硬链接"></a>2 软链接和硬链接</h2><ul>
+<li>Hard link<ul>
+<li>不同文件名对应同一个inode</li>
+<li>不能跨越文件系统</li>
+<li>对应系统调用link</li>
+</ul>
+</li>
+<li>Symbolic link<ul>
+<li>存储被链接文件的文件名(而不是inode)实现链接</li>
+<li>可跨越文件系统</li>
+<li>对应系统调用symlink</li>
+</ul>
+</li>
+<li>在shell中</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ln</span> –<span class="selector-tag">s</span> <span class="selector-attr">[文件名]</span> <span class="selector-attr">[文件名]</span> 创建软连接</span><br><span class="line"><span class="selector-tag">ls</span> <span class="selector-attr">[文件名]</span> <span class="selector-attr">[文件名]</span> 创建硬链接</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在应用程序中</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">link</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *oldpath, <span class="keyword">const</span> <span class="keyword">char</span> *newpath)</span></span>;</span><br><span class="line"><span class="comment">//(Return: 0 if success; -1 if failure)</span></span><br><span class="line">创建软链接：</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">symlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *oldpath, <span class="keyword">const</span> <span class="keyword">char</span> *newpath)</span></span>;</span><br><span class="line"><span class="comment">//(Return: 0 if success; -1 if failure)</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-系统调用"><a href="#3-系统调用" class="headerlink" title="3 系统调用"></a>3 系统调用</h2><p>Linux内核的对外接口; 用户程序和内核之间唯一的 接口; 提供最小接口</p>
+<h3 id="3-1-File-descriptor-文件描述符"><a href="#3-1-File-descriptor-文件描述符" class="headerlink" title="3.1 File descriptor 文件描述符"></a>3.1 File descriptor 文件描述符</h3><p>Int fd (in &lt;unistd.h&gt;)    </p>
+<p>‏STDIN_FILENO (0), STDOUT_FILENO (1), STDERR_FILENO (2)</p>
+<h3 id="3-2-Basic-I-O-基本IO"><a href="#3-2-Basic-I-O-基本IO" class="headerlink" title="3.2 Basic I/O 基本IO"></a>3.2 Basic I/O 基本IO</h3><p>open-read/write-[lseek]-close</p>
+<h4 id="3-2-1-open-create-close-read-write-lseek"><a href="#3-2-1-open-create-close-read-write-lseek" class="headerlink" title="3.2.1 open/create,close,read,write,lseek"></a>3.2.1 open/create,close,read,write,lseek</h4><h5 id="open-amp-create"><a href="#open-amp-create" class="headerlink" title="open&amp;create"></a>open&amp;create</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">open</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">int</span> flags)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">open</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">int</span> flags, <span class="keyword">mode_t</span> mode)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">creat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">mode_t</span> mode)</span></span>; </span><br><span class="line"></span><br><span class="line">(Return: a <span class="keyword">new</span> file descriptor <span class="keyword">if</span> success; <span class="number">-1</span> <span class="keyword">if</span> failure</span><br></pre></td></tr></table></figure>
+
+<p><strong>Flags</strong>: </p>
+<p>主标志（互斥）：O_RDONLY, O_WRONLY or O_RDWR</p>
+<p>副标准：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421162938561.png" alt="image-20210421162938561"></p>
+<p>（create =O_CREAT|O_WRONLY|O_TRUNC)</p>
+<p><strong>mode</strong> 创建文件时指定权限</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421164150810.png" alt="image-20210421164150810"></p>
+<h5 id="close"><a href="#close" class="headerlink" title="close"></a>close</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt; </span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">close</span><span class="params">(<span class="keyword">int</span> fd)</span></span>;</span><br><span class="line"></span><br><span class="line">(Return: <span class="number">0</span> <span class="keyword">if</span> success; <span class="number">-1</span> <span class="keyword">if</span> failure）</span><br></pre></td></tr></table></figure>
+
+<h5 id="read-write"><a href="#read-write" class="headerlink" title="read/write"></a>read/write</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt; </span></span></span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> count)</span></span>;</span><br><span class="line"><span class="comment">//返回值: 读到的字节数，若已到文件尾为0，若出错为-1)</span></span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">write</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> count)</span></span>;</span><br><span class="line"><span class="comment">//返回值: 若成功为已写的字节数，若出错为-1</span></span><br></pre></td></tr></table></figure>
+
+<p>example</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> ((n = read(STDIN_FILENO, buf, BUFSIZE)) &gt; <span class="number">0</span>)&#123;</span><br><span class="line">  <span class="keyword">if</span> (write(STDOUT_FILENO, buf, n) != n)&#123;</span><br><span class="line">    err_sys(<span class="string">&quot;write error&quot;</span>);</span><br><span class="line">  &#125; 	</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> n&lt;<span class="number">0</span></span><br><span class="line">  err_sys(<span class="string">&quot;read error&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="lseek"><a href="#lseek" class="headerlink" title="lseek"></a>lseek</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt; </span></span></span><br><span class="line"><span class="function"><span class="keyword">off_t</span> <span class="title">lseek</span><span class="params">(<span class="keyword">int</span> fildes, <span class="keyword">off_t</span> offset, <span class="keyword">int</span> whence)</span></span>;</span><br><span class="line"></span><br><span class="line">(Return: the resulting offset location <span class="keyword">if</span> success; <span class="number">-1</span> <span class="keyword">if</span> failure)</span><br></pre></td></tr></table></figure>
+
+<p><strong>whence:</strong></p>
+<p>1.SEEK_SET</p>
+<p>如果offset为0，则读写位置移动到开头。如果不为0，则读写位置在当前位置基础上向前移动offset个字节</p>
+<p>2.SEEK_CUR</p>
+<p>将读写位置移动到当前位置后再增加offset个字节</p>
+<p>3.SEEK_END</p>
+<p>将读写位置移动到文件结尾后再增加offset个字节</p>
+<p>example</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> fd;</span><br><span class="line">        <span class="keyword">char</span> buf[<span class="number">100</span>];</span><br><span class="line">        <span class="built_in">memset</span>(buf,<span class="number">0</span>,<span class="keyword">sizeof</span>(buf));</span><br><span class="line">        fd = open(<span class="string">&quot;write.test&quot;</span>,O_RDWR|O_APPEND); <span class="comment">//追加可 读写方式打开了一个文件</span></span><br><span class="line">        <span class="keyword">size_t</span> x = write(fd,<span class="string">&quot;my name is hello \n&quot;</span>,<span class="number">20</span>)  <span class="comment">//写入20个字符串</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;you have writed %d words to the buffer and off is %d\n&quot;</span>,x,fd);</span><br><span class="line">        <span class="comment">//close(fd); //此时close，则后续的lseek都返回 -1</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//如果此时不进行lseek，则后续read读出的buf是空的。lseek此时使用`SEEK_SET`的`whence`，即跳到文件开头进行偏移</span></span><br><span class="line">        <span class="keyword">off_t</span> k = lseek(fd,<span class="number">10</span>,SEEK_SET); </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;The file offset is %d\n&quot;</span>,k);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">size_t</span> t = read(fd,buf,<span class="number">20</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;you have read %d words and %s content\n&quot;</span>,t,buf);</span><br><span class="line">        </span><br><span class="line">        close(fd);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//</span></span><br><span class="line">you have writed <span class="number">20</span> words to the buffer <span class="keyword">and</span> off is <span class="number">3</span></span><br><span class="line">The file offset is <span class="number">10</span> <span class="comment">//向前移动10个字符，最后读出的内容是 “hello \n”</span></span><br><span class="line">you have read <span class="number">10</span> words <span class="keyword">and</span>  hello </span><br><span class="line"> content</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-2-dup-dup2"><a href="#3-2-2-dup-dup2" class="headerlink" title="3.2.2 dup,dup2"></a>3.2.2 dup,dup2</h4><p>复制一个文件描述符</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt; </span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dup</span><span class="params">(<span class="keyword">int</span> oldfd)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dup2</span><span class="params">(<span class="keyword">int</span> oldfd, <span class="keyword">int</span> newfd)</span></span>; </span><br><span class="line">(Return: the <span class="keyword">new</span> file descriptor <span class="keyword">if</span> success; <span class="number">-1</span> <span class="keyword">if</span> failure)</span><br></pre></td></tr></table></figure>
+
+<p>dup()函数返回的新的文件描述符是当前可用文件描述符中最小数值 ;</p>
+<p>dup2()与dup()的区别在于可以用newfd来指定新描述符数值，若newfd指向的文件已经被打开，会先将其关闭。若newfd等于oldfd，就不关闭newfd，newfd和oldfd共同指向一份文件。</p>
+<h4 id="3-2-3-fcntl"><a href="#3-2-3-fcntl" class="headerlink" title="3.2.3 fcntl"></a>3.2.3 fcntl</h4><p>根据文件描述词来操作文件的特性。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fcntl</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">int</span> cmd)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fcntl</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">int</span> cmd, <span class="keyword">long</span> arg)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fcntl</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">int</span> cmd, struct flock *lock)</span></span>; </span><br><span class="line">(返回值: 若成功则依赖于cmd,若出错为<span class="number">-1</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>cmd:</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421173307899.png" alt="image-20210421173307899"></p>
+<h3 id="3-3-Advanced-System-calls"><a href="#3-3-Advanced-System-calls" class="headerlink" title="3.3 Advanced System calls"></a>3.3 Advanced System calls</h3><h4 id="3-3-1-针对file-attributes"><a href="#3-3-1-针对file-attributes" class="headerlink" title="3.3.1 针对file attributes"></a>3.3.1 针对file attributes</h4><h5 id="stat-fstat-lstat"><a href="#stat-fstat-lstat" class="headerlink" title="stat/fstat/lstat"></a>stat/fstat/lstat</h5><p>//TODO </p>
+<p>ass的例子没理解</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">stat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *filename, struct stat *buf)</span></span>; <span class="function"><span class="keyword">int</span> <span class="title">fstat</span><span class="params">(<span class="keyword">int</span> filedes, struct stat *buf)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lstat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *file_name, struct stat *buf)</span></span>; </span><br><span class="line"></span><br><span class="line">(Return: <span class="number">0</span> <span class="keyword">if</span> success; <span class="number">-1</span> <span class="keyword">if</span> failure#</span><br></pre></td></tr></table></figure>
+
+<p>state与fstat的区别在于，stat()用文件名来指定要查询的文件，而fstat()用文件描述符来指定目标文件；</p>
+<p>而stat()与lstat()的区别在于，如果指定的文件是一个符号链接，那么stat会解引用，查询该链接指向的普通文件的属性，而lstat()在遇到符号链接文件是，不去解引用，而是直接返回这个符号链接文件本身的属性。</p>
+<p>要成功获取到指定文件的状态信息，需要用户对文件存储位置的每一层目录都具有执行和读取权限。</p>
+<h5 id="access"><a href="#access" class="headerlink" title="access"></a>access</h5><p>按实际用户ID和实际组ID测试文件存取权限</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt; </span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">access</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">int</span> mode)</span></span>; (Return: <span class="number">0</span> <span class="keyword">if</span> success; <span class="number">-1</span> <span class="keyword">if</span> failure)</span><br></pre></td></tr></table></figure>
+
+<p>mode:<br>R_OK   测试读许可权<br>W_OK   测试写许可权<br>X_OK   测试执行许可权<br>F_OK   测试文件是否存在</p>
+<h5 id="chmod-fchmod"><a href="#chmod-fchmod" class="headerlink" title="chmod/fchmod"></a>chmod/fchmod</h5><p>更改文件权限</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">chmod</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *path, <span class="keyword">mode_t</span> mode)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fchmod</span><span class="params">(<span class="keyword">int</span> fildes, <span class="keyword">mode_t</span> mode)</span></span>;</span><br><span class="line">(Return: <span class="number">0</span> <span class="keyword">if</span> success; <span class="number">-1</span> <span class="keyword">if</span> failure#</span><br></pre></td></tr></table></figure>
+
+<h5 id="chown-fchown-lchown"><a href="#chown-fchown-lchown" class="headerlink" title="chown/fchown/lchown"></a>chown/fchown/lchown</h5><p>更改文件拥有者</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">chown</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *path, <span class="keyword">uid_t</span> owner, <span class="keyword">gid_t</span> group)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fchown</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">uid_t</span> owner, <span class="keyword">gid_t</span> group)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lchown</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *path, <span class="keyword">uid_t</span> owner, <span class="keyword">gid_t</span> group)</span></span>;</span><br><span class="line"></span><br><span class="line">(Return: <span class="number">0</span> <span class="keyword">if</span> success; <span class="number">-1</span> <span class="keyword">if</span> failure)</span><br></pre></td></tr></table></figure>
+
+<h5 id="umask"><a href="#umask" class="headerlink" title="umask"></a>umask</h5><p>为进程设置文件存取权限屏蔽字，并返回以前的值</p>
+<p>//TODO</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">mode_t</span> <span class="title">umask</span><span class="params">(<span class="keyword">mode_t</span> mask)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h5 id="link-unlink"><a href="#link-unlink" class="headerlink" title="link/unlink"></a>link/unlink</h5><p>创建/删除硬链接</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421181727280.png" alt="image-20210421181727280"></p>
+<h5 id="symlink-readlink"><a href="#symlink-readlink" class="headerlink" title="symlink/readlink"></a>symlink/readlink</h5><p>创建/读取</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421181804331.png" alt="image-20210421181804331"></p>
+<h4 id="3-3-2-针对-directory"><a href="#3-3-2-针对-directory" class="headerlink" title="3.3.2 针对 directory"></a>3.3.2 针对 directory</h4><h5 id="mkdir-rmdir"><a href="#mkdir-rmdir" class="headerlink" title="mkdir/rmdir"></a>mkdir/rmdir</h5><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421181840737.png" alt="image-20210421181840737"></p>
+<h5 id="chdir-fchdir"><a href="#chdir-fchdir" class="headerlink" title="chdir/fchdir"></a>chdir/fchdir</h5><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421181912966.png" alt="image-20210421181912966"></p>
+<h5 id="getcwd"><a href="#getcwd" class="headerlink" title="getcwd"></a>getcwd</h5><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421181943734.png" alt="image-20210421181943734"></p>
+<h5 id="read-directory"><a href="#read-directory" class="headerlink" title="read directory"></a>read directory</h5><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421182116257.png" alt="image-20210421182116257"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421182126779.png" alt="image-20210421182126779"></p>
+<h2 id="4-C库"><a href="#4-C库" class="headerlink" title="4 C库"></a>4 C库</h2><p>依赖于系统调用; 提供较复杂功能</p>
+<p>//TODO</p>
+<h2 id="5-权限"><a href="#5-权限" class="headerlink" title="5 权限"></a>5 权限</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421180045812.png" alt="image-20210421180045812"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421175900649.png" alt="image-20210421175900649"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421175910123.png" alt="image-20210421175910123"></p>
+<h2 id="6-文件锁"><a href="#6-文件锁" class="headerlink" title="6 文件锁"></a>6 文件锁</h2><ul>
+<li>记录锁</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421184041051.png" alt="image-20210421184041051"></p>
+<p>首先使用cmd:F_GETLK 把flock结构体放进去，如果flock结构体的type变成F_UNLCK则说明可以加锁</p>
+<p>接着cmd: F_SETLK</p>
+<p>flock：F_RDLCK\F_WRLCK\F_UNLCK</p>
+<ul>
+<li>劝告锁<ul>
+<li>检查，加锁由应用程序自己控制</li>
+</ul>
+</li>
+<li>强制锁<ul>
+<li>检查，加锁由内核控制</li>
+<li>影响 open\read\write 等</li>
+</ul>
+</li>
+<li>共享锁</li>
+<li>排他锁</li>
+</ul>
+<p>p.s</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421184804193.png" alt="image-20210421184804193"></p>
+<h1 id="Ch4-Kernel-Driver"><a href="#Ch4-Kernel-Driver" class="headerlink" title="Ch4 Kernel Driver"></a>Ch4 Kernel Driver</h1><h2 id="1-内核的概念"><a href="#1-内核的概念" class="headerlink" title="1 内核的概念"></a>1 内核的概念</h2><p>操作系统是一系列程序的集合，其中最重要的部分构成了内核</p>
+<p>内核分为单内核和微内核。单内核是一个很大的进程，内部可以分为若干模块，运行时是一个独立的二进制文件，模块间通讯通过直接调用函数实现。微内核中大部分内核作为独立的进程在特权下运行，通过消息传递进行通讯。</p>
+<h2 id="2-初始化程序的建立"><a href="#2-初始化程序的建立" class="headerlink" title="2 初始化程序的建立"></a>2 初始化程序的建立</h2><ul>
+<li>initrd是什么意思</li>
+</ul>
+<p>initrd的解释是initialized RAM disk，就是启动的时候由uboot来初始化内存，当做disk来使用。在uboot启动的时候，uboot会将存储介质中（如Flash）的initrd文件加载到内存，内核启动时会在访问挂载的根文件系统前先访问该内存中的initrd文件系统。在uboot配置了initrd的情况下，文件系统启动被分成两个阶段，第一阶段先执行initrd文件系统中的”某个可执行文件”，完成加载驱动模块等任务。第二阶段是挂载真正的根文件系统中，然后执行/sbin/init进程。</p>
+<h2 id="3-驱动的模块-ko"><a href="#3-驱动的模块-ko" class="headerlink" title="3 驱动的模块 .ko"></a>3 驱动的模块 .ko</h2><ul>
+<li>许多常见驱动的源代码集成在内核源码里</li>
+<li>也有第三方开发的驱动，可以单独编译成模块.ko</li>
+<li>编译需要内核头文件的支持</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421190322499.png" alt="image-20210421190322499"></p>
+<ul>
+<li>insmod</li>
+<li>rmmod</li>
+</ul>
+<p>Linux insmod（英文全拼：install module）命令用于载入模块。</p>
+<p>Linux有许多功能是通过模块的方式，在需要时才载入kernel。如此可使kernel较为精简，进而提高效率，以及保有较大的弹性。这类可载入的模块，通常是设备驱动程序。</p>
+<p>执行 rmmod 指令，可删除不需要的模块。Linux 操作系统的核心具有模块化的特性，应此在编译核心时，务须把全部的功能都放如核心。你可以将这些功能编译成一个个单独的模块，待有需要时再分别载入它们。</p>
+<ul>
+<li>modprobe</li>
+<li>modprobe -r</li>
+</ul>
+<p>Linux modprobe命令用于自动处理可载入模块。</p>
+<p>modprobe可载入指定的个别模块，或是载入一组相依的模块。modprobe会根据depmod所产生的相依关系，决定要载入哪些模块。若在载入过程中发生错误，在modprobe会卸载整组的模块。</p>
+<p>-r或–remove 　模块闲置不用时，即自动卸载模块。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421190816356.png" alt="image-20210421190816356"></p>
+<h2 id="4-内核模块和应用程序的区别"><a href="#4-内核模块和应用程序的区别" class="headerlink" title="4 内核模块和应用程序的区别"></a>4 内核模块和应用程序的区别</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421161655180.png" alt="image-20210421161655180"></p>
+<h2 id="5-字符型驱动的概念"><a href="#5-字符型驱动的概念" class="headerlink" title="5 字符型驱动的概念"></a>5 字符型驱动的概念</h2><p>在Linux设备驱劢程序的家族中，字符设备驱劢程序是较为简单的驱劢程序， 同时也是应用非常广泛的驱劢程序。 所以学习字符设备驱劢程序，对构建 Linux设备驱劢程序的知识结构非常的 重要。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Coolingsky</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2021/04/22/Linux%E5%A4%8D%E4%B9%A0%E8%83%8C%E8%AF%B5/">http://example.com/2021/04/22/Linux%E5%A4%8D%E4%B9%A0%E8%83%8C%E8%AF%B5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Coolingsky的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a><a class="post-meta__tags" href="/tags/NJUSE/">NJUSE</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422204219192.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.JPG" target="_blank"><img class="post-qr-code-img" src="/img/alipay.JPG" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/03/28/%E9%98%BF%E9%87%8C1%E9%9D%A2/"><img class="next-cover" src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210324153036.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">阿里1面</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/fnym.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Coolingsky</div><div class="author-info__description">A man can be destroyed but not defeated</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Coolingsky167"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Coolingsky167" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1029370923@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">Welcome to Coolingsky's tech blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch1-1-linux-basics1"><span class="toc-number">1.</span> <span class="toc-text">Ch1-1 linux basics1</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AFLinux"><span class="toc-number">1.1.</span> <span class="toc-text">1 什么是Linux</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%B8%B8%E7%94%A8%E5%8F%91%E8%A1%8C%E7%89%88%E5%8F%8A%E5%85%B6%E7%89%B9%E7%82%B9"><span class="toc-number">1.2.</span> <span class="toc-text">2 常用发行版及其特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%BC%95%E5%AF%BC%E7%A8%8B%E5%BA%8F%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">1.3.</span> <span class="toc-text">3 引导程序的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-linux%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2%E4%B8%8E%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%95%8C%E9%9D%A2%E5%A5%BD%E5%A4%84"><span class="toc-number">1.4.</span> <span class="toc-text">4  linux图形界面与命令行界面好处</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-apt-get-%E5%8E%9F%E7%90%86"><span class="toc-number">1.5.</span> <span class="toc-text">5  apt-get 原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="toc-number">1.6.</span> <span class="toc-text">6 基本命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">1.7.</span> <span class="toc-text">7 进程的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.8.</span> <span class="toc-text">8 文件类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E6%96%87%E4%BB%B6%E5%A4%B9%E7%BB%84%E7%BB%87"><span class="toc-number">1.9.</span> <span class="toc-text">9 文件夹组织</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E6%9D%83%E9%99%90"><span class="toc-number">1.10.</span> <span class="toc-text">10 权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E5%B1%82%E6%AC%A1%E5%9B%BE"><span class="toc-number">1.11.</span> <span class="toc-text">11 层次图</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch1-2-Linux-Basics2"><span class="toc-number">2.</span> <span class="toc-text">Ch1-2 Linux Basics2</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%91%BD%E4%BB%A4"><span class="toc-number">2.1.</span> <span class="toc-text">1 命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-number">2.2.</span> <span class="toc-text">2 重定向</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E9%87%8D%E5%AE%9A%E5%90%91%E6%9C%89%E5%93%AA%E4%BA%9B%E7%A7%8D%EF%BC%9F%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8D%E6%AF%8F%E7%A7%8D%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-number">2.2.1.</span> <span class="toc-text">2.1 重定向有哪些种？详细介绍每种的功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.2 实现机制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%AE%A1%E9%81%93"><span class="toc-number">2.3.</span> <span class="toc-text">3 管道</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-number">2.4.</span> <span class="toc-text">4 环境变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E7%AE%80%E5%8D%95%E6%AD%A3%E5%88%99"><span class="toc-number">2.5.</span> <span class="toc-text">5 简单正则</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch2-shell-programming"><span class="toc-number">3.</span> <span class="toc-text">Ch2 shell programming</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-shell%E7%9A%84%E4%BD%8D%E7%BD%AE%EF%BC%8C%E6%98%AF%E4%B8%80%E4%B8%AA%E6%80%8E%E6%A0%B7%E7%9A%84%E7%A8%8B%E5%BA%8F"><span class="toc-number">3.1.</span> <span class="toc-text">1 shell的位置，是一个怎样的程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%B8%B8%E8%A7%81shell"><span class="toc-number">3.2.</span> <span class="toc-text">2 常见shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-number">3.3.</span> <span class="toc-text">3 脚本执行的方式 *</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F-1"><span class="toc-number">3.4.</span> <span class="toc-text">4 环境变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-linux%E8%AF%BB%E5%8F%96-amp-%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-number">3.4.1.</span> <span class="toc-text">4.1 linux读取&amp;配置环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-read"><span class="toc-number">3.4.2.</span> <span class="toc-text">4.2 read</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E5%BC%95%E5%8F%B7%E7%9A%84%E7%94%A8%E6%B3%95"><span class="toc-number">3.4.3.</span> <span class="toc-text">4.3 引号的用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-%E5%B8%B8%E7%94%A8"><span class="toc-number">3.4.4.</span> <span class="toc-text">4.4 常用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E8%AF%AD%E6%B3%95"><span class="toc-number">3.5.</span> <span class="toc-text">5 语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-if-amp-test"><span class="toc-number">3.5.1.</span> <span class="toc-text">5.1 if &amp; test</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-case"><span class="toc-number">3.5.2.</span> <span class="toc-text">5.2 case</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-for-amp-while-amp-until-amp-selesct"><span class="toc-number">3.5.3.</span> <span class="toc-text">5.3 for &amp; while &amp; until &amp; selesct</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%82%E9%A1%B9"><span class="toc-number">3.5.4.</span> <span class="toc-text">杂项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%B3%E6%97%B6%E6%96%87%E6%A1%A3-31-45"><span class="toc-number">3.5.5.</span> <span class="toc-text">即时文档 31:45</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch3-0-Linux-Programming-Prerequisite"><span class="toc-number">4.</span> <span class="toc-text">Ch3-0 Linux Programming Prerequisite</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%BC%96%E8%AF%91%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">4.1.</span> <span class="toc-text">1 编译的原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-GCC-%EF%BC%88%E7%BB%99%E7%BC%96%E8%AF%91%E5%91%BD%E4%BB%A4%E7%90%86%E8%A7%A3%EF%BC%8C%E6%89%BE%E9%94%99%EF%BC%89"><span class="toc-number">4.2.</span> <span class="toc-text">2 GCC （给编译命令理解，找错）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-makefile"><span class="toc-number">4.3.</span> <span class="toc-text">3 makefile</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch3-1-Linux-System-Programming-File-System"><span class="toc-number">5.</span> <span class="toc-text">Ch3-1 Linux System Programming - File System</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-VFS"><span class="toc-number">5.1.</span> <span class="toc-text">1 VFS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-Virtual-File-System-Switch-VFS"><span class="toc-number">5.1.1.</span> <span class="toc-text">1.1 Virtual File System Switch(VFS)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%9B%9B%E4%B8%AA%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86%E5%92%8C%E5%90%84%E8%87%AA%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">5.1.2.</span> <span class="toc-text">1.2 四个组成部分和各自的作用*</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%92%8C%E7%A1%AC%E9%93%BE%E6%8E%A5"><span class="toc-number">5.2.</span> <span class="toc-text">2 软链接和硬链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">5.3.</span> <span class="toc-text">3 系统调用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-File-descriptor-%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="toc-number">5.3.1.</span> <span class="toc-text">3.1 File descriptor 文件描述符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-Basic-I-O-%E5%9F%BA%E6%9C%ACIO"><span class="toc-number">5.3.2.</span> <span class="toc-text">3.2 Basic I&#x2F;O 基本IO</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-1-open-create-close-read-write-lseek"><span class="toc-number">5.3.2.1.</span> <span class="toc-text">3.2.1 open&#x2F;create,close,read,write,lseek</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#open-amp-create"><span class="toc-number">5.3.2.1.1.</span> <span class="toc-text">open&amp;create</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#close"><span class="toc-number">5.3.2.1.2.</span> <span class="toc-text">close</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#read-write"><span class="toc-number">5.3.2.1.3.</span> <span class="toc-text">read&#x2F;write</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#lseek"><span class="toc-number">5.3.2.1.4.</span> <span class="toc-text">lseek</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-2-dup-dup2"><span class="toc-number">5.3.2.2.</span> <span class="toc-text">3.2.2 dup,dup2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-3-fcntl"><span class="toc-number">5.3.2.3.</span> <span class="toc-text">3.2.3 fcntl</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-Advanced-System-calls"><span class="toc-number">5.3.3.</span> <span class="toc-text">3.3 Advanced System calls</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-1-%E9%92%88%E5%AF%B9file-attributes"><span class="toc-number">5.3.3.1.</span> <span class="toc-text">3.3.1 针对file attributes</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#stat-fstat-lstat"><span class="toc-number">5.3.3.1.1.</span> <span class="toc-text">stat&#x2F;fstat&#x2F;lstat</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#access"><span class="toc-number">5.3.3.1.2.</span> <span class="toc-text">access</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#chmod-fchmod"><span class="toc-number">5.3.3.1.3.</span> <span class="toc-text">chmod&#x2F;fchmod</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#chown-fchown-lchown"><span class="toc-number">5.3.3.1.4.</span> <span class="toc-text">chown&#x2F;fchown&#x2F;lchown</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#umask"><span class="toc-number">5.3.3.1.5.</span> <span class="toc-text">umask</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#link-unlink"><span class="toc-number">5.3.3.1.6.</span> <span class="toc-text">link&#x2F;unlink</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#symlink-readlink"><span class="toc-number">5.3.3.1.7.</span> <span class="toc-text">symlink&#x2F;readlink</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-2-%E9%92%88%E5%AF%B9-directory"><span class="toc-number">5.3.3.2.</span> <span class="toc-text">3.3.2 针对 directory</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#mkdir-rmdir"><span class="toc-number">5.3.3.2.1.</span> <span class="toc-text">mkdir&#x2F;rmdir</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#chdir-fchdir"><span class="toc-number">5.3.3.2.2.</span> <span class="toc-text">chdir&#x2F;fchdir</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#getcwd"><span class="toc-number">5.3.3.2.3.</span> <span class="toc-text">getcwd</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#read-directory"><span class="toc-number">5.3.3.2.4.</span> <span class="toc-text">read directory</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-C%E5%BA%93"><span class="toc-number">5.4.</span> <span class="toc-text">4 C库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%9D%83%E9%99%90"><span class="toc-number">5.5.</span> <span class="toc-text">5 权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%96%87%E4%BB%B6%E9%94%81"><span class="toc-number">5.6.</span> <span class="toc-text">6 文件锁</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch4-Kernel-Driver"><span class="toc-number">6.</span> <span class="toc-text">Ch4 Kernel Driver</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%86%85%E6%A0%B8%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">6.1.</span> <span class="toc-text">1 内核的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%88%9D%E5%A7%8B%E5%8C%96%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%BB%BA%E7%AB%8B"><span class="toc-number">6.2.</span> <span class="toc-text">2 初始化程序的建立</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%A9%B1%E5%8A%A8%E7%9A%84%E6%A8%A1%E5%9D%97-ko"><span class="toc-number">6.3.</span> <span class="toc-text">3 驱动的模块 .ko</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E5%92%8C%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">6.4.</span> <span class="toc-text">4 内核模块和应用程序的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%AD%97%E7%AC%A6%E5%9E%8B%E9%A9%B1%E5%8A%A8%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">6.5.</span> <span class="toc-text">5 字符型驱动的概念</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/04/22/Linux%E5%A4%8D%E4%B9%A0%E8%83%8C%E8%AF%B5/" title="linux程序设计-复习背诵"><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422204219192.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="linux程序设计-复习背诵"/></a><div class="content"><a class="title" href="/2021/04/22/Linux%E5%A4%8D%E4%B9%A0%E8%83%8C%E8%AF%B5/" title="linux程序设计-复习背诵">linux程序设计-复习背诵</a><time datetime="2021-04-22T14:49:14.000Z" title="发表于 2021-04-22 22:49:14">2021-04-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/28/%E9%98%BF%E9%87%8C1%E9%9D%A2/" title="阿里1面"><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210324153036.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="阿里1面"/></a><div class="content"><a class="title" href="/2021/03/28/%E9%98%BF%E9%87%8C1%E9%9D%A2/" title="阿里1面">阿里1面</a><time datetime="2021-03-28T02:59:28.000Z" title="发表于 2021-03-28 10:59:28">2021-03-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/27/leetcode%E6%96%B0%E6%89%8B%E6%9D%91-2/" title="leetcode新手村-2"><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210324152746.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="leetcode新手村-2"/></a><div class="content"><a class="title" href="/2021/03/27/leetcode%E6%96%B0%E6%89%8B%E6%9D%91-2/" title="leetcode新手村-2">leetcode新手村-2</a><time datetime="2021-03-27T10:52:17.000Z" title="发表于 2021-03-27 18:52:17">2021-03-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/24/%E9%98%BF%E9%87%8C%E7%AC%94%E8%AF%95/" title="阿里笔试"><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210324153036.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="阿里笔试"/></a><div class="content"><a class="title" href="/2021/03/24/%E9%98%BF%E9%87%8C%E7%AC%94%E8%AF%95/" title="阿里笔试">阿里笔试</a><time datetime="2021-03-24T03:06:37.000Z" title="发表于 2021-03-24 11:06:37">2021-03-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/23/leetcode%E6%96%B0%E6%89%8B%E6%9D%91-1/" title="leetcode新手村(1)"><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210324152746.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="leetcode新手村(1)"/></a><div class="content"><a class="title" href="/2021/03/23/leetcode%E6%96%B0%E6%89%8B%E6%9D%91-1/" title="leetcode新手村(1)">leetcode新手村(1)</a><time datetime="2021-03-23T10:30:02.000Z" title="发表于 2021-03-23 18:30:02">2021-03-23</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422204219192.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Coolingsky</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a><br>
+<a href="http://www.beian.miit.gov.cn/"  style="color:#ffffff" target="_blank">苏ICP备2021014309号</a></div><div class="footer_custom_text">Welcome.</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
