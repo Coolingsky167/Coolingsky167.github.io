@@ -536,7 +536,7 @@
 <li>home</li>
 <li>dev</li>
 </ul>
-<p><img src="https://upload-images.jianshu.io/upload_images/22730871-e989d57ad227bf0b.png?imageMogr2/auto-orient/strip"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/22730871-e989d57ad227bf0b.png"></p>
 <h2 id="10-权限"><a href="#10-权限" class="headerlink" title="10 权限"></a>10 权限</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210419184823884.png" alt="image-20210419184823884"></p>
 <p>更换权限：</p>
 <figure class="highlight lisp"><table><tr><td class="code"><pre><span class="line">chmod ugo += r file</span><br><span class="line">chmod <span class="number">7</span>(<span class="name">user</span>)<span class="number">6</span>(<span class="name">group</span>)<span class="number">5</span>(<span class="name">users</span>) file</span><br></pre></td></tr></table></figure>
