@@ -837,6 +837,27 @@
 <p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421190816356.png" alt="image-20210421190816356"></p>
 <h2 id="4-内核模块和应用程序的区别"><a href="#4-内核模块和应用程序的区别" class="headerlink" title="4 内核模块和应用程序的区别"></a>4 内核模块和应用程序的区别</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421161655180.png" alt="image-20210421161655180"></p>
 <h2 id="5-字符型驱动的概念"><a href="#5-字符型驱动的概念" class="headerlink" title="5 字符型驱动的概念"></a>5 字符型驱动的概念</h2><p>在Linux设备驱劢程序的家族中，字符设备驱劢程序是较为简单的驱劢程序， 同时也是应用非常广泛的驱劢程序。 所以学习字符设备驱劢程序，对构建 Linux设备驱劢程序的知识结构非常的 重要。</p>
+<h1 id="Final-华为企业课（openEuler操作系统）-15‘"><a href="#Final-华为企业课（openEuler操作系统）-15‘" class="headerlink" title="Final 华为企业课（openEuler操作系统） 15‘"></a>Final 华为企业课（openEuler操作系统） 15‘</h1><h2 id="openEuler出现的背景"><a href="#openEuler出现的背景" class="headerlink" title="openEuler出现的背景"></a>openEuler出现的背景</h2><p>为推动鲲鹏生态的发展，繁荣国内和全球的计算产业， 2019 年底 EulerOS 被正式推 送开源社区，命名为 openEuler</p>
+<h2 id="openEuler是什么"><a href="#openEuler是什么" class="headerlink" title="openEuler是什么"></a>openEuler是什么</h2><ul>
+<li><p>openEuler 是一个开源、免费的 Linux 发行平台； </p>
+</li>
+<li><p>支持 x86 、 ARM 、 RISC-V 等多种处理器架构；</p>
+</li>
+<li><p>所有开发者、企业、商业组织都可以使用 openEuler 社区版本，也可以基于社区版本 发布自己二次开发的操作系统版本。</p>
+</li>
+</ul>
+<h2 id="线程间通信"><a href="#线程间通信" class="headerlink" title="线程间通信"></a>线程间通信</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210423142242169.png" alt="image-20210423142242169"></p>
+<h2 id="进程间通信："><a href="#进程间通信：" class="headerlink" title="进程间通信："></a>进程间通信：</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210423142419445.png" alt="image-20210423142419445"></p>
+<p>是增强而不是只支持两种</p>
+<h2 id="openEuler内存页"><a href="#openEuler内存页" class="headerlink" title="openEuler内存页"></a>openEuler内存页</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210423142547232.png" alt="image-20210423142547232"></p>
+<p>8B是关键；</p>
+<h2 id="鲲鹏处理器简介"><a href="#鲲鹏处理器简介" class="headerlink" title="鲲鹏处理器简介"></a>鲲鹏处理器简介</h2><p>芯片是硅；鲲鹏单片支持64核</p>
+<p>鲲鹏处理器是基于 ARMv8-64 位 RISC 指令集开发的通用处理器</p>
+<h3 id="计算子系统"><a href="#计算子系统" class="headerlink" title="计算子系统"></a>计算子系统</h3><p>使用大量寄存器：通用X0-X30 （31个，64位）+特 殊 寄存器+ 系统寄存器</p>
+<h2 id="openEuler的增强"><a href="#openEuler的增强" class="headerlink" title="openEuler的增强"></a>openEuler的增强</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210423144616488.png" alt="image-20210423144616488"></p>
+<p>为了充分发挥鲲鹏处理器的优势， openEuler在多核调用技术、软硬件协同、轻量级虚拟化、指令级优化和智能优化引擎等斱面做了增强。</p>
+<h3 id="NUMA-aware-Qspinlock"><a href="#NUMA-aware-Qspinlock" class="headerlink" title="NUMA-aware Qspinlock"></a>NUMA-aware Qspinlock</h3><p>openEuler 提供“ NUMA 感知队列自旋锁”实现互斥机制以减小 MUMA 体系结构中使 用自旋锁的开销。</p>
+<h3 id="鲲鹏加速引擎"><a href="#鲲鹏加速引擎" class="headerlink" title="鲲鹏加速引擎"></a>鲲鹏加速引擎</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210423151657639.png" alt="image-20210423151657639"></p>
 ]]></content>
       <tags>
         <tag>Linux</tag>
