@@ -406,7 +406,7 @@
   </entry>
   <entry>
     <title>linux程序设计-复习背诵</title>
-    <url>/2021/04/22/Linux%E5%A4%8D%E4%B9%A0%E8%83%8C%E8%AF%B5/</url>
+    <url>/2021/04/22/Linux%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E5%A4%8D%E4%B9%A0%E8%83%8C%E8%AF%B5/</url>
     <content><![CDATA[<h1 id="Ch1-1-linux-basics1"><a href="#Ch1-1-linux-basics1" class="headerlink" title="Ch1-1 linux basics1"></a>Ch1-1 linux basics1</h1><h2 id="1-什么是Linux"><a href="#1-什么是Linux" class="headerlink" title="1 什么是Linux"></a>1 什么是Linux</h2><p>在GNU通用公共许可证下开发的免费unix类型操作系统。</p>
 <p>开源；使用广泛；支持大部分平台</p>
 <h2 id="2-常用发行版及其特点"><a href="#2-常用发行版及其特点" class="headerlink" title="2 常用发行版及其特点"></a>2 常用发行版及其特点</h2><ul>
@@ -439,7 +439,7 @@
 </ul>
 </li>
 <li>常用：LILO(Linux Loader) GRUB(Grand Unified Boot Loader)</li>
-<li>通常在 /dev/hda配置</li>
+<li>通常在  /dev/hda配置</li>
 </ul>
 <h2 id="4-linux图形界面与命令行界面好处"><a href="#4-linux图形界面与命令行界面好处" class="headerlink" title="4  linux图形界面与命令行界面好处"></a>4  linux图形界面与命令行界面好处</h2><ul>
 <li>图形界面用户友好</li>
@@ -536,7 +536,7 @@
 <li>home</li>
 <li>dev</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/22730871-e989d57ad227bf0b.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/22730871-e989d57ad227bf0b.png?imageMogr2/auto-orient/strip"></p>
 <h2 id="10-权限"><a href="#10-权限" class="headerlink" title="10 权限"></a>10 权限</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210419184823884.png" alt="image-20210419184823884"></p>
 <p>更换权限：</p>
 <figure class="highlight lisp"><table><tr><td class="code"><pre><span class="line">chmod ugo += r file</span><br><span class="line">chmod <span class="number">7</span>(<span class="name">user</span>)<span class="number">6</span>(<span class="name">group</span>)<span class="number">5</span>(<span class="name">users</span>) file</span><br></pre></td></tr></table></figure>
@@ -555,18 +555,26 @@
 <li><strong>grep</strong></li>
 </ul>
 <p><a href="https://www.runoob.com/linux/linux-comm-grep.html">grep</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425214245313.png" alt="image-20210425214245313"></p>
 <ul>
 <li><strong>sed</strong></li>
 </ul>
 <p><a href="https://www.runoob.com/linux/linux-comm-sed.html">sed</a></p>
-<h2 id="2-重定向"><a href="#2-重定向" class="headerlink" title="2 重定向"></a>2 重定向</h2><h3 id="2-1-重定向有哪些种？详细介绍每种的功能"><a href="#2-1-重定向有哪些种？详细介绍每种的功能" class="headerlink" title="2.1 重定向有哪些种？详细介绍每种的功能"></a>2.1 重定向有哪些种？详细介绍每种的功能</h3><ul>
-<li>输出重定向 1</li>
-</ul>
-<p>将某一命令执行的输出保存到文件中，如果已经存在相同的文件，那么覆盖源文件中的内容</p>
 <ul>
+<li>comm</li>
+</ul>
+<p>Linux comm 命令用于比较两个已排过序的文件。</p>
+<p>这项指令会一列列地比较两个已排序文件的差异，并将其结果显示出来，如果没有指定任何参数，则会把结果分成 3 列显示：第 1 列仅是在第 1 个文件中出现过的列，第 2 列是仅在第 2 个文件中出现过的列，第 3 列则是在第 1 与第 2 个文件里都出现过的列。若给予的文件名称为 <strong>-</strong> ，则 comm 指令会从标准输入设备读取数据。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425214726190.png" alt="image-20210425214726190"></p>
+<h3 id="作业题："><a href="#作业题：" class="headerlink" title="作业题："></a>作业题：</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425214555642.png" alt="image-20210425214555642"></p>
+<h2 id="2-重定向"><a href="#2-重定向" class="headerlink" title="2 重定向"></a>2 重定向</h2><h3 id="2-1-重定向有哪些种？详细介绍每种的功能"><a href="#2-1-重定向有哪些种？详细介绍每种的功能" class="headerlink" title="2.1 重定向有哪些种？详细介绍每种的功能"></a>2.1 重定向有哪些种？详细介绍每种的功能</h3><ul>
 <li>输入重定向 0</li>
 </ul>
 <p>将某一文件的内容作为命令的输入</p>
+<ul>
+<li>输出重定向 1</li>
+</ul>
+<p>将某一命令执行的输出保存到文件中，如果已经存在相同的文件，那么覆盖源文件中的内容</p>
 <ul>
 <li>错误重定向 2</li>
 </ul>
@@ -617,9 +625,36 @@
 <h3 id="4-4-常用"><a href="#4-4-常用" class="headerlink" title="4.4 常用"></a>4.4 常用</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210420220030514.png" alt="image-20210420220030514"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210420220206897.png" alt="image-20210420220206897"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210420220220397.png" alt="image-20210420220220397"></p>
-<h2 id="5-语法"><a href="#5-语法" class="headerlink" title="5 语法"></a>5 语法</h2><p>//TODO</p>
-<h3 id="5-1-if-amp-test"><a href="#5-1-if-amp-test" class="headerlink" title="5.1 if &amp; test"></a>5.1 if &amp; test</h3><h3 id="5-2-case"><a href="#5-2-case" class="headerlink" title="5.2 case"></a>5.2 case</h3><h3 id="5-3-for-amp-while-amp-until-amp-selesct"><a href="#5-3-for-amp-while-amp-until-amp-selesct" class="headerlink" title="5.3 for &amp; while &amp; until &amp; selesct"></a>5.3 for &amp; while &amp; until &amp; selesct</h3><h3 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h3><h3 id="即时文档-31-45"><a href="#即时文档-31-45" class="headerlink" title="即时文档 31:45"></a>即时文档 31:45</h3><h1 id="Ch3-0-Linux-Programming-Prerequisite"><a href="#Ch3-0-Linux-Programming-Prerequisite" class="headerlink" title="Ch3-0 Linux Programming Prerequisite"></a>Ch3-0 Linux Programming Prerequisite</h1><h2 id="1-编译的原理"><a href="#1-编译的原理" class="headerlink" title="1 编译的原理"></a>1 编译的原理</h2><p>不会直接考，在一些概念题里涉及到</p>
-<p>#include</p>
+<h2 id="5-语法"><a href="#5-语法" class="headerlink" title="5 语法"></a>5 语法</h2><h3 id="5-1-if-amp-test"><a href="#5-1-if-amp-test" class="headerlink" title="5.1 if &amp; test"></a>5.1 if &amp; test</h3><ul>
+<li>字符串比较</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425204338541.png" alt="image-20210425204338541"></p>
+<ul>
+<li>算数比较</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425204408664.png" alt="image-20210425204408664"></p>
+<ul>
+<li>与文件有关的测试</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425204455666.png" alt="image-20210425204455666"></p>
+<ul>
+<li>逻辑操作</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425205616921.png" alt="image-20210425205616921"></p>
+<h4 id="example"><a href="#example" class="headerlink" title="example"></a>example</h4><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425205838622.png" alt="image-20210425205838622"></p>
+<h3 id="5-2-case"><a href="#5-2-case" class="headerlink" title="5.2 case"></a>5.2 case</h3><h4 id="形式："><a href="#形式：" class="headerlink" title="形式："></a>形式：</h4><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425210004161.png" alt="image-20210425210004161"></p>
+<h4 id="example："><a href="#example：" class="headerlink" title="example："></a>example：</h4><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425210012699.png" alt="image-20210425210012699"></p>
+<h3 id="5-3-for-amp-while-amp-until-amp-selesct"><a href="#5-3-for-amp-while-amp-until-amp-selesct" class="headerlink" title="5.3 for &amp; while &amp; until &amp; selesct"></a>5.3 for &amp; while &amp; until &amp; selesct</h3><h4 id="for"><a href="#for" class="headerlink" title="for"></a>for</h4><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425210234657.png" alt="image-20210425210234657"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425210241674.png" alt="image-20210425210241674"></p>
+<h4 id="while"><a href="#while" class="headerlink" title="while"></a>while</h4><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425210301412.png" alt="image-20210425210301412"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425210323453.png" alt="image-20210425210323453"></p>
+<h4 id="until（不建议使用）"><a href="#until（不建议使用）" class="headerlink" title="until（不建议使用）"></a>until（不建议使用）</h4><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425210353629.png" alt="image-20210425210353629"></p>
+<h4 id="select"><a href="#select" class="headerlink" title="select"></a>select</h4><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425210455311.png" alt="image-20210425210455311"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425210502217.png" alt="image-20210425210502217"></p>
+<h3 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425210633286.png" alt="image-20210425210633286"></p>
+<h3 id="算术扩展"><a href="#算术扩展" class="headerlink" title="算术扩展"></a>算术扩展</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425211257356.png" alt="image-20210425211257356"></p>
+<h3 id="即时文档"><a href="#即时文档" class="headerlink" title="即时文档"></a>即时文档</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425211341408.png" alt="image-20210425211341408"></p>
+<h1 id="Ch3-0-Linux-Programming-Prerequisite"><a href="#Ch3-0-Linux-Programming-Prerequisite" class="headerlink" title="Ch3-0 Linux Programming Prerequisite"></a>Ch3-0 Linux Programming Prerequisite</h1><h2 id="1-编译的原理"><a href="#1-编译的原理" class="headerlink" title="1 编译的原理"></a>1 编译的原理</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425212157217.png" alt="image-20210425212157217"></p>
 <h2 id="2-GCC-（给编译命令理解，找错）"><a href="#2-GCC-（给编译命令理解，找错）" class="headerlink" title="2 GCC （给编译命令理解，找错）"></a>2 GCC （给编译命令理解，找错）</h2><p><a href="https://www.runoob.com/w3cnote/gcc-parameter-detail.html">参考</a></p>
 <p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421094808293.png" alt="image-20210421094808293"></p>
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">gcc [<span class="string">options</span>][<span class="symbol">filenames</span>]</span><br></pre></td></tr></table></figure>
@@ -649,14 +684,15 @@
 </li>
 <li><p>-wall 显示所有的警告信息</p>
 </li>
+<li><p>-Idir 指定额外的头文件搜索路径</p>
+</li>
+<li><p>-Ldir 链接时搜索指定的库文件</p>
+</li>
+<li><p>-DMACRO[=DEFN]  定义MACRO宏</p>
+</li>
 </ul>
-<p>//TODO 下面几个指令需要再详细了解一下</p>
-<ul>
-<li>-Idir 指定额外的头文件搜索路径</li>
-<li>-Ldir 链接时搜索指定的库文件</li>
-<li>-DMACRO[=DEFN]  定义MACRO宏</li>
-</ul>
-<h2 id="3-makefile"><a href="#3-makefile" class="headerlink" title="3 makefile"></a>3 makefile</h2><p>//TODO</p>
+<h2 id="3-makefile"><a href="#3-makefile" class="headerlink" title="3 makefile"></a>3 makefile</h2><h3 id="规则结构"><a href="#规则结构" class="headerlink" title="规则结构"></a>规则结构</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425212401653.png" alt="image-20210425212401653"></p>
+<h3 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425212906626.png" alt="image-20210425212906626"></p>
 <h1 id="Ch3-1-Linux-System-Programming-File-System"><a href="#Ch3-1-Linux-System-Programming-File-System" class="headerlink" title="Ch3-1 Linux System Programming - File System"></a>Ch3-1 Linux System Programming - File System</h1><h2 id="1-VFS"><a href="#1-VFS" class="headerlink" title="1 VFS"></a>1 VFS</h2><h3 id="1-1-Virtual-File-System-Switch-VFS"><a href="#1-1-Virtual-File-System-Switch-VFS" class="headerlink" title="1.1 Virtual File System Switch(VFS)"></a>1.1 Virtual File System Switch(VFS)</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421135942713.png" alt="image-20210421135942713"></p>
 <h3 id="1-2-四个组成部分和各自的作用"><a href="#1-2-四个组成部分和各自的作用" class="headerlink" title="1.2 四个组成部分和各自的作用*"></a>1.2 四个组成部分和各自的作用*</h3><ul>
 <li><strong>super block 超级块对象</strong></li>
@@ -713,7 +749,7 @@
 <h3 id="3-1-File-descriptor-文件描述符"><a href="#3-1-File-descriptor-文件描述符" class="headerlink" title="3.1 File descriptor 文件描述符"></a>3.1 File descriptor 文件描述符</h3><p>Int fd (in &lt;unistd.h&gt;)    </p>
 <p>‏STDIN_FILENO (0), STDOUT_FILENO (1), STDERR_FILENO (2)</p>
 <h3 id="3-2-Basic-I-O-基本IO"><a href="#3-2-Basic-I-O-基本IO" class="headerlink" title="3.2 Basic I/O 基本IO"></a>3.2 Basic I/O 基本IO</h3><p>open-read/write-[lseek]-close</p>
-<h4 id="3-2-1-open-create-close-read-write-lseek"><a href="#3-2-1-open-create-close-read-write-lseek" class="headerlink" title="3.2.1 open/create,close,read,write,lseek"></a>3.2.1 open/create,close,read,write,lseek</h4><h5 id="open-amp-create"><a href="#open-amp-create" class="headerlink" title="open&amp;create"></a>open&amp;create</h5><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">open</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">int</span> flags)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">open</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">int</span> flags, <span class="keyword">mode_t</span> mode)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">creat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">mode_t</span> mode)</span></span>; </span><br><span class="line"></span><br><span class="line">(Return: a <span class="keyword">new</span> file descriptor <span class="keyword">if</span> success; <span class="number">-1</span> <span class="keyword">if</span> failure</span><br></pre></td></tr></table></figure>
+<h4 id="3-2-1-open-create-close-read-write-lseek"><a href="#3-2-1-open-create-close-read-write-lseek" class="headerlink" title="3.2.1 open/create,close,read,write,lseek"></a>3.2.1 open/create,close,read,write,lseek</h4><h5 id="open-amp-create"><a href="#open-amp-create" class="headerlink" title="open&amp;create"></a>open&amp;create</h5><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">open</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">int</span> flags)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">open</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">int</span> flags, <span class="keyword">mode_t</span> mode)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">creat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">mode_t</span> mode)</span></span>; </span><br><span class="line"></span><br><span class="line">(Return: a <span class="keyword">new</span> file descriptor <span class="keyword">if</span> success; <span class="number">-1</span> <span class="keyword">if</span> failure</span><br></pre></td></tr></table></figure>
 
 <p><strong>Flags</strong>: </p>
 <p>主标志（互斥）：O_RDONLY, O_WRONLY or O_RDWR</p>
@@ -751,8 +787,12 @@
 
 <p><strong>cmd:</strong></p>
 <p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421173307899.png" alt="image-20210421173307899"></p>
-<h3 id="3-3-Advanced-System-calls"><a href="#3-3-Advanced-System-calls" class="headerlink" title="3.3 Advanced System calls"></a>3.3 Advanced System calls</h3><h4 id="3-3-1-针对file-attributes"><a href="#3-3-1-针对file-attributes" class="headerlink" title="3.3.1 针对file attributes"></a>3.3.1 针对file attributes</h4><h5 id="stat-fstat-lstat"><a href="#stat-fstat-lstat" class="headerlink" title="stat/fstat/lstat"></a>stat/fstat/lstat</h5><p>//TODO </p>
-<p>ass的例子没理解</p>
+<h3 id="3-3-Advanced-System-calls"><a href="#3-3-Advanced-System-calls" class="headerlink" title="3.3 Advanced System calls"></a>3.3 Advanced System calls</h3><h4 id="3-3-1-针对file-attributes"><a href="#3-3-1-针对file-attributes" class="headerlink" title="3.3.1 针对file attributes"></a>3.3.1 针对file attributes</h4><h5 id="stat-fstat-lstat"><a href="#stat-fstat-lstat" class="headerlink" title="stat/fstat/lstat"></a>stat/fstat/lstat</h5><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425192830069.png" alt="image-20210425192830069"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425194421156.png" alt="image-20210425194421156"></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(S_ISDIR(statbuf.st_mode))&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">stat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *filename, struct stat *buf)</span></span>; <span class="function"><span class="keyword">int</span> <span class="title">fstat</span><span class="params">(<span class="keyword">int</span> filedes, struct stat *buf)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lstat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *file_name, struct stat *buf)</span></span>; </span><br><span class="line"></span><br><span class="line">(Return: <span class="number">0</span> <span class="keyword">if</span> success; <span class="number">-1</span> <span class="keyword">if</span> failure#</span><br></pre></td></tr></table></figure>
 
 <p>state与fstat的区别在于，stat()用文件名来指定要查询的文件，而fstat()用文件描述符来指定目标文件；</p>
@@ -779,10 +819,21 @@
 <h4 id="3-3-2-针对-directory"><a href="#3-3-2-针对-directory" class="headerlink" title="3.3.2 针对 directory"></a>3.3.2 针对 directory</h4><h5 id="mkdir-rmdir"><a href="#mkdir-rmdir" class="headerlink" title="mkdir/rmdir"></a>mkdir/rmdir</h5><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421181840737.png" alt="image-20210421181840737"></p>
 <h5 id="chdir-fchdir"><a href="#chdir-fchdir" class="headerlink" title="chdir/fchdir"></a>chdir/fchdir</h5><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421181912966.png" alt="image-20210421181912966"></p>
 <h5 id="getcwd"><a href="#getcwd" class="headerlink" title="getcwd"></a>getcwd</h5><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421181943734.png" alt="image-20210421181943734"></p>
-<h5 id="read-directory"><a href="#read-directory" class="headerlink" title="read directory"></a>read directory</h5><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421182116257.png" alt="image-20210421182116257"></p>
+<h5 id="read-directory"><a href="#read-directory" class="headerlink" title="read directory"></a>read directory</h5><ul>
+<li>Data structures<ul>
+<li>DIR</li>
+<li>Struct dirent</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//声明</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;dirent.h&gt;</span></span></span><br><span class="line">DIR *fd; <span class="comment">// 定义文件夹类型</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">dirent</span> *<span class="title">fp</span>;</span><span class="comment">// 文件夹返回值</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stat</span> <span class="title">states</span>;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421182116257.png" alt="image-20210421182116257"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421182126779.png" alt="image-20210421182126779"></p>
+<h3 id="example-1"><a href="#example-1" class="headerlink" title="example"></a>example</h3><p>（<a href="https://github.com/NJU-SE-15-share-review/professional-class/blob/master/Linux%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E5%A4%8D%E4%B9%A0%E8%B5%84%E6%96%99/Linux%E5%A4%8D%E4%B9%A0.pdf">截图自</a>）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425212609395.png" alt="image-20210425212609395"></p>
 <h2 id="4-C库"><a href="#4-C库" class="headerlink" title="4 C库"></a>4 C库</h2><p>依赖于系统调用; 提供较复杂功能</p>
-<p>//TODO</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425214057984.png" alt="image-20210425214057984"></p>
 <h2 id="5-权限"><a href="#5-权限" class="headerlink" title="5 权限"></a>5 权限</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421180045812.png" alt="image-20210421180045812"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421175900649.png" alt="image-20210421175900649"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421175910123.png" alt="image-20210421175910123"></p>
@@ -836,7 +887,22 @@
 <p>-r或–remove 　模块闲置不用时，即自动卸载模块。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421190816356.png" alt="image-20210421190816356"></p>
 <h2 id="4-内核模块和应用程序的区别"><a href="#4-内核模块和应用程序的区别" class="headerlink" title="4 内核模块和应用程序的区别"></a>4 内核模块和应用程序的区别</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421161655180.png" alt="image-20210421161655180"></p>
-<h2 id="5-字符型驱动的概念"><a href="#5-字符型驱动的概念" class="headerlink" title="5 字符型驱动的概念"></a>5 字符型驱动的概念</h2><p>在Linux设备驱劢程序的家族中，字符设备驱劢程序是较为简单的驱劢程序， 同时也是应用非常广泛的驱劢程序。 所以学习字符设备驱劢程序，对构建 Linux设备驱劢程序的知识结构非常的 重要。</p>
+<ul>
+<li>不能用c库开发驱动程序</li>
+<li>没有内存保护机制</li>
+<li>小内核栈</li>
+<li>并发上的考虑</li>
+</ul>
+<h2 id="5-LED-example"><a href="#5-LED-example" class="headerlink" title="5 LED example"></a>5 LED example</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425213732082.png" alt="image-20210425213732082"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425213313501.png" alt="image-20210425213313501"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425213324731.png" alt="image-20210425213324731"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425213348186.png" alt="image-20210425213348186"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425213357325.png" alt="image-20210425213357325"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425213407526.png" alt="image-20210425213407526"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425213423147.png" alt="image-20210425213423147"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425213433696.png" alt="image-20210425213433696"></p>
+<h2 id="6-字符型驱动的概念"><a href="#6-字符型驱动的概念" class="headerlink" title="6 字符型驱动的概念"></a>6 字符型驱动的概念</h2><p>在Linux设备驱动程序的家族中，字符设备驱动程序是较为简单的驱动程序， 同时也是应用非常广泛的驱动程序。 所以学习字符设备驱动程序，对构建 Linux设备驱劢程序的知识结构非常的 重要。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425213231106.png" alt="image-20210425213231106"></p>
 <h1 id="Final-华为企业课（openEuler操作系统）-15‘"><a href="#Final-华为企业课（openEuler操作系统）-15‘" class="headerlink" title="Final 华为企业课（openEuler操作系统） 15‘"></a>Final 华为企业课（openEuler操作系统） 15‘</h1><h2 id="openEuler出现的背景"><a href="#openEuler出现的背景" class="headerlink" title="openEuler出现的背景"></a>openEuler出现的背景</h2><p>为推动鲲鹏生态的发展，繁荣国内和全球的计算产业， 2019 年底 EulerOS 被正式推 送开源社区，命名为 openEuler</p>
 <h2 id="openEuler是什么"><a href="#openEuler是什么" class="headerlink" title="openEuler是什么"></a>openEuler是什么</h2><ul>
 <li><p>openEuler 是一个开源、免费的 Linux 发行平台； </p>
@@ -846,16 +912,17 @@
 <li><p>所有开发者、企业、商业组织都可以使用 openEuler 社区版本，也可以基于社区版本 发布自己二次开发的操作系统版本。</p>
 </li>
 </ul>
+<h2 id="毕昇JDK"><a href="#毕昇JDK" class="headerlink" title="毕昇JDK"></a>毕昇JDK</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425190703093.png" alt="image-20210425190703093"></p>
 <h2 id="线程间通信"><a href="#线程间通信" class="headerlink" title="线程间通信"></a>线程间通信</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210423142242169.png" alt="image-20210423142242169"></p>
 <h2 id="进程间通信："><a href="#进程间通信：" class="headerlink" title="进程间通信："></a>进程间通信：</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210423142419445.png" alt="image-20210423142419445"></p>
 <p>是增强而不是只支持两种</p>
 <h2 id="openEuler内存页"><a href="#openEuler内存页" class="headerlink" title="openEuler内存页"></a>openEuler内存页</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210423142547232.png" alt="image-20210423142547232"></p>
 <p>8B是关键；</p>
 <h2 id="鲲鹏处理器简介"><a href="#鲲鹏处理器简介" class="headerlink" title="鲲鹏处理器简介"></a>鲲鹏处理器简介</h2><p>芯片是硅；鲲鹏单片支持64核</p>
-<p>鲲鹏处理器是基于 ARMv8-64 位 RISC 指令集开发的通用处理器</p>
-<h3 id="计算子系统"><a href="#计算子系统" class="headerlink" title="计算子系统"></a>计算子系统</h3><p>使用大量寄存器：通用X0-X30 （31个，64位）+特 殊 寄存器+ 系统寄存器</p>
+<p><strong>鲲鹏处理器是基于 ARMv8-64 位 RISC 指令集开发的通用处理器</strong></p>
+<h3 id="计算子系统"><a href="#计算子系统" class="headerlink" title="计算子系统"></a>计算子系统</h3><p>使用大量寄存器：通用X0-X30 （31个，64位）+ 特殊寄存器 + 系统寄存器</p>
 <h2 id="openEuler的增强"><a href="#openEuler的增强" class="headerlink" title="openEuler的增强"></a>openEuler的增强</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210423144616488.png" alt="image-20210423144616488"></p>
-<p>为了充分发挥鲲鹏处理器的优势， openEuler在多核调用技术、软硬件协同、轻量级虚拟化、指令级优化和智能优化引擎等斱面做了增强。</p>
+<p>为了充分发挥鲲鹏处理器的优势， openEuler在<strong>多核调用技术</strong>、<strong>软硬件协同</strong>、<strong>轻量级虚拟化</strong>、<strong>指令级优化</strong>和<strong>智能优化引擎</strong>等方面做了增强。</p>
 <h3 id="NUMA-aware-Qspinlock"><a href="#NUMA-aware-Qspinlock" class="headerlink" title="NUMA-aware Qspinlock"></a>NUMA-aware Qspinlock</h3><p>openEuler 提供“ NUMA 感知队列自旋锁”实现互斥机制以减小 MUMA 体系结构中使 用自旋锁的开销。</p>
 <h3 id="鲲鹏加速引擎"><a href="#鲲鹏加速引擎" class="headerlink" title="鲲鹏加速引擎"></a>鲲鹏加速引擎</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210423151657639.png" alt="image-20210423151657639"></p>
 ]]></content>
