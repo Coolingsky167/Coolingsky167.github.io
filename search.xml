@@ -931,4 +931,246 @@
         <tag>NJUSE</tag>
       </tags>
   </entry>
+  <entry>
+    <title>数据库开发-复习背诵</title>
+    <url>/2021/04/26/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91-%E5%A4%8D%E4%B9%A0%E8%83%8C%E8%AF%B5/</url>
+    <content><![CDATA[<h1 id="一、索引"><a href="#一、索引" class="headerlink" title="一、索引"></a>一、索引</h1><h2 id="1-1-B-树索引的结构和使用方式"><a href="#1-1-B-树索引的结构和使用方式" class="headerlink" title="1.1 B+树索引的结构和使用方式"></a>1.1 B+树索引的结构和使用方式</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422122243811.png" alt="image-20210422122243811"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422122308673.png" alt="image-20210422122308673"></p>
+<h2 id="1-2-B-索引能做什么不能做什么以及为什么"><a href="#1-2-B-索引能做什么不能做什么以及为什么" class="headerlink" title="1.2 B+索引能做什么不能做什么以及为什么"></a>1.2 B+索引能做什么不能做什么以及为什么</h2><ul>
+<li>能做的<ul>
+<li>全键值 where x=123</li>
+<li>键值范围 where 45&lt;x&lt;123</li>
+<li>键前缀查找 where x like “j%”</li>
+</ul>
+</li>
+<li>不能做什么<ul>
+<li>如果不是按照索引最左列开始寻找，就无法使用索引<ul>
+<li>无法查找名字为bill，也无法查找特定生日</li>
+</ul>
+</li>
+<li>不能跳过索引中的列<ul>
+<li>无法查找姓Smith并且在某一特定日期出生的</li>
+</ul>
+</li>
+<li>如果查询中有某个列的范围查询，则其右边的所有列都无法使用索引</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-3-何时该使用B树索引并分别说明原因"><a href="#1-3-何时该使用B树索引并分别说明原因" class="headerlink" title="1.3 何时该使用B树索引并分别说明原因"></a>1.3 何时该使用B树索引并分别说明原因</h2><ul>
+<li><p>考虑检索比例 （但不一定）</p>
+</li>
+<li><p>仅需要通过索引访问基本表的很少一部分行（必要条件）</p>
+</li>
+<li><p>如果要处理表中的多行，可以使用索引而不使用表（复合键的索引）=&gt;所有的结果都在索引中间</p>
+<ul>
+<li>index(x,y) select x,y from T where x</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-4-为什么系统的外键构建索引是普遍要求；有没有例外的情况，说明理由"><a href="#1-4-为什么系统的外键构建索引是普遍要求；有没有例外的情况，说明理由" class="headerlink" title="1.4 为什么系统的外键构建索引是普遍要求；有没有例外的情况，说明理由"></a>1.4 为什么系统的外键构建索引是普遍要求；有没有例外的情况，说明理由</h2><ul>
+<li>对数据进行并发更新的时候，外键加索引尤为必要，以避免加锁的时间过长</li>
+<li>主从结构的表，A表的外键参照了B表的主键，所以两个表需要同时修改</li>
+<li>事务型数据库的被参照表常常是只读的，例如字典和查找表很少修改，这是是否为外键增加索引的判断标准是增加索引是否能为性能带来好处（刘嘉举例代码表不经常更新）</li>
+<li>对外键构建索引可能会导致同一个字段，多个索引的问题（为每一个外键建立索引，可能会造成多余的索引）：</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422133115927.png" alt="image-20210422133115927"></p>
+<p>Order_Detail的主键是复合键(Order_id,article_id)，所以当订单录入的时候回为表Order_deatils的外键增加索引。但是Order_details作为复合键索引的第一个字段，无需再增加索引。（反之如果article_id是第一个字段则article_id不需要增加索引）</p>
+<h2 id="1-5-思考题"><a href="#1-5-思考题" class="headerlink" title="1.5 思考题"></a>1.5 思考题</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210421202233936.png" alt="image-20210421202233936"></p>
+<ul>
+<li>MyISAM使用前缀压缩来缩小索引，从而让更多的索引能够放入内存中达到快速索引的目的，但是索引这样组织会在某些操作时导致性能降低，因为每个值的压缩前缀都依前面的值</li>
+<li>InnoDB的数据文件本身就是索引文件；而MyISAM索引文件和数据文件是分离的。所以不建议InnoDB使用过长的字段作为主键，因为所有辅助索引都引用主索引，过长的主索引会令辅助索引变得过大</li>
+</ul>
+<h2 id="1-6-系统生成键"><a href="#1-6-系统生成键" class="headerlink" title="1.6 系统生成键"></a>1.6 系统生成键</h2><p><strong>问题描述</strong></p>
+<ul>
+<li>系统生产序列号，远好于寻找当前最大值并加一或用一个专门的表存下一个值并且加锁更新</li>
+<li>但是如果插入操作并发性过高，在主键索引的创建操作上就会产生非常严重的资源竞争（因为当生成器数量只有一个的时候会产生大量相近的序列号争用同一个索引页）</li>
+</ul>
+<p><strong>解决方案</strong></p>
+<ul>
+<li>反向索引/逆向索引</li>
+</ul>
+<p>保存索引之前先将组成键的bit序列进行逆向排序</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422170516846.png" alt="image-20210422170516846"></p>
+<p>把MASSENA(ANESSAM)，于是插入时会找到索引中的不同位置，资源竞争会比使用常规索引要少</p>
+<ul>
+<li>哈希索引</li>
+</ul>
+<p>根据索引字段的值，将实际键转换为一个随机数值键。访问某一个键值非常快，但是不支持通配符查询、范围查询等</p>
+<h1 id="二、SQL查询优化"><a href="#二、SQL查询优化" class="headerlink" title="二、SQL查询优化"></a>二、SQL查询优化</h1><h2 id="2-1-SQL执行顺序"><a href="#2-1-SQL执行顺序" class="headerlink" title="2.1 SQL执行顺序"></a>2.1 SQL执行顺序</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422171643281.png" alt="image-20210422171643281"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/%E6%9F%90%E9%81%93%E9%A2%98%E7%9A%84%E7%AD%94%E6%A1%88.png"></p>
+<ul>
+<li>软解析与硬解析</li>
+</ul>
+<p>软：对一条sql，利用hash算法获取其hash值，然后在library cache中查询，如果hash存在，再比较sql和cache中的sql，如果“相同”（带绑定变量），就利用已有的解析树和执行计划，省略优化器相关工作，这个过程就是软解析。</p>
+<p>硬：如果上面两个比较有一个不等，那么优化器都将进行创建解析树、生成执行计划（或者叫执行序列），这个过程就是硬解析</p>
+<p>硬解析开销昂贵，应当极力避免。因此开发人员对功能相同的代码要努力保持代码的一致性（这就是提倡在程序中多使用绑定变量的原因）</p>
+<h2 id="2-2-对过滤条件进行优化"><a href="#2-2-对过滤条件进行优化" class="headerlink" title="2.2 对过滤条件进行优化"></a>2.2 对过滤条件进行优化</h2><p>假设四个表：customers\orders\orderdetail\articles</p>
+<p>找出近6个月住在xx市、且订购了yy车的所有用户</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422175627161.png" alt="image-20210422175627161"></p>
+<h3 id="第一版"><a href="#第一版" class="headerlink" title="第一版"></a>第一版</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422180040069.png" alt="image-20210422180040069"></p>
+<p>可以在join order表的时候先过滤掉日期</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422180055594.png" alt="image-20210422180055594"></p>
+<p>数据处理顺序无足轻重，customers表最为重要，因为所有最终数据都来自这个表，其他的表起辅助作用</p>
+<h3 id="第二版"><a href="#第二版" class="headerlink" title="第二版"></a>第二版</h3><p>发现重复数据容易，但是发现数据不准确很难，所以要避免在最高层使用distinct（比如在第一版中可能存在重名用户）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422180602245.png" alt="image-20210422180602245"></p>
+<p>第二版中，customers表是查询结果的唯一来源；</p>
+<p>内层子查询是<em>关联子查询</em>，缺点是无法在确定当前客户之前执行，优化器不改写的话会先找出每个用户再逐一进行存在性测试</p>
+<p>如果使用非关联子查询：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422181228134.png" alt="image-20210422181228134"></p>
+<p>这里内层查询不再依赖外层查询，只需要执行一次；注意有无索引的差别；</p>
+<p>in执行了隐式的distinct；但是为了一致性，应该在子查询和主查询应用相同的规则</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422182406298.png" alt="image-20210422182406298"></p>
+<p><strong>当对大量记录做存在性检查时，选择exists和in需要斟酌</strong></p>
+<p>IN适合于外表大而内表小的情况；EXISTS适合于外表小而内表大的情况。IN是不走索引的。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422183054581.png" alt="image-20210422183054581"></p>
+<p>这里取决于日期和商品条件的有效性：</p>
+<ul>
+<li>过去六个月生意好的情况下，商品名称是最有效的过滤条件，因此子查询中使用in更好（先找出所有的BMW再查找是否是在最近六个月会更快）</li>
+<li>如果article表的artid字段有索引这个方法会更快</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>找到分辨率最强的条件（箭头大小对应分辨率大小）</p>
+<p>1.城市人少但是过去六个月销售业绩不错，卖出去了很多车</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422183836050.png" alt="image-20210422183836050"></p>
+<p>2.城市人多但是很少有人买BMW</p>
+<p>![image-20210422183933657](/Users/xuyuxuan/Library/Application Support/typora-user-images/image-20210422183933657.png)</p>
+<h3 id="大数据量的查询"><a href="#大数据量的查询" class="headerlink" title="大数据量的查询"></a>大数据量的查询</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422185318495.png" alt="image-20210422185318495"></p>
+<h2 id="2-3-减少表连接的数量"><a href="#2-3-减少表连接的数量" class="headerlink" title="2.3 减少表连接的数量"></a>2.3 减少表连接的数量</h2><h3 id="改写sql"><a href="#改写sql" class="headerlink" title="改写sql"></a>改写sql</h3><p>再回头看订单和客户的例子：</p>
+<p>列出所有尚未记录为完成状态的订单的下列字段：订单号、客户名、订单的最后状态、设置状态的时间</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422190033609.png" alt="image-20210422190033609"></p>
+<p>两个子查询访问的表在外层已经被访问过，os表遍历3遍是5表连接。</p>
+<p>目前两个子查询是关联子查询，尝试把它变成非关联子查询</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422190507597.png" alt="image-20210422190507597"></p>
+<p>这个子查询会对orderstatus做全扫描。为了让优化器明白我们要“先获得子查询的结果，然后再连接orders和orderstatus”</p>
+<p>略作修改，一开始就指定（os.xx,os.yy）来自相同的表：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422191036426.png" alt="image-20210422191036426"></p>
+<p>将非关联子查询变成内嵌实图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422191419380.png" alt="image-20210422191419380"></p>
+<p>实际上不需要再用子查询，因为内嵌视图已经找到了最后的状态，我们只要“检查已知的最新状态“就可以：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422191740119.png" alt="image-20210422191740119"></p>
+<h3 id="设计的方式-（反范式模式）"><a href="#设计的方式-（反范式模式）" class="headerlink" title="设计的方式 （反范式模式）"></a>设计的方式 （反范式模式）</h3><ul>
+<li>什么是逆范式<ul>
+<li>对关系模式的细化，使被修改表的规范化程度小于至少一个原始表的规范化程度。</li>
+<li>还可以使用更宽松的术语来指将两个表合并为一个新表的情况，新表仍然是规范化的，但比原来的表包含更多的空值。</li>
+</ul>
+</li>
+<li>使用逆范式的条件</li>
+</ul>
+<p>有些时候一昧的追求范式减少冗余，反而会降低数据读写的效率，这个时候就要反范式，利用空间来换时间。</p>
+<ol>
+<li><strong>组合1:1对应关系</strong></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425165127019.png" alt="image-20210425165127019"></p>
+<ol start="2">
+<li>*<em>在1:<em>关系中复制非键列以减少连接</em></em></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425165514186.png" alt="image-20210425165514186"></p>
+<ol start="3">
+<li>*<em>复制1:<em>关系中的FK列以减少连接</em></em></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425165915608.png" alt="image-20210425165915608"></p>
+<ol start="4">
+<li><strong>复制*:*关系中的列以减少连接</strong></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425165942205.png" alt="image-20210425165942205"></p>
+<ol start="5">
+<li>引入重复组</li>
+<li>创建抽取表</li>
+<li>分表</li>
+</ol>
+<h1 id="三、数据库的事务隔离级别"><a href="#三、数据库的事务隔离级别" class="headerlink" title="三、数据库的事务隔离级别"></a>三、数据库的事务隔离级别</h1><p><a href="http://www.cyc2018.xyz/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86.html#mysql-%E9%9A%90%E5%BC%8F%E4%B8%8E%E6%98%BE%E5%BC%8F%E9%94%81%E5%AE%9A">参考</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425161048380.png" alt="image-20210425161048380"></p>
+<ul>
+<li>未提交读 Read uncommitted</li>
+</ul>
+<p>事务中的修改，即使没有提交，对其它事务也是可见的。</p>
+<ul>
+<li>提交读 Read committed</li>
+</ul>
+<p>一个事务只能读取已经提交的事务所做的修改。换句话说，一个事务所做的修改在提交之前对其它事务是不可见的</p>
+<ul>
+<li>可重复读 Repeatable Read</li>
+</ul>
+<p>保证在同一个事务中多次读取同一数据的结果是一样的</p>
+<p>在可重复读隔离级别下，事务B只能在事务A修改过数据并提交后，自己也提交事务后，才能读取到事务B修改的数据。</p>
+<ul>
+<li>可串行化 Serializable</li>
+</ul>
+<p>强制事务串行执行，这样多个事务互不干扰，不会出现并发一致性问题。该隔离级别需要加锁实现，因为要使用加锁机制保证同一时间只有一个事务执行，也就是保证事务串行执行</p>
+<ul>
+<li>脏读 Dirty Read</li>
+</ul>
+<p>一个事务读到了另一个未提交事务修改过的数据</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425162407699.png" alt="image-20210425162407699"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425162416293.png" alt="image-20210425162416293"></p>
+<ul>
+<li>不可重复读 NonRepeatable Read</li>
+</ul>
+<p>不可重复读指的是在同一事务内，不同的时刻读到的同一批数据可能是不一样的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425162944973.png" alt="image-20210425162944973"></p>
+<ul>
+<li>幻读 Phantom Read</li>
+</ul>
+<p>一个事务先根据某些条件查询出一些记录，之后另一个事务又向表中插入了符合这些条件的记录，原先的事务再次按照该条件查询时，能把另一个事务插入的记录也读出来。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425163347641.png" alt="image-20210425163347641"></p>
+<ul>
+<li>mysql中的实现机制</li>
+</ul>
+<h1 id="四、资源竞争"><a href="#四、资源竞争" class="headerlink" title="四、资源竞争"></a>四、资源竞争</h1><ul>
+<li>DBA解决方案<ul>
+<li>事务空间<ul>
+<li>表或索引由物理块组成，每个物理块中为事务条目预留了空间。DBA通过增加分配给事务条目的空间来缓解冲突</li>
+<li>完整扫描和索引搜索必须访问更多的物理块</li>
+</ul>
+</li>
+<li>可用列表<ul>
+<li>insert操作分散到不同的物理块</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>架构解决方案<ul>
+<li>分区</li>
+<li>逆序索引</li>
+<li>索引组织表（IOT）<ul>
+<li>以索引的方式组织表，就少了一个竞争源</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>开发解决方案<ul>
+<li>调节并发数</li>
+<li><strong>不使用系统产生值</strong><ul>
+<li>不一定需要连续的值作为代理键。在处理范围的情况下，连续值有用(结合”&gt;”,”between”等)，但是如果仅需要在其他表中作为外键的唯一ID。可以考虑使用随机数，遇到已经使用过的随机数就重新生成</li>
+<li>随机数在大的range中，10倍数据量，是常用的</li>
+<li>该不该用毫无意义的ID作为主键<ul>
+<li>有意义的键：例如身份证号。键值是唯一的，而由人来指定是不可靠的，有可能会出现重复，虽然数据库可以检测出来，但是在数据进入系统之前不会被发现。所以有意义的键是不可靠的。<ul>
+<li>路径是字符串 作为主键使得索引结构庞大，拆分耗时效率低</li>
+</ul>
+</li>
+<li>无意义的键：本质是数据库构造的并不打算供人使用的一个随即数。对应小系统或稳定的情况，应优先考虑</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>随机数 窄的range 宽的range 10倍</p>
+<p>该不该用毫无意义的id</p>
+<p>流水号</p>
+<p>两派 没有意义会带来什么 有意义会带来什么</p>
+<p>路径是字符串会怎样 索引结构庞大 拆分比较效率低</p>
+<h1 id="五、代码题"><a href="#五、代码题" class="headerlink" title="五、代码题"></a>五、代码题</h1><p>自求多福系列。</p>
+<p>有一问简单累加；</p>
+<p>第一题：索引的问题</p>
+<p>第二题：索引相关，高并发的问题，自增字段问题</p>
+<p>第三题：sql优化 exist in 过滤条件；降低表数量方式</p>
+<p>第四题：事务隔离级别</p>
+]]></content>
+      <tags>
+        <tag>NJUSE</tag>
+        <tag>数据库</tag>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
 </search>
