@@ -926,6 +926,9 @@
 <h3 id="NUMA-aware-Qspinlock"><a href="#NUMA-aware-Qspinlock" class="headerlink" title="NUMA-aware Qspinlock"></a>NUMA-aware Qspinlock</h3><p>openEuler 提供“ NUMA 感知队列自旋锁”实现互斥机制以减小 MUMA 体系结构中使 用自旋锁的开销。</p>
 <h3 id="鲲鹏加速引擎"><a href="#鲲鹏加速引擎" class="headerlink" title="鲲鹏加速引擎"></a>鲲鹏加速引擎</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210423151657639.png" alt="image-20210423151657639"></p>
 ]]></content>
+      <categories>
+        <category>NJUSE课程</category>
+      </categories>
       <tags>
         <tag>Linux</tag>
         <tag>NJUSE</tag>
@@ -1032,7 +1035,7 @@
 <p>1.城市人少但是过去六个月销售业绩不错，卖出去了很多车</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422183836050.png" alt="image-20210422183836050"></p>
 <p>2.城市人多但是很少有人买BMW</p>
-<p>![image-20210422183933657](/Users/xuyuxuan/Library/Application Support/typora-user-images/image-20210422183933657.png)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210428090256938.png" alt="image-20210428090256938"></p>
 <h3 id="大数据量的查询"><a href="#大数据量的查询" class="headerlink" title="大数据量的查询"></a>大数据量的查询</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210422185318495.png" alt="image-20210422185318495"></p>
 <h2 id="2-3-减少表连接的数量"><a href="#2-3-减少表连接的数量" class="headerlink" title="2.3 减少表连接的数量"></a>2.3 减少表连接的数量</h2><h3 id="改写sql"><a href="#改写sql" class="headerlink" title="改写sql"></a>改写sql</h3><p>再回头看订单和客户的例子：</p>
 <p>列出所有尚未记录为完成状态的订单的下列字段：订单号、客户名、订单的最后状态、设置状态的时间</p>
@@ -1055,7 +1058,7 @@
 </li>
 <li>使用逆范式的条件</li>
 </ul>
-<p>有些时候一昧的追求范式减少冗余，反而会降低数据读写的效率，这个时候就要反范式，利用空间来换时间。</p>
+<p>有些时候一昧的追求范式减少冗余，反而会降低数据读写的效率，这个时候就要反范式，<strong>引入可控制的冗余</strong>，利用空间来换时间。</p>
 <ol>
 <li><strong>组合1:1对应关系</strong></li>
 </ol>
@@ -1064,12 +1067,15 @@
 <li>*<em>在1:<em>关系中复制非键列以减少连接</em></em></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425165514186.png" alt="image-20210425165514186"></p>
+<p>一般价格会在多表都有；</p>
+<p>对不改变的数据不用范式；</p>
 <ol start="3">
 <li>*<em>复制1:<em>关系中的FK列以减少连接</em></em></li>
 </ol>
+<p>ABC单向连接的情况：需要构建实体关系模型来发现</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425165915608.png" alt="image-20210425165915608"></p>
 <ol start="4">
-<li><strong>复制*:*关系中的列以减少连接</strong></li>
+<li><strong>复制 *:*关系中的列以减少连接</strong></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425165942205.png" alt="image-20210425165942205"></p>
 <ol start="5">
@@ -1113,8 +1119,9 @@
 <p>一个事务先根据某些条件查询出一些记录，之后另一个事务又向表中插入了符合这些条件的记录，原先的事务再次按照该条件查询时，能把另一个事务插入的记录也读出来。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210425163347641.png" alt="image-20210425163347641"></p>
 <ul>
-<li>mysql中的实现机制</li>
+<li>mysql中的实现机制(mysql中可重复读可以防得住幻读)</li>
 </ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210428090225730.png" alt="image-20210428090225730"></p>
 <h1 id="四、资源竞争"><a href="#四、资源竞争" class="headerlink" title="四、资源竞争"></a>四、资源竞争</h1><ul>
 <li>DBA解决方案<ul>
 <li>事务空间<ul>
@@ -1167,6 +1174,9 @@
 <p>第三题：sql优化 exist in 过滤条件；降低表数量方式</p>
 <p>第四题：事务隔离级别</p>
 ]]></content>
+      <categories>
+        <category>NJUSE课程</category>
+      </categories>
       <tags>
         <tag>NJUSE</tag>
         <tag>数据库</tag>
