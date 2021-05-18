@@ -1183,4 +1183,148 @@
         <tag>mysql</tag>
       </tags>
   </entry>
+  <entry>
+    <title>ServletStudy</title>
+    <url>/2021/05/17/ServletStudy/</url>
+    <content><![CDATA[<h1 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h1><h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1 简介"></a>1 简介</h2><p>Java Servlet 是运行在 Web 服务器或应用服务器上的程序，它是作为来自 Web 浏览器或其他 HTTP 客户端的请求和 HTTP 服务器上的数据库或应用程序之间的中间层。</p>
+<ul>
+<li><p>Servlet是sun公司开发动态web的一门技术，sun提供了一个Servlet接口</p>
+<ul>
+<li>编写一个类实现servlet接口</li>
+<li>把开发好的类部署到web服务器上</li>
+</ul>
+</li>
+<li><p>实现了servlet接口的java程序就可以被称作servlet</p>
+</li>
+</ul>
+<h2 id="2-HelloServlet"><a href="#2-HelloServlet" class="headerlink" title="2 HelloServlet"></a>2 HelloServlet</h2><ul>
+<li><p>IDEA-&gt;File-&gt;new-&gt;project直接用maven的一个webapp模版</p>
+</li>
+<li><p>/src/main/java/com/coolinsky/servlet/HelloServlet.java</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.coolingsky.servlet;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.PrintWriter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line"><span class="comment">//        super.doGet(req, resp);</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	在servlet从容器得到的响应对象中，可以有一个PrintWriter，使用这个PrintWriter能够将HTML文本输出到响应对象</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">        PrintWriter writer=resp.getWriter();</span><br><span class="line">        writer.println(<span class="string">&quot;hello servlet&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line"><span class="comment">//        super.doPost(req, resp);</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>/src/main/webapp/WEB-INF/web.xml</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">web-app</span> <span class="meta-keyword">PUBLIC</span></span></span><br><span class="line"><span class="meta"> <span class="meta-string">&quot;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot;</span></span></span><br><span class="line"><span class="meta"> <span class="meta-string">&quot;http://java.sun.com/dtd/web-app_2_3.dtd&quot;</span> &gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">web-app</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">display-name</span>&gt;</span>Archetype Created Web Application<span class="tag">&lt;/<span class="name">display-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>com.coolingsky.servlet.HelloServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/hello<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>部署在tomcat服务器上</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210517230207551.png" alt="image-20210517230207551"></p>
+<h2 id="3-原理"><a href="#3-原理" class="headerlink" title="3 原理"></a>3 原理</h2><h3 id="3-1-容器"><a href="#3-1-容器" class="headerlink" title="3.1 容器"></a>3.1 容器</h3><h4 id="什么是容器"><a href="#什么是容器" class="headerlink" title="什么是容器"></a>什么是容器</h4><p>如果一个web服务应用得到一个指向某个servlet的请求，此时服务器不是把这个请求交给servlet本身，而是交给部署该servlet的容器，由容器调用servlet方法，如doPost\doGet</p>
+<h4 id="容器能提供什么"><a href="#容器能提供什么" class="headerlink" title="容器能提供什么"></a>容器能提供什么</h4><p>容器能够提供通信支持、生命周期管理、多线程支持、生命方式实现安全、JSP支持</p>
+<h4 id="容器如何处理请求"><a href="#容器如何处理请求" class="headerlink" title="容器如何处理请求"></a>容器如何处理请求</h4><ol>
+<li>用户点击一个链接，其URL指向一个servlet而不是静态页面</li>
+<li>容器看出来这个请求要的是一个servlet，所以容器要创建两个对象<ol>
+<li>HttpServletRespnese</li>
+<li>HttpServletRequest</li>
+</ol>
+</li>
+<li>容器根据URL找到正确的servlet，为这个请求创建或分配一个线程，并把请求和响应对象传递给这个servlet线程</li>
+<li>容器调用servlet的service()方法。根据请求的不同类型，service()调用deGet或者doPost（下面假设是HTTP GET）</li>
+<li>doGet生成动态页面，并把这个页面填入相应对象（容器还有响应对象的一个引用）</li>
+<li>线程结束，容器把响应对象转换成一个HTTP响应，发回给客户，然后删除请求和响应对象</li>
+</ol>
+<h3 id="3-2-URL与servlet的映射"><a href="#3-2-URL与servlet的映射" class="headerlink" title="3.2 URL与servlet的映射"></a>3.2 URL与servlet的映射</h3><h4 id="一个servlet有3个名字"><a href="#一个servlet有3个名字" class="headerlink" title="一个servlet有3个名字"></a>一个servlet有3个名字</h4><ol>
+<li><p>客户知道的URL名</p>
+</li>
+<li><p>部署人员知道的秘密的内部名</p>
+</li>
+<li><p>实际的文件名</p>
+</li>
+</ol>
+<h4 id="使用部署描述文件（DD）将URL映射到servlet"><a href="#使用部署描述文件（DD）将URL映射到servlet" class="headerlink" title="使用部署描述文件（DD）将URL映射到servlet"></a>使用部署描述文件（DD）将URL映射到servlet</h4><ul>
+<li>&lt;servlet&gt; 内部名映射到完全限定类名<ul>
+<li>servlet元素告诉容器哪些文件属于一个特定web应用</li>
+<li>servlet-name元素用于把一个servlet元素绑定到一个特定的servlet-mapping元素。最终用户看不到这个名字，这个名字只在这个部署描述文件中用到</li>
+<li>servlet-class放置类的完全限定名（不加.class）</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>com.coolingsky.servlet.HelloServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>&lt;servlet-mapping&gt; 内部名映射到公共URL名<ul>
+<li>可以理解为，当请求到来的时候，容器会在运行时使用这个元素访问“对于请求的这个URL，我应该调用哪个servlet”</li>
+<li>url-pattern是客户看到并且使用的servlet名字，但是不是具体类的名字</li>
+<li>url-pattern中可以使用通配符</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/hello<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-ServletContext"><a href="#4-ServletContext" class="headerlink" title="4 ServletContext"></a>4 ServletContext</h2><p>web容器在启动的时候，它会为每个web程序都创建一个对应的servletContext对象，代表了当前的web应用</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ServletContext context = <span class="keyword">this</span>.getServletContext();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>共享数据</p>
+<ul>
+<li>写一个servlet1在context中放数据</li>
+<li>写一个servlet2在context中读取数据</li>
+</ul>
+</li>
+<li><p>获取初始化参数</p>
+<ul>
+<li>在web.xml中配置</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>namespace<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>xx<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在servlet中读取</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ServletContext context = <span class="keyword">this</span>.getServletContext();</span><br><span class="line">context.getInitParameter(<span class="string">&quot;namespace&quot;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>请求转发</p>
+<ul>
+<li>当前servlet: url1</li>
+<li>访问/url1获得url2的内容（url不变，如果是重定向是变的）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ServletContext context = <span class="keyword">this</span>.getServletContext();</span><br><span class="line">context.getRequestDispatcher(<span class="string">&quot;/url2&quot;</span>).forward(req,resp);</span><br><span class="line"><span class="comment">//这里的/代表web应用</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<ul>
+<li>读取资源文件</li>
+</ul>
+<ul>
+<li><p>在properties中写一个db.properties</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">username</span>:<span class="string">coolingsky</span></span><br><span class="line"><span class="attr">password</span>:<span class="string">coolingsky</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<ul>
+<li><p>在servlet中读取</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">    ServletContext context = <span class="keyword">this</span>.getServletContext();</span><br><span class="line">    InputStream inputStream=context.getResourceAsStream(<span class="string">&quot;/WEB-INF/classes/db.properties&quot;</span>);</span><br><span class="line">    Properties properties=<span class="keyword">new</span> Properties();</span><br><span class="line">    properties.load(inputStream);</span><br><span class="line">    String name=properties.getProperty(<span class="string">&quot;username&quot;</span>);</span><br><span class="line">    String pwd=properties.getProperty(<span class="string">&quot;password&quot;</span>);</span><br><span class="line">    resp.getWriter().println(name+<span class="string">&quot;:&quot;</span>+pwd);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>访问浏览器</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210518164838133.png" alt="image-20210518164838133"></p>
+</li>
+</ul>
+<h2 id="5-HttpServletResponse"><a href="#5-HttpServletResponse" class="headerlink" title="5 HttpServletResponse"></a>5 HttpServletResponse</h2><h3 id="5-1-下载文件"><a href="#5-1-下载文件" class="headerlink" title="5.1 下载文件"></a>5.1 下载文件</h3><p>文件下载的实质就是文件拷贝，将文件从服务器端拷贝到浏览器端。所以文件下载需 要IO技术将服务器端的文件使用InputStream读取到，再使用 ServletOutputStream写到response缓冲区中。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">    <span class="comment">//1.获取要下载的文件路径</span></span><br><span class="line">    String realPath=<span class="string">&quot;/Users/xuyuxuan/IdeaProjects/helloservlet/src/main/resources/hello.txt&quot;</span>;</span><br><span class="line">    <span class="comment">//2.获取下载的文件名</span></span><br><span class="line">    String fileName=realPath.substring(realPath.lastIndexOf(<span class="string">&#x27;/&#x27;</span>)+<span class="number">1</span>);</span><br><span class="line">    System.out.println(fileName);</span><br><span class="line">    <span class="comment">//3.让浏览器能够支持下载我们想要的东西，中文文件名用URLEncoder编码，否则可能乱码</span></span><br><span class="line">    resp.setHeader(<span class="string">&quot;content-disposition&quot;</span>, <span class="string">&quot;attachment;filename=&quot;</span>+fileName);</span><br><span class="line">    <span class="comment">//4.获取下载文件的输入流</span></span><br><span class="line">    FileInputStream inputStream=<span class="keyword">new</span> FileInputStream(realPath);</span><br><span class="line">    <span class="comment">//5.创建缓冲区</span></span><br><span class="line">    <span class="keyword">int</span> len=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">byte</span>[] buffer=<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">    <span class="comment">//6.获取outputstream对象</span></span><br><span class="line">    ServletOutputStream servletOutputStream=resp.getOutputStream();</span><br><span class="line">    <span class="comment">//7.将fileoutputstream流写入到buffer缓冲区，使用outputstream将缓冲区中的数据输出到客户端</span></span><br><span class="line">    <span class="keyword">while</span> ((len=inputStream.read(buffer))&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        servletOutputStream.write(buffer,<span class="number">0</span>,len);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-重定向"><a href="#5-2-重定向" class="headerlink" title="5.2 重定向"></a>5.2 重定向</h3><p>一个web资源B收到客户端A的请求后，B会通知A客户端去访问另一个web资源c</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">    resp.sendRedirect(<span class="string">&quot;/helloservlet_war/success.jsp&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h2&gt;Hello World!&lt;/h2&gt;</span><br><span class="line">&lt;form action=<span class="string">&quot;$&#123;pageContext.request.contextPath&#125;/hello&quot;</span> method=<span class="string">&quot;get&quot;</span>&gt;</span><br><span class="line">    username:&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;username&quot;</span>&gt;</span><br><span class="line">    password:&lt;input type=<span class="string">&quot;password&quot;</span> name=<span class="string">&quot;password&quot;</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;submit&quot;</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>注意：web.xml默认版本好像不行，建议用更高的版本</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://xmlns.jcp.org/xml/ns/javaee</span></span></span><br><span class="line"><span class="tag"><span class="string">         http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">version</span>=<span class="string">&quot;4.0&quot;</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="6-HttpServletRequest"><a href="#6-HttpServletRequest" class="headerlink" title="6 HttpServletRequest"></a>6 HttpServletRequest</h2><p>获取前端的参数&amp;请求转发</p>
+<h2 id="7-参考"><a href="#7-参考" class="headerlink" title="7 参考"></a>7 参考</h2><p>[1] <a href="https://www.bilibili.com/video/BV12J411M7Sj?p=9&amp;t=112">https://www.bilibili.com/video/BV12J411M7Sj?p=9&amp;t=112</a></p>
+<p>[2] Head First Servlets and JSP</p>
+]]></content>
+      <categories>
+        <category>Java开发</category>
+      </categories>
+      <tags>
+        <tag>servlet</tag>
+      </tags>
+  </entry>
 </search>
