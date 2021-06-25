@@ -1327,9 +1327,17 @@
   <entry>
     <title>设计模式-1</title>
     <url>/2021/05/31/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-1/</url>
-    <content><![CDATA[<h1 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h1><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210531235140465.png" alt="image-20210531235140465"></p>
+    <content><![CDATA[<h1 id="UML"><a href="#UML" class="headerlink" title="UML"></a>UML</h1><p>一些常见的UML表示：<br><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210623200403.png"></p>
+<p>java抽象类和接口的区别：</p>
+<ol>
+<li>抽象类不一定必须含有抽象方法</li>
+<li>接口中的方法必须都是抽象方法</li>
+<li>抽象类是对整个类整体进行抽象，包括属性、行为，但是接口却是对类局部（行为）进行抽象</li>
+</ol>
+<h1 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h1><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210531235140465.png" alt="image-20210531235140465"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210531235154023.png" alt="image-20210531235154023"></p>
-<h1 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h1><h2 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h2><ul>
+<h1 id="策略模式-行为型模式"><a href="#策略模式-行为型模式" class="headerlink" title="策略模式-行为型模式"></a>策略模式-行为型模式</h1><h3 id="模式结构"><a href="#模式结构" class="headerlink" title="模式结构"></a>模式结构</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210605213309.png" alt="image-20210605213309729"></p>
+<h2 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h2><ul>
 <li><p>找出应用中可能需要变化之处，把它们独立出来， 不要和那些不需要变化的代码混在一起。</p>
 </li>
 <li><p>针对接口编程， 而不是针对实现编程。（针对超类型 <em>supertype</em>编程）</p>
@@ -1348,29 +1356,39 @@
 <li>更多对象</li>
 <li>Strategy和Context的沟通开销</li>
 </ul>
-<h1 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h1><h2 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h2><h3 id="模式结构"><a href="#模式结构" class="headerlink" title="模式结构"></a>模式结构</h3><ul>
+<h1 id="工厂模式-创建型模式"><a href="#工厂模式-创建型模式" class="headerlink" title="工厂模式-创建型模式"></a>工厂模式-创建型模式</h1><h2 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h2><h3 id="模式结构-1"><a href="#模式结构-1" class="headerlink" title="模式结构"></a>模式结构</h3><ul>
 <li>Factory</li>
 <li>Product</li>
 <li>ConcreteProduct</li>
 </ul>
 <p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210601211232083.png" alt="image-20210601211232083"></p>
 <h3 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h3><ul>
-<li>将对象的创建和对象本身业务处理分离可以降低系统的耦合度</li>
-<li>简单工厂模式最大的问题在于工厂类的职责相对过重<ul>
+<li><p>Simple Factory Pattern&amp;Static Factory Method</p>
+</li>
+<li><p>将对象的创建和对象本身业务处理分离可以降低系统的耦合度</p>
+</li>
+<li><p>简单工厂模式最大的问题在于工厂类的职责相对过重</p>
+<ul>
 <li>当有新产品要加入到系统中时 ，必须修改工厂类，加入必要的处理逻辑，这违背了“ 开闭原则”。</li>
 </ul>
 </li>
-<li>当你需要什么，只需要传入一个正确的参数，就可以获取你所需要的对象，而无须知道其创建细节。</li>
-<li>工厂方法是静态方法<ul>
+<li><p>当你需要什么，只需要传入一个正确的参数，就可以获取你所需要的对象，而无须知道其创建细节。</p>
+</li>
+<li><p>工厂方法是静态方法</p>
+<ul>
 <li>利用静态方法定义一个简单的工厂，这是常见的技巧，被称为静态工厂</li>
 <li>不需要使用创建对象的方法来实例化对象</li>
 <li>不能通过继承来改变创建方法的行为</li>
 </ul>
 </li>
-<li>简单工厂其实不是一种设计模式，更像是编程习惯</li>
+<li><p>简单工厂其实不是一种设计模式，更像是编程习惯</p>
+</li>
 </ul>
-<h2 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h2><h3 id="模式结构-1"><a href="#模式结构-1" class="headerlink" title="模式结构"></a>模式结构</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210603110413857.png" alt="image-20210603110413857"></p>
+<h2 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h2><h3 id="模式结构-2"><a href="#模式结构-2" class="headerlink" title="模式结构"></a>模式结构</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210603110413857.png" alt="image-20210603110413857"></p>
 <h3 id="分析-2"><a href="#分析-2" class="headerlink" title="分析"></a>分析</h3><ul>
+<li>Factory Method Pattern&amp;Virtual Constructor&amp;Polymorphic Factory</li>
+</ul>
+<ul>
 <li>在工厂方法模式中，核心的工厂类不再负责所有产品的创建，而是将具体创建工作交给子类去做。</li>
 <li>工厂方法模式可以允许系统在不修改工厂角色的情况下引进新产品。</li>
 <li>符合“开闭原则”</li>
@@ -1379,15 +1397,214 @@
 <h3 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//抽象工厂类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">PayMethodFactory</span> </span></span><br><span class="line"><span class="class"></span>&#123; </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> AbstractPay <span class="title">getPayMethod</span><span class="params">()</span></span>; </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//具体工厂类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CashPayFactory</span> <span class="keyword">extends</span> <span class="title">PayMethodFactory</span> </span></span><br><span class="line"><span class="class"></span>&#123; </span><br><span class="line">  <span class="function"><span class="keyword">public</span> AbstractPay <span class="title">getPayMethod</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">  </span>&#123; </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> CashPay(); </span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//client</span></span><br><span class="line">PayMethodFactory factory; </span><br><span class="line">AbstractPay payMethod; </span><br><span class="line">factory=<span class="keyword">new</span> CashPayFactory();</span><br><span class="line">payMethod =factory.getPayMethod();</span><br><span class="line">payMethod.pay();</span><br></pre></td></tr></table></figure>
 
 <p>p.s. 真正的开发过程中，不直接使用new关键字来创建对象，而是将具体类名写入配置文件，通过java的反射机制创建类</p>
-<h2 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h2><h3 id="模式结构-2"><a href="#模式结构-2" class="headerlink" title="模式结构"></a>模式结构</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210603114903839.png" alt="image-20210603114903839"></p>
+<h2 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h2><h3 id="模式结构-3"><a href="#模式结构-3" class="headerlink" title="模式结构"></a>模式结构</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/image-20210603114903839.png" alt="image-20210603114903839"></p>
 <p>提供一个创建一系列相关或相互依赖对象的接口，而无须指定它们具体的类。抽象工厂模式又称为Kit模式，属于对象创建型模式。</p>
-<h3 id="例子-2"><a href="#例子-2" class="headerlink" title="例子"></a>例子</h3><h4 id="1"><a href="#1" class="headerlink" title="1"></a>1</h4><p><img src="https://i.loli.net/2021/06/05/R1IGEYQH6sc4vdm.png" alt="image-20210605210147079"></p>
+<h3 id="分析-3"><a href="#分析-3" class="headerlink" title="分析"></a>分析</h3><ul>
+<li><p>kit pattern</p>
+</li>
+<li><p>Provide an interface for creating <strong>families of related or dependent objects</strong> without specifying their concrete classes.</p>
+<p>Frequency of use: <strong>high</strong></p>
+</li>
+<li><p>开闭原则的倾斜性(增加新的工厂和产品族容易，增加新的产品等级结构麻烦)</p>
+</li>
+<li><p>当只存在一个产品等级结构的时候，抽象工厂模式退化为工厂方法模式</p>
+</li>
+<li><p>当工厂方法模式中的抽象工厂与具体工厂合并，提供一个统一的工厂来创建产品对象，并将创建对象的工厂方法设计为静态方法时，工厂方法模式退化为简单工厂模式</p>
+</li>
+</ul>
+<h3 id="例子-2"><a href="#例子-2" class="headerlink" title="例子"></a>例子</h3><h4 id="1"><a href="#1" class="headerlink" title="1"></a>1</h4><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210605210623.png" alt="image-20210605210623734"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210605211043.png" alt="image-20210605211043731"></p>
+<h4 id="2"><a href="#2" class="headerlink" title="2"></a>2</h4><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210605211230.png" alt="image-20210605211230541"></p>
+<h1 id="建造者模式-创建型模式"><a href="#建造者模式-创建型模式" class="headerlink" title="建造者模式-创建型模式"></a>建造者模式-创建型模式</h1><h2 id="模式结构-4"><a href="#模式结构-4" class="headerlink" title="模式结构"></a>模式结构</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210605212809.png" alt="image-20210605212809024"></p>
+<p>包含抽象建造者、具体建造者、指挥者、产品角色</p>
+<ul>
+<li>将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。</li>
+<li>建造者模式是一步一步创建一个复杂的对象<ul>
+<li>用户只通过制定复杂对象的类型和内容就可以构建他们</li>
+<li>建造者模式属于对象创建型模式</li>
+</ul>
+</li>
+</ul>
+<h2 id="分析-4"><a href="#分析-4" class="headerlink" title="分析"></a>分析</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p><strong>Separate the construction of a complex object</strong> from its representation so that the <strong>same construction process</strong> can <strong>create different representations</strong></p>
+<h3 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h3><ol>
+<li>Product</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Product</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="keyword">private</span> String partA; <span class="comment">//可以是任意类型</span></span><br><span class="line">  <span class="keyword">private</span> String partB;</span><br><span class="line">  <span class="keyword">private</span> String partC;</span><br><span class="line">  <span class="comment">//partA的Getter方法和Setter方法省略 </span></span><br><span class="line">  <span class="comment">//partB的Getter方法和Setter方法省略 </span></span><br><span class="line">  <span class="comment">//partC的Getter方法和Setter方法省略</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Builder</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Builder</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="keyword">protected</span> Product product = <span class="keyword">new</span> Product();</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">buildPartA</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">buildPartB</span><span class="params">()</span></span>; </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">buildPartC</span><span class="params">()</span></span>; </span><br><span class="line">  <span class="function"><span class="keyword">public</span> Product <span class="title">getResult</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> product; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>Director</p>
+<ul>
+<li>隔离客户与生产过程</li>
+<li>负责控制产品的生成过程</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Director</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> Builder builder; </span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Director</span><span class="params">(Builder builder)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">  	<span class="keyword">this</span>.builder=builder; </span><br><span class="line">  &#125; </span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBuilder</span><span class="params">(Builder builder)</span> </span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line"> 		<span class="keyword">this</span>.builder=builer;</span><br><span class="line">  &#125; </span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> Product <span class="title">construct</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    builder.buildPartA();</span><br><span class="line"></span><br><span class="line">    builder.buildPartB();</span><br><span class="line"></span><br><span class="line">    builder.buildPartC();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> builder.getResult(); </span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>Client</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Builder builder = <span class="keyword">new</span> ConcreteBuilder(); </span><br><span class="line">Director director = <span class="keyword">new</span> Director(builder); </span><br><span class="line">Product product = director.construct();</span><br></pre></td></tr></table></figure>
+
+<h3 id="模式的简化"><a href="#模式的简化" class="headerlink" title="模式的简化"></a>模式的简化</h3><ol>
+<li>如果系统中只需要一个具体的建造者，可以<strong>省略抽象建造者</strong></li>
+<li>在具体建造者只有一个的情况下，如果抽象建造者角色已经被省略，还可以<strong>省略指挥者</strong>，让Builder角色扮演指挥者和建造者的双重角色</li>
+</ol>
+<h3 id="与工厂模式的比较"><a href="#与工厂模式的比较" class="headerlink" title="与工厂模式的比较"></a>与工厂模式的比较</h3><ol>
+<li>与抽象工厂模式相比，建造者模式返回一个<strong>组装好的完整产品</strong>，而抽象厂模式返回<strong>一系列相关的产品</strong>，这些产品位于不同的产品等级结构，构成了一个产品族。</li>
+<li>在抽象工厂模式中，客户端实例化工厂类，然后调用工厂方法获取所需产品对象，而在建造者模式中，客户端可以不直接调用建造者的相关方法， 而是通过指挥者类来指导如何生成对象，包括对象的组装过程和建造步骤， 它侧重于一步步构造一个复杂对象，返回一个完整的对象。</li>
+<li>如果将抽象工厂模式看成<strong>汽车配件生产工厂</strong>，生产一个产品族的产品，那 么建造者模式就是一个<strong>汽车组装工厂</strong>，通过对部件的组装可以返回一辆完整的汽车。</li>
+</ol>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ol>
+<li>客户端不必知道产品内部组成的细节，将产品本身与产品的创建过程解耦，使得相同的创建过程可以创建不同的产品对象</li>
+<li>用户使用不同的具体建造者即可得到不同的产品对象</li>
+<li>可以更加精细地控制产品的创建过程</li>
+<li>增加新的具体建造者无须修改原有类库的代码，指挥者类针对抽象 建造者类编程，系统扩展方便，符合“开闭原则”</li>
+</ol>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ol>
+<li>建造者模式所创建的产品一般具有较多的共同点，其组成部分相似， 如果产品之间的差异性很大，则不适合使用建造者模式，因此其使用范围受到一定的限制</li>
+<li>如果产品的内部变化复杂，可能会导致需要定义很多具体建造者类 来实现这种变化，导致系统变得很庞大</li>
+</ol>
+<h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><ol>
+<li>需要生成的产品对象有复杂的内部结构</li>
+<li>需要生成的产品对象的属性相互依赖，需要指定其生成顺序</li>
+<li>对象的创建过程独立于创建该对象的类</li>
+<li>隔离复杂对象的创建和使用，并使得相同的创建过程可以创建不同 的产品。</li>
+</ol>
+<h2 id="例子-3"><a href="#例子-3" class="headerlink" title="例子"></a>例子</h2><h3 id="e1-套餐"><a href="#e1-套餐" class="headerlink" title="e1.套餐"></a>e1.套餐</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210623202318.png" alt="image-20210623202318848"></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MealBuilder</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">   <span class="function"><span class="keyword">public</span> Meal <span class="title">prepareVegMeal</span> <span class="params">()</span></span>&#123;</span><br><span class="line">      Meal meal = <span class="keyword">new</span> Meal();</span><br><span class="line">      meal.addItem(<span class="keyword">new</span> VegBurger());</span><br><span class="line">      meal.addItem(<span class="keyword">new</span> Coke());</span><br><span class="line">      <span class="keyword">return</span> meal;</span><br><span class="line">   &#125;   </span><br><span class="line"> </span><br><span class="line">   <span class="function"><span class="keyword">public</span> Meal <span class="title">prepareNonVegMeal</span> <span class="params">()</span></span>&#123;</span><br><span class="line">      Meal meal = <span class="keyword">new</span> Meal();</span><br><span class="line">      meal.addItem(<span class="keyword">new</span> ChickenBurger());</span><br><span class="line">      meal.addItem(<span class="keyword">new</span> Pepsi());</span><br><span class="line">      <span class="keyword">return</span> meal;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="e2-JavaMail"><a href="#e2-JavaMail" class="headerlink" title="e2.JavaMail"></a>e2.JavaMail</h3><p>一步一步构造一个完整的邮件对象，然后发送</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210623203229.png" alt="image-20210623203229770"></p>
 ]]></content>
       <categories>
         <category>NJUSE课程</category>
       </categories>
       <tags>
         <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>服务计算与SOA开发-复习参考</title>
+    <url>/2021/06/25/%E6%9C%8D%E5%8A%A1%E8%AE%A1%E7%AE%97%E4%B8%8ESOA%E5%BC%80%E5%8F%91-%E5%A4%8D%E4%B9%A0%E5%8F%82%E8%80%83/</url>
+    <content><![CDATA[<blockquote>
+<p>蚌埠住了</p>
+<p>以某年考试卷为脉络做殊死一搏</p>
+<p>解析全是自己猜的，有任何错误请邮件通知<a href="mailto:&#x31;&#x30;&#50;&#x39;&#x33;&#x37;&#48;&#57;&#50;&#x33;&#x40;&#113;&#x71;&#46;&#99;&#x6f;&#109;">&#x31;&#x30;&#50;&#x39;&#x33;&#x37;&#48;&#57;&#50;&#x33;&#x40;&#113;&#x71;&#46;&#99;&#x6f;&#109;</a></p>
+</blockquote>
+<h1 id="选择题"><a href="#选择题" class="headerlink" title="选择题"></a>选择题</h1><p><strong>1.About SOA, which of the following declarations are correct?</strong></p>
+<p><strong>A.</strong> Three roles involved in Triangular SOA Operation Model are: Service Requestor, Service Provider and Service Registry</p>
+<p>解析:</p>
+<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625204251.png" style="zoom:50%;" />
+
+<p>B. Services can be informally classified to task services, entity services and utility services.Among them, only task services can be implemented as service compositions</p>
+<p>解析：估计是only错了？从下图来看只要是service就可以构成服务组成。说实话也不知哪里错了。下图是应该理解成服务层抽象成的应用服务层、业务服务层、编排服务层（从下往上）</p>
+<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625210318.png" alt="image-20210625210318355" style="zoom:50%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625211614.png" alt="image-20210625211614714" style="zoom:50%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625211702.png" alt="image-20210625211702802" style="zoom:50%;" />
+
+<p>c. While things are Service-Oriented, software development is divided to three phases,Platform Development, Services Development, and Application Development.Application development can be performed by business specialists with<br>service composition</p>
+<p>解析：可能app dev不是业务专家该管的事情8 （bj在考啥？）</p>
+<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625211933.png" alt="image-20210625211933277" style="zoom:50%;" />
+
+<p>D. Web service is a kind of Service-Oriented programming language, which is used to build services in SOA</p>
+<p>解析：Web Service协议与具体的平台/语言/技术无关，在各开发平台/语言/环境中均有相关支撑</p>
+<p>E. As long as self-contained, platform/realization-independent and<br>reusable, local or network software components can both be regarded as services</p>
+<p>解析：local可能不叫service 毕竟service是要被其他人调用的（猜的）</p>
+<p><strong>2.Which of the following represents the BEST reason that the Document Object Model (DOM) might NOT be used in a given XML application? **<br>A. The application demands complex processing<br>B. It is permissible that the application be non-validating<br>**C.</strong> The application is subject to significant constraints on memory usage<br>D. The architecture requires the use of attributes</p>
+<p>解析：</p>
+<p>DOM生成一棵树，但是耗内存，并且必须等到所有的文档都读入内存才能进行处理。</p>
+<p>SAX对文档进行顺序扫描，当扫描到文档开始与结束、元素开始与结束、文档（document）结束等地方时通知事件处理函数，由事件处理函数做相应动作，然后继续同样的扫描，直至文档结束。相比较DOM，解析速度快，SAX解析器是对文档的解析过程是一种边解析边执行的过程；内存消耗少，SAX解析器对文档的解析过程中，无需把整个文档都加载到内存中</p>
+<h1 id="问答题"><a href="#问答题" class="headerlink" title="问答题"></a>问答题</h1><p><strong>1.根据Java Web Service的调用模型，结合下图，举例阐述在server端和Client端的调用过程</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625223643.png" alt="image-20210625223643031"></p>
+<p><strong>服务端调用</strong></p>
+<ol>
+<li>接受来自网络传输层(例如，HTTP 或JMS端点)的SOAP消息。</li>
+<li>调用处理器(handler)来对消息进行预处理(例如，为可靠性的目的而对消息进行持久化处理，或者处理SOAP消息的标头)。</li>
+<li>决定消息的目标服务，换句话说，消息应该调用哪个WSDL操作</li>
+<li>在确定了目标WSDL操作后，决定调用哪个Java类方法。我将确定的Java类/方法称为Java目标。决定Java目标的过程称为分发(dispatching)</li>
+<li>把SOAP消息传递给序列化(Srializatio)子系统，将它反序列化为Java对象，这些Java对象将作为参数传递给Java目标。</li>
+<li>使用序列化子系统生成的参 数来调用Java 目标，而后得到目标方法返回的Java对象。</li>
+<li>把返回的Java对象再传递给序列化子系统，将它序列化为与目标WSDL操作指定的返回消息一致的 XML元素。</li>
+<li>把返回的XML元素包装成与目标WSDL操作相一致的SOAP响应消息。</li>
+<li>把SOAP响应消息传回给网络传输层以发送消息。</li>
+</ol>
+<p><strong>客户端调用</strong></p>
+<ol>
+<li><p>创建一个Web服务端点的实例，该服务端点实现一个Java接口，用JWS的术语来说，这种接口叫做服务端点接口(Service Endpoint Interface, SEI)。调用子系统有一个或多个工厂方法可以用于创建SEI实例。我们可以方便地创建这些实例，也可以用JNDI来访问它们。通常情况下，SEI 实例是用Java代理和调用处理器(Invocation Handler)来实现的。</p>
+</li>
+<li><p>处理 SEI实例的调用。</p>
+</li>
+<li><p>获得传递给 SEI的参数，把它们传递给序列化子系统，然后序列化为与目标服务的WSDL指定的XML模式一致的 XML元素。</p>
+</li>
+<li><p>基于目标服务的WSDL,把参数元素封装到SOAP消息中。</p>
+</li>
+<li><p>调用处理器， 它基于服务质量(Quality of Service, QoS)和其他需求对消息进行后续处理(例如，为可靠性的目的而对消息进行持久化处理，或者设置SOAP标头)</p>
+</li>
+<li><p>把消息传递给网络传输， 向目标Web服务交付消息。</p>
+</li>
+<li><p>接收来自网络传输的SOAP消息响应。</p>
+</li>
+<li><p>把SOAP响应消息传递给序列化子系统，把它反序列化为Java对象，该Java对象是SEI的返回类型指定类的实例。</p>
+</li>
+<li><p>返回反序列化的 S0AP响应 消息，完成SEI的调用。</p>
+</li>
+</ol>
+<p><strong>2.两个图分别显示了Java Web Service在server和client端的调用模型，试结合两图，举例阐述在Server端和Client端的调用过程</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625223819.png" alt="image-20210625223819766"></p>
+<ol>
+<li>JWS 中，Port 组件(component, 有时也称为Port)是一个Web服务的服务器视图。可以把一个Port 组件打包为一个WAR (用于部署为一个servlet 端点)或一个EJB JAR (用于部署为一个EJB端点)。WSEE[JSR 109]是用于定义部署过程和打包结构(包括部署描述符)的主要标准。WS-Metadata[SR 181]描述了如何通过标注(annotation) 来部署需要打包的类(例如，可以用WS-Metadata标注来定义代表一个Port组件的WSDL接口)。部署一个Java EE 5 Port组件的功能相当于在第1章介绍的WSPA参考系统中部署一个子系统的功能。第8章将会对部署进行深入探讨。</li>
+<li>转移到图2-2 的顶部，第1步描述了通过Port组件可以部署Web服务，现在沿着对部署好的Web服务的调用而展开描述。服务端点(endpoint)支持通过HTTP GET来请求描述Web服务的WSDL文档。这一WSDL的结构是由JAX-WS WSDL/Java映射决定的，映射的细节将在第6章讲述。可以使用由JAX-WS、JAXB,以及WS-Metadata定义的标注来定制这些映射。通常，JAX-WS 标注可以处理所使用的WSDL的样式(style) (第 4章会讨论WSDL样式)。另一方面，JAXB标注将Java参数和返回值的类型表示为XML Schema组件来加以处理。WS-Metadata标注用于处理WSDL接口的一些细节(例如，目标命名空间和WSDL文档中包含的众多XML元素的局部名称)。处理WSDL请求目前还不是WSPA的正式组成部分;不过，在一些 Web Services平台的调用子系统中经常会包含这一功能。</li>
+<li>在服务端点接收到一个通过HTTP POST发送来的SOAP请求时，就会引发部署在这个端点上的Web服务的调用。</li>
+<li>Web服务的端点通常是通过servlet来实现的，这个servlet可以监听部署服务(参见步骤1)时指定的端点URL。这个servlet不是由Port组件的开发人员指定的，而是Java EE 5内部的JWS实现的一部分。在部署Web服务时，WSEE运行时引擎会读取标注和(或)部署描述符中的配置信息，以决定服务端点的URL,并在容器内部进行配置，以便为此端点URL部署相应的监听器(listener) 。这一处理过程将会在第 8章进行详细描述。建立服务端点是WSPA中部署子系统的功能。</li>
+<li>第5步显示SOAP请求已经被转换为一组XML参数，在 WSDL中指定为参数的XML Schema组件的实例。JAX-WS运行时引擎负责从SOAP消息中提取这些参数。第4章将详细探讨这一非同寻 常的转换过程。在WSPA的调用子系统中，这一XML参数提取过程被定义为分发处理(dispatching process)的一部分。</li>
+</ol>
+<p>//祖传试卷的标准答案到这一步就没了？？</p>
+<ol start="6">
+<li>接下来，XML参数被反序列化(eseraire)) 为Java参数。这一反序列化过程由JAXB运行时引擎进行处理，可以通过目标Java 类中的标注对反序列化加以控制(也就是定义类型映射)。JAXB运行时引擎使用内省(introspectio) 机制来检查目标类中的标注，再加上由JAXB定义的标准的Java/XML绑定信息，就可以生成目标参数的实例了。JAXB序列化和相关的标注将在第5章加以介绍。这一步相当于WSPA中的序列化子系统。</li>
+<li>在创建好了参数以后，就可以调用目标Java类/方法。在WSPA中，这一功能由调用子系统负责处理。在JavaEE5中，由JAX-WS运行时引擎来处理调用管理。提供调用方法的类可以是EJB,也可是POJO。如图2-2所示，Web服务应用程序是由经过标注的Java类组成的，JAX-WS、JAXB,以及WS-Metadata在这些类的定义中均扮演了一定角色，这些类都使用了相关JSR 中的标注。必须使用WS-Metadata标注(如@webService )来标明被调用的类(被称为服务实现bean)，<br>以表明它实现了一个Web服务，再用JAXB标注来标明这些类方法的参数和返回值。此外，对于服务实现bean, 还可以用一 些JAX-WS标注来控制WSDL的样式</li>
+<li>在调用之后， 处理过程将按与以上步骤相反的方向进行处理。Java方法返回的数据类型由JAXB进行序列化处理，以转换成XML返回值的类型的实例。这种序列化(与第6步中描述的反序列化类似)是通过对Java返回类上添加的标注来加以控制的。</li>
+<li>接下来， JAX-WS运行时引擎将收到的XML返回值的类型的实例封装到SOAP响应中。</li>
+<li>最后，SOAP响应作为HTTP响应的有效负载而被发送回请求者。</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625223849.png" alt="image-20210625223849755"></p>
+<ol>
+<li>在客户端调用Web服务的第一步， 通常是使用某种WSDL到Java的映射工具来生成一个服务端点接口(Service Endpoint Interface, SEI。SEI 提供了对需要调用的Web服务的Java表示。在编译客户端应用程序之前，就应该先生成SEI,因为在客户端应用程序中要使用它的服务接口定义。生成SEI要使用到JAXB、JAX-WS、WS-Metadata</li>
+<li>在运行时，使用JAX-WS的javax. xml .ws . Service类的一个实例来提供被调用的Web服务的客户端视图，用一个Service .getPort方法来获取上一步中生成的SEI的运行时实例。这个运行时实例是使用Java代理(proxy) 技术而实现的，在图2-3中表示为个Proxy 实例(instance) 。如图2-3 所示，这一个Proxy实例实现了服务端点接口(SEI)。</li>
+<li>接下来，通过调用Proxy 实例上的一个SEI方法，就可以调用Web服务。传递给SEI方法的参数是在创建SEI (第1步)时生成的类的实例。这些类是JAXB根据WSDL中包含的模式而映射定义的。如图2-3所示，由Proxy实例实现的SEI也使用了WS-Metadata和JAX-WS。在SEI中会使用一些由这些 JSR定义的标注，不过，这些标注不会影响用户对SEI方法的调用。JAX-WS运行时引擎会用这些标注把JAXB参数和方法调用转换成要向Web服务发送的SOAP请求。JAX.WS运行时引擎生成好SOAP请求以后，在将它发送到Web服务端点之前，会先调用处理器(如果存在)。处理器(handler)是由用户定义的，可以对SOAP请求/响应的消息进行处理。WSEE规范定义了封装客户端处理器的过程，JAX-WS运行时引擎负责对处理器进行调用。WS-Metadata 规范也定义了用于将处理器附加到端点实现的标注。</li>
+<li>在处理 器完成处理之后，SOAP请求消息就会被发送到Web服务，Web服务再返回一个 SOAP响应。SOAP响应的处理过程顺序与前面的顺序相反。首先应用处理器，接着将SOAP响应参数进行反序列化(deserialized) (通过 JAXB运行时引擎)。</li>
+<li>最后， Proxy 实例返回一个JAXB实例作为调用的返回值。</li>
+</ol>
+<p><strong>3.结合JAX-WS，JAXB，WSEE，WS-Metada等JSR，讨论如何在Java Web Service Platform中使用 start from WSDL , start from Java , start from WSDL and Java 三种开发方式并且对比这三种开发方式</strong></p>
+<ol>
+<li>JWS旨在帮助Java开发者更容易地开发Web服务。因此，它偏重于 “从Java开始 “的开发模式。<ol>
+<li>“从 Java 开始 “假设您从开发一个 Java 类开始创建 Web 服务。<br>事实上，在大多数情况下，你需要做的就是用 @WebService 来注释该类，以便将其部署为 Web 服务。JAX-WS 和 JAXB 运行时引擎将使用标准的 WSDL/Java 和 XML/Java 映射法将该类映射为 WSDL 文档。</li>
+<li>在 “从Java开始 “的开发模式下，如果你需要调整你的 WSDL 或 XML 类型，可以通过向你的类添加注解来完成。”从Java 开始”是WS-Metadata实现所要求的唯一开发模式。另外，JWS也定义了 “从WSDL开始 “的开发模式。</li>
+<li>使用这种方法，你需要一个预先存在的 WSDL，并使用 WSDL 编译器（作为 JAX-WS 实现的一部分提供）来生成一组实现 WSDL 的 Java 程序元素。</li>
+<li>使用这种方法，你可以得到一组与 WSDL 对应的 SEI。你的工作是用适当的业务逻辑实现 SEI，以实现 WSDL 定义的 Web 服务。</li>
+</ol>
+</li>
+<li>在 “从 WSDL 和 Java 开始 “的开发模式下，你有预先存在的 XML schema，必须与预先存在的 Java 对象（参数和返回类型）相对应。这些如果没有一个高度可定制的序列化子系统，这些问题就无法得到优雅的解决。</li>
+<li>因此，几乎所有试图简化序列化问题的 Web 服务平台（例如，通过定义标准的序列化上下文，如 JAX-RPC 1.1）最终都会引入对包装代码的需求，以解决 “从 WSDL 和 Java 开始 “的问题。<ol>
+<li>开发者使用 JAX-WS WSDL 编译器，按照从 WSDL 开始的开发模式，从现有的 WSDL 中生成一个 SEI。然后，这个 SEI 通过包装器被映射到现有的类中。</li>
+</ol>
+</li>
+<li>另一方面，有一种情况是，从 WSDL 和 Java 开始的开发模式实际上最容易处理。开发模式实际上是最容易处理的，因为当 WSDL 和 Java 都被定义时，开发者不需要做任何设计工作。也就是说，开发者不需要设计一个灵活而有用的WSDL或一个好的Java API。</li>
+</ol>
+<p>从设计者的角度看这可能是真的，但从开发者的角度看，”从WSDL和Java开始是使用JWS工具最难解决的问题。JWS 可以从你的 Java 中生成有效的 WSDL，它可以从你的 XML Schema 中编译 Java 类，但是当涉及到将现有的 Java 映射到现有的 XML Schema 和 WSDL 时，它不能帮你太多。</p>
+]]></content>
+      <categories>
+        <category>NJUSE课程</category>
+      </categories>
+      <tags>
+        <tag>SOA</tag>
       </tags>
   </entry>
 </search>
