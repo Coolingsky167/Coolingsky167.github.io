@@ -1490,228 +1490,661 @@
       </tags>
   </entry>
   <entry>
-    <title>服务计算与SOA开发-复习参考</title>
-    <url>/2021/06/25/%E6%9C%8D%E5%8A%A1%E8%AE%A1%E7%AE%97%E4%B8%8ESOA%E5%BC%80%E5%8F%91-%E5%A4%8D%E4%B9%A0%E5%8F%82%E8%80%83/</url>
-    <content><![CDATA[<blockquote>
-<p>蚌埠住了</p>
-<p>以某年考试卷为脉络做殊死一搏</p>
-<p>解析全是自己猜的，有任何错误请邮件通知<a href="mailto:&#49;&#48;&#x32;&#57;&#x33;&#55;&#x30;&#x39;&#x32;&#51;&#64;&#x71;&#x71;&#x2e;&#99;&#111;&#x6d;">&#49;&#48;&#x32;&#57;&#x33;&#55;&#x30;&#x39;&#x32;&#51;&#64;&#x71;&#x71;&#x2e;&#99;&#111;&#x6d;</a></p>
+    <title>设计模式-2</title>
+    <url>/2021/06/23/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-2/</url>
+    <content><![CDATA[<h1 id="原型模式-Prototype-Pattern-对象创建型模式"><a href="#原型模式-Prototype-Pattern-对象创建型模式" class="headerlink" title="原型模式(Prototype Pattern)-对象创建型模式"></a>原型模式(Prototype Pattern)-对象创建型模式</h1><h2 id="模式结构"><a href="#模式结构" class="headerlink" title="模式结构"></a>模式结构</h2><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210623205806.png" alt="image-20210623205806309" style="zoom:50%;" />
+
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p><strong>Specify the kind of objects to create</strong> using a <strong>prototypical instance</strong>, and create new objects by <strong>copying this prototype</strong></p>
+<h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><ol>
+<li><p>Prototype：抽象原型类</p>
+</li>
+<li><p>ConcretePrototype：具体原型类</p>
+</li>
+<li><p>Client：客户类</p>
+</li>
+</ol>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ol>
+<li>当创建新的对象实例较为复杂时，使用原型模式可以简化对象的创建过程，通过一个已有实例可以提高新实例的创建效率</li>
+<li>可以动态的增加或者减少产品类</li>
+<li>原型模式提供了简化的创建结构</li>
+<li>可以使用深克隆的方式保存对象的状态</li>
+</ol>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ol>
+<li>需要为每一个类配备一个克隆方法（对已有的类进行改造时，不一定是件容易的事， 必须修改其源代码，违背了“开闭原则”）</li>
+<li>实现深克隆时需要编写较为复杂的代码</li>
+</ol>
+<h3 id="适用环境"><a href="#适用环境" class="headerlink" title="适用环境"></a>适用环境</h3><ol>
+<li>创建新对象成本较大（相似对象，则可以对其属性稍作修改）</li>
+<li>如果系统要保存对象的状态，而对象的状态变化很小，或者对象本身占内存不大的时候，也可以使用<strong>原型模式配合备忘录模式</strong>来应用。</li>
+<li>需要避免使用分层次的工厂类来创建分层次的对象，并且类的实例对象只有一个或很少的几个组合状态，通过复制原型对象得到新实例可能比使用构造函数创建一个新实例更加方便</li>
+</ol>
+<h3 id="模式应用"><a href="#模式应用" class="headerlink" title="模式应用"></a>模式应用</h3><ol>
+<li>ctrl c &amp; ctrl v</li>
+<li>在Struts2中为了保证线程的安全性 ， Action 对象的创建使用了原型模式 </li>
+<li>在 Spring 中 ，用户也可以采用原型模式来创建新的 bean 实例</li>
+</ol>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ol>
+<li>通常情况下，一个类包含一些成员对象，在使用原型模式克隆对象时，根据其成员对象是否也克隆，原型模式可以分为两种形式：深克隆和浅克隆</li>
+</ol>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><h3 id="e1-java-lang-Object"><a href="#e1-java-lang-Object" class="headerlink" title="e1.java.lang.Object"></a>e1.java.lang.Object</h3><ol>
+<li>在原型模式结构中定义了一个抽象原型类，所有的Java 类都继承自java.lang.Object，而Object类提供一个 clone()方法，可以将一个Java对象复制一份。因此在 Java中可以直接使用Object提供的clone()方法来实现对象的克隆，Java语言中的原型模式实现很简单<ol>
+<li>对任何的对象x，都有x.clone() !=x，即克隆对象与原对象不是同一个对象</li>
+<li>对任何的对象x，都有 x.clone().getClass()==x.getClass()，即克隆对象与原对象的类型一样</li>
+<li>如果对象x的equals()方法定义恰当，那么 x.clone().equals(x)应该成立。</li>
+</ol>
+</li>
+<li>能够实现克隆的Java类必须实现一个标识接口Cloneable， 表示这个Java类支持复制。如果一个类没有实现这个接 口但是调用了clone()方法，Java编译器将抛出一个 CloneNotSupportedException异常。</li>
+</ol>
+<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210623210121.png" alt="image-20210623210121579" style="zoom:50%;" />
+
+<h3 id="e2-邮件复制-浅克隆"><a href="#e2-邮件复制-浅克隆" class="headerlink" title="e2.邮件复制(浅克隆)"></a>e2.邮件复制(浅克隆)</h3><p>邮件对象包含的内容较多（如发送者、接收者、标 题、内容、日期、附件等）使用原型模式设计该系统。在本实例中使用浅克隆实现邮件复制，即复制邮件(Email)的同时不复制附件(Attachment)。</p>
+<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210623212102.png" alt="image-20210623212102572" style="zoom:50%;" />
+
+<h2 id="模式拓展"><a href="#模式拓展" class="headerlink" title="模式拓展"></a>模式拓展</h2><h3 id="带原型管理器的原型模式"><a href="#带原型管理器的原型模式" class="headerlink" title="带原型管理器的原型模式"></a>带原型管理器的原型模式</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210623212846.png" alt="image-20210623212846677" style="zoom:50%;" />
+
+<h3 id="相似对象的复制"><a href="#相似对象的复制" class="headerlink" title="相似对象的复制"></a>相似对象的复制</h3><p>很多情况下，复制所得到的对象与原型对象并不是完全相同的，它们的某些属性值存在异同。通过原型模式获得相同对象后可以再对其属性进行修改，从而获取所需对象。如多个学生对象的信息的区别在于性别、姓名和年龄，而专业、学院、学校等信息都相同，为了简化创建过程，可以通过原型模式来实现相似对象的复制。</p>
+<h1 id="状态模式-State-Pattern-行为型模式"><a href="#状态模式-State-Pattern-行为型模式" class="headerlink" title="状态模式(State Pattern)-行为型模式"></a>状态模式(State Pattern)-行为型模式</h1><h2 id="模式结构-1"><a href="#模式结构-1" class="headerlink" title="模式结构"></a>模式结构</h2><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210623213442.png" alt="image-20210623213442769" style="zoom:50%;" />
+
+<h2 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><p>Allow an object to alter its behavior when its <strong>internal state</strong> changes. The object will appear to change its class.</p>
+<blockquote>
+<p>其实我们是通过适用组合通过简单引用不同的状态对象来造成类改变的假象</p>
 </blockquote>
-<h1 id="选择题"><a href="#选择题" class="headerlink" title="选择题"></a>选择题</h1><p><strong>1.About SOA, which of the following declarations are correct?</strong></p>
-<p><strong>A.</strong> Three roles involved in Triangular SOA Operation Model are: Service Requestor, Service Provider and Service Registry</p>
-<p>解析:</p>
-<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625204251.png" style="zoom:50%;" />
-
-<p>B. Services can be informally classified to task services, entity services and utility services.Among them, only task services can be implemented as service compositions</p>
-<p>解析：估计是only错了？从下图来看只要是service就可以构成服务组成。说实话也不知哪里错了。下图是应该理解成服务层抽象成的应用服务层、业务服务层、编排服务层（从下往上）</p>
-<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625210318.png" alt="image-20210625210318355" style="zoom:50%;" />
-
-<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625211614.png" alt="image-20210625211614714" style="zoom:50%;" />
-
-<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625211702.png" alt="image-20210625211702802" style="zoom:50%;" />
-
-<p>c. While things are Service-Oriented, software development is divided to three phases,Platform Development, Services Development, and Application Development.Application development can be performed by business specialists with<br>service composition</p>
-<p>解析：可能app dev不是业务专家该管的事情8 （bj在考啥？）</p>
-<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625211933.png" alt="image-20210625211933277" style="zoom:50%;" />
-
-<p>D. Web service is a kind of Service-Oriented programming language, which is used to build services in SOA</p>
-<p>解析：Web Service协议与具体的平台/语言/技术无关，在各开发平台/语言/环境中均有相关支撑</p>
-<p>E. As long as self-contained, platform/realization-independent and<br>reusable, local or network software components can both be regarded as services</p>
-<p>解析：local可能不叫service 毕竟service是要被其他人调用的（猜的）</p>
-<p><strong>2.Which of the following represents the BEST reason that the Document Object Model (DOM) might NOT be used in a given XML application? **<br>A. The application demands complex processing<br>B. It is permissible that the application be non-validating<br>**C.</strong> The application is subject to significant constraints on memory usage<br>D. The architecture requires the use of attributes</p>
-<p>解析：</p>
-<p>DOM生成一棵树，但是耗内存，并且必须等到所有的文档都读入内存才能进行处理。</p>
-<p>SAX对文档进行顺序扫描，当扫描到文档开始与结束、元素开始与结束、文档（document）结束等地方时通知事件处理函数，由事件处理函数做相应动作，然后继续同样的扫描，直至文档结束。相比较DOM，解析速度快，SAX解析器是对文档的解析过程是一种边解析边执行的过程；内存消耗少，SAX解析器对文档的解析过程中，无需把整个文档都加载到内存中</p>
-<p><strong>3.Is an XSL Stylesheet an XML document? Yes</strong></p>
-<p>解析：样式表可描述文档如何被显示、发音或打印。XSL 语言包括三部分：XSLT、XPath 以及 XSL 格式化对象</p>
-<p><strong>4.In SOAP message, which of the fllowing part() is(are) mandatory in env : Envelope?(xmlns :env=”http:/ /<a href="http://www.w3.org/2003/05/soap-envelop&quot;">www.w3.org/2003/05/soap-envelop&quot;</a>)</strong><br>A.env : Header<br><strong>B</strong>. env:Body<br>C.env: Fault<br>D. Both A. and B.</p>
-<p>解析：</p>
-<p>一条 SOAP 消息就是一个普通的 XML 文档，包含下列元素：</p>
+<h3 id="模式结构-2"><a href="#模式结构-2" class="headerlink" title="模式结构"></a>模式结构</h3><p>Context: 环境类</p>
+<blockquote>
+<p>环境类实际上就是拥有状态的对象，环境类有时候可以充当状态管理器(State Manager)的角色，可以在环境类中对状态进行切换操作。</p>
+</blockquote>
+<p>State: 抽象状态类</p>
+<blockquote>
+<p>引入了一个抽象类(或者接口)来专门表示对象的状态，这个类我们叫做抽象状态类，而对象的每一种具体状态类都继承了该类，并在不同具体状态类中实现了不同状态的行为，包括各种状态之间的转换。</p>
+</blockquote>
+<p>ConcreteState: 具体状态类</p>
+<blockquote>
+<p> 将不同对象下的行为单独提取出来封装在具体的状态类中，使得环境类对象在其内部状态改变时可以改变它的行为，对象看起来似乎修改了它的类，而实际上是由于切换到不同的具体状态类实现 的。</p>
+</blockquote>
+<h3 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h3><ol>
+<li>封装了转换的原则</li>
+<li>枚举可能的状态</li>
+<li>方便增加新的状态</li>
+<li>允许状态转换逻辑与状态对象合成一体，而不是某一个 巨大的条件语句块。</li>
+<li>可以让多个环境对象共享一个状态对象</li>
+</ol>
+<h3 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h3><ol>
+<li>增加系统类和对象的个数</li>
+<li>使用不当会导致程序结构和代码混乱</li>
+<li>对开闭原则支持并不友好</li>
+</ol>
+<h3 id="适用环境-1"><a href="#适用环境-1" class="headerlink" title="适用环境"></a>适用环境</h3><ol>
+<li>对象的行为依赖于它的状态（属性）并且可以根据它的状态改变而改变它的相关行为。</li>
+<li>代码中包含大量与对象状态有关的条件语句</li>
+</ol>
+<h3 id="模式应用-1"><a href="#模式应用-1" class="headerlink" title="模式应用"></a>模式应用</h3><ol>
+<li>工作流&amp;游戏中，例如政府OA办公系统。使用状态模式可以描述工作流对象（如批文 ）的状态转换以及不同状态下它所具有的行为</li>
+<li>在目前主流的RPG（Role Play Game，角色扮演游戏）中，使用状态模式可以对游戏角色进行控制</li>
+</ol>
+<h2 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h2><h3 id="e1-糖果机器"><a href="#e1-糖果机器" class="headerlink" title="e1.糖果机器"></a>e1.糖果机器</h3><p>head first上的例子，糖果机器和状态。比较在意的是糖果机器拥有对状态的引用，状态同时也引用机器（状态的切换在state中实现）</p>
+<p>一般来说，当状态的转换是固定的时候，就设放在context中，当转换比较动态的时候，就放在状态类中，但是这样使得状态类之间产生了依赖（例子中在context里加入getter方法减少依赖）。其实也就是对context类还是对状态类的修改封闭做抉择。</p>
+<h3 id="e2-tcpConnection"><a href="#e2-tcpConnection" class="headerlink" title="e2.tcpConnection"></a>e2.tcpConnection</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210624210608.png" alt="image-20210624210608849"></p>
+<h2 id="模式拓展-1"><a href="#模式拓展-1" class="headerlink" title="模式拓展"></a>模式拓展</h2><h3 id="共享状态"><a href="#共享状态" class="headerlink" title="共享状态"></a>共享状态</h3><p>在有些情况下多个环境对象需要共享同一个状态，如果希望在系统中实现<strong>多个环境对象实例共享一个或多个状态对象</strong>，那么需要将这些状态对象定义为环境的静态成员对象。</p>
+<p>如果state对象都没有实例变量，那么各个Context可以共享一个State对象，此时的状态是没有内部状态，只有行为的轻量级对象（Flyweight）</p>
+<h3 id="简单状态模式与可切换状态的状态模式"><a href="#简单状态模式与可切换状态的状态模式" class="headerlink" title="简单状态模式与可切换状态的状态模式"></a>简单状态模式与可切换状态的状态模式</h3><ul>
+<li>简单状态模式是指状态都相互独立， 状态之间无须进行转换的状态模式。它遵循“开闭原则”，在客户端可以针对抽象状态类进行编程</li>
+<li>状态类与环境类之间通常还存在关联关系或者依赖关系，在实现状态切换时，在具体状态类内部需要调用环境类Context的setState()方法进行状态的转换操作，增加新的状态类可能需要修改其他某些状态类甚至环境类的源代码</li>
+</ul>
+<h2 id="与策略模式的比较"><a href="#与策略模式的比较" class="headerlink" title="与策略模式的比较"></a>与策略模式的比较</h2><p>策略模式和状态模式的类图是一样的。</p>
 <ul>
-<li>必需的 Envelope 元素，可把此 XML 文档标识为一条 SOAP 消息</li>
-<li>可选的 Header 元素，包含头部信息</li>
-<li>必需的 Body 元素，包含所有的调用和响应信息</li>
-<li>可选的 Fault 元素，提供有关在处理此消息所发生错误的信息</li>
+<li>对于状态模式，我们将一群<strong>行为封装在状态对象</strong>中，context对象中的行为随时可以委托到那些状态对象中的一个。当前状态在状态集合中转换，反映context的内部状态，从而使得context的行为改变。但是context的<strong>客户对于状态对象基本没有了解</strong></li>
+<li>策略模式，客户通常指定context索要组合的策略对象</li>
 </ul>
-<p>5.About SOAP,which is not correct?<br>A.SOAP is a kind of Message Exchange Protocol, which offers a staleles one-way message exchange paradigm, but can be used to create more complex intraction patterns</p>
-<p>解析：</p>
-<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210626110225.png" alt="image-20210626110225465" style="zoom:50%;" />
+<h3 id="与表驱动的状态机的比较"><a href="#与表驱动的状态机的比较" class="headerlink" title="与表驱动的状态机的比较"></a>与表驱动的状态机的比较</h3><p>/TODO 最后有一节表驱动，不知联系，这里先一笔带过 </p>
+<p>State模式对与状态相关的行为进行建模，表驱动着重于定义状态转换</p>
+<h1 id="命令模式（Command-Pattern）-行为型模式"><a href="#命令模式（Command-Pattern）-行为型模式" class="headerlink" title="命令模式（Command Pattern）-行为型模式"></a>命令模式（Command Pattern）-行为型模式</h1><h2 id="模式结构-3"><a href="#模式结构-3" class="headerlink" title="模式结构"></a>模式结构</h2><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210624211713.png" alt="image-20210624211713361" style="zoom:50%;" />
 
-<p>B. In SOAP processing model, two types of intermediaries are defined: forwarding intermediaries and active intermediaries</p>
-<p>解析：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210626111117.png" alt="image-20210626111117929"></p>
-<p>C. In SOAP fault message, the diret sub-element of env: body should be env: fault(xmlns:env=”http: //www . w3. org/2003/05/ soap-envelope”)</p>
-<p>解析：</p>
-<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210626110649.png" alt="image-20210626110649062" style="zoom:50%;" />
+<h2 id="分析-2"><a href="#分析-2" class="headerlink" title="分析"></a>分析</h2><h3 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h3><p><strong>Encapsulate a request</strong> as an object, thereby letting you <strong>parameterize clients with different requests</strong>, queue or log requests, and support undoable operations.</p>
+<h3 id="模式结构-4"><a href="#模式结构-4" class="headerlink" title="模式结构"></a>模式结构</h3><p>Command: 抽象命令类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Command</span> </span>&#123; <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span></span>; &#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>D</strong>. In SOAP processing model, SOAP headers are used to carry information for value- added characters, they can be processed by ultimate receiver and/or intermediaries. SOAP body is used to carry payload from initial sender to ultimate receiver, it can be accessed by ultimate receiver and/or intermediaries, but it can only be modified by ultimate receiver</p>
-<p>解析：</p>
-<p>不建议在中间节点修改body，但是可以改</p>
-<p><strong>6.Which of the following elements can NOT be the DIRECT sub-element (under the namespace of “http: 1 /www. w3. org/ns/wsdl”) of description element in WSDL?</strong><br>A. types<br>B. interface<br>C. binding<br>D. service<br><strong>E. endpoint</strong><br>F. import</p>
-<p>解析：</p>
-<p>endpoint是service下的子节点</p>
-<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210626121913.png" alt="image-20210626121913190" style="zoom:50%;" />
+<p>ConcreteCommand: 具体命令类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteCommand</span> <span class="keyword">extends</span> <span class="title">Command</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Receiver receiver;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span> </span>&#123; receiver.action(); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210626121938.png" alt="image-20210626121938447" style="zoom:50%;" />
+<p>Invoker: 调用者</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Invoker</span> </span>&#123; </span><br><span class="line">  <span class="keyword">private</span> Command command;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Invoker</span><span class="params">(Command command)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.command=command; &#125; </span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCommand</span><span class="params">(Command command)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.command=command; &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//业务方法，用于调用命令类的方法 </span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    command.execute(); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>7.About WSDL, which of the following NOT correct?</strong><br>A. WSDL document is used to define service, services derived from a certain WSDL document share similar abilities<br>B. Element interface and operation are used to define abstract abilities of service,while Element binding , endpoint and service are used to link interfaces to concrete message and deployment information<br><strong>C.</strong> Operations in an interface can share a same name under one namespace, as long as they have different definition of input/ output messages. This is called overload”</p>
-<p>解析：Since you can have more than one interface element in a WSDL 2.0 file, each interface must be given an unique name</p>
-<p>D. Since fault messages are shared by operations in an interface, Element fault is defined as the direct sub-element of Element Inter face and referenced by QName</p>
-<p>解析：</p>
-<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210626122656.png" alt="image-20210626122656171" style="zoom:50%;" />
+<p>Receiver: 接收者</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Receiver</span> </span>&#123; <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">action</span><span class="params">()</span> </span>&#123; <span class="comment">//具体操作 &#125; &#125;</span></span><br></pre></td></tr></table></figure>
 
-<p>E. Besides XML schema, we can use some other schema definition language in WSDL</p>
-<p>code-1:</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210626122841.png" alt="image-20210626122841080"></p>
-<p><strong>8.About Code l, which of the following specification is NOT correct？</strong><br>A. Header block transaction only need to be processed by ultimate receiver. If ultimate receiver fails, a SOAP fault message should be generated<br><strong>B.</strong> Since header block transaction defines transaction ID, the response message (if any) must contain this header block unchanged. Otherwise, we can’t achieve correlation of SOAP messages, thus a SOAP fault message should be generated</p>
-<p>解析：</p>
-<p>header block是可以在中间节点被insert/modify的</p>
-<p>C. As long as needed, multiple header blocks can be added to this SOAP message to support more characters<br>D. As long as needed, multiple direct sub-elements can be contained in Element Body</p>
-<p><strong>9.The SOAP message shown in Code 1, is MOST likely to be a</strong><br>A. XML-based content exchanging message<br><strong>B.</strong> RPC request message<br>C. RPC response message<br>D. Fault message</p>
-<p><strong>10.About Code 1, which of the follwingg specicaion is NOT corect?</strong><br>A. The sender of this SOAP message should expet a HTTP Response message. Since HTTP is connection-oriented, address information is not necessary in HTTP Response message<br><strong>B</strong>. Instead of SOAP specificaion, the dressing method is defined by HTTP specfication<br>C. If parameter code=FT35ZBQ in HTTP address URI is used to identify resource, this SOAP message is Web Architecture Compatible. SOAP specification specifies a default algorithm for URI computing<br>D. Attribute encodingStyle is used to define a serialization scheme for elements. Its value is an application- specific decision and the ability to interoperate is assumed to have been settled “out-of-band”</p>
-<p>Code2</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210626125249.png" alt="image-20210626125249448"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210626125336.png" alt="image-20210626125336544"></p>
-<p>11.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210626125553.png" alt="image-20210626125553398"></p>
-<p>解析：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210626132728.png" alt="image-20210626132728618"></p>
-<p>12.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210626133227.png" alt="image-20210626133227440"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210626135042.png" alt="image-20210626135042407"></p>
-<p>13.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210626133247.png" alt="image-20210626133247812"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210626140211.png" alt="image-20210626140211671"></p>
-<h1 id="简答题"><a href="#简答题" class="headerlink" title="简答题"></a>简答题</h1><h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><ul>
-<li>关于 Web service 的 Java 的异常应该被转化成 WSDL 的 fault（wsdl:fault）</li>
-<li>关于运行时的动态异常则不应该被转化成 fault</li>
-<li>使用 @WebFault 注解</li>
-<li>如果想自定义错误处理流程，可以使用 JAX-WS 的 handlers</li>
+<p>Client:客户类</p>
+<h3 id="模式分析"><a href="#模式分析" class="headerlink" title="模式分析"></a>模式分析</h3><ol>
+<li>对命令进行封装，将发出命令的责任 和执行命令的责任分割开</li>
+<li>命令模式允许请求的一方和接收的一方独立开来，使得请求的一方不必知道接收请求的一方的接口</li>
+<li>命令模式使请求本身成为一个对象，这个对象和其他对象一样可以被存储和传递。</li>
+<li>命令模式的关键在于引入了抽象命令接口，且发送者针对抽象命令接口编程，只有实现了抽象命令接口的具体命令才能与接收者相关联。</li>
+</ol>
+<h3 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h3><ol>
+<li>降低系统的耦合度</li>
+<li>新的命令可以容易地加入到系统中</li>
+<li>可以比较容易的设计一个命令队列和宏命令（组合命令）</li>
+<li>可以方便地实现对命令的Undo和Redo<ol>
+<li>ConcreteCommand对象需要存储额外的状态信息：接收者对象；接收者执行操作的参数；如果请求的操作会改变接收者对象中的某些值，那么这些值也要先存储起来</li>
+<li>如果只支持一次取消操作，那么只需要存储最近一次被执行的命令，如果是多级的取消和重做，则需要一个历史列表</li>
+<li>被放入历史列表中的必须拷贝的command（没有改变状态的保存引用即可）起着原型的作用</li>
+</ol>
+</li>
+</ol>
+<h3 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h3><p>导致系统有过多的具体命令类</p>
+<h3 id="适用环境-2"><a href="#适用环境-2" class="headerlink" title="适用环境"></a>适用环境</h3><ol>
+<li><p>需要将请求调用者和请求接收者解耦合</p>
+</li>
+<li><p>需要在不同的时间指定请求、将请求排队和执行请求</p>
+</li>
+<li><p>支持Undo和Redo</p>
+</li>
+<li><p>需要将一系列操作组合</p>
+</li>
+</ol>
+<h3 id="模式应用-2"><a href="#模式应用-2" class="headerlink" title="模式应用"></a>模式应用</h3><ol>
+<li>Java语言使用命令模式实现AWT/Swing GUI的委派事件模型 (Delegation Event Model, DEM)</li>
+<li>UNIX平台下的 Shell编程</li>
+</ol>
+<h2 id="例子-2"><a href="#例子-2" class="headerlink" title="例子"></a>例子</h2><h3 id="e1-Order"><a href="#e1-Order" class="headerlink" title="e1.Order"></a>e1.Order</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210624213726.png" alt="image-20210624213726634" style="zoom:50%;" />
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CommandPatternDemo</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      Stock abcStock = <span class="keyword">new</span> Stock();</span><br><span class="line"> </span><br><span class="line">      BuyStock buyStockOrder = <span class="keyword">new</span> BuyStock(abcStock);</span><br><span class="line">      SellStock sellStockOrder = <span class="keyword">new</span> SellStock(abcStock);</span><br><span class="line"> </span><br><span class="line">      Broker broker = <span class="keyword">new</span> Broker();</span><br><span class="line">      broker.takeOrder(buyStockOrder); <span class="comment">//broker内维护一个orderList</span></span><br><span class="line">      broker.takeOrder(sellStockOrder);</span><br><span class="line"> </span><br><span class="line">      broker.placeOrders(); <span class="comment">//顺序执行列表操作最后清空</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="e2-电视机遥控器"><a href="#e2-电视机遥控器" class="headerlink" title="e2.电视机遥控器"></a>e2.电视机遥控器</h3><p>电视机是receiver 遥控器是请求的发送者</p>
+<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210624214338.png" alt="image-20210624214338213" style="zoom: 200%;" />
+
+<h3 id="e3-自定义功能键"><a href="#e3-自定义功能键" class="headerlink" title="e3.自定义功能键"></a>e3.自定义功能键</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210624214648.png" alt="image-20210624214648296" style="zoom:50%;" />
+
+<h3 id="e4-菜单栏"><a href="#e4-菜单栏" class="headerlink" title="e4.菜单栏"></a>e4.菜单栏</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210624214925.png" alt="image-20210624214925899" style="zoom:50%;" />
+
+<p>concreteCommand: PasteCommand&amp;OpenCommand</p>
+<p>Client: Application</p>
+<p>Invoker: MenuItem</p>
+<p>Receiver: Document&amp;Application(知道如何实施与执行一个请求相关的操作。任何类都可能作为一个接收者)</p>
+<h2 id="模式拓展-2"><a href="#模式拓展-2" class="headerlink" title="模式拓展"></a>模式拓展</h2><h3 id="撤销操作"><a href="#撤销操作" class="headerlink" title="撤销操作"></a>撤销操作</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210624225225.png" alt="image-20210624225225409"></p>
+<h2 id="组合命令"><a href="#组合命令" class="headerlink" title="组合命令"></a>组合命令</h2><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210624225257.png" alt="image-20210624225257132" style="zoom:50%;" />
+
+<p>宏命令也是一个具体命令，不过它包含了对其他命令对象 的引用，在调用宏命令的execute()方法时，将递归调用它所包含的每个成员命令的execute()方法，一个宏命令的成员对象可以是简单命令，还可以继续是宏命令</p>
+<h1 id="观察者模式（Observer-Pattern）-行为型模式"><a href="#观察者模式（Observer-Pattern）-行为型模式" class="headerlink" title="观察者模式（Observer Pattern）-行为型模式"></a>观察者模式（Observer Pattern）-行为型模式</h1><h2 id="模式结构-5"><a href="#模式结构-5" class="headerlink" title="模式结构"></a>模式结构</h2><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210624233124.png" alt="image-20210624233124224" style="zoom:50%;" />
+
+
+
+<h2 id="分析-3"><a href="#分析-3" class="headerlink" title="分析"></a>分析</h2><h3 id="定义-3"><a href="#定义-3" class="headerlink" title="定义"></a>定义</h3><p>Define a <strong>one-to-many dependency</strong> between objects so that when <strong>one object changes state</strong>, <strong>all its dependents are notified and updated automatically</strong>.</p>
+<h3 id="模式结构-6"><a href="#模式结构-6" class="headerlink" title="模式结构"></a>模式结构</h3><ul>
+<li>Subject 目标</li>
 </ul>
-<h3 id="WSDL-Message-Dispatch"><a href="#WSDL-Message-Dispatch" class="headerlink" title="WSDL Message Dispatch"></a>WSDL Message Dispatch</h3><ul>
-<li><p>如果端点地址只和wsdl中的一个service关联，那么指定唯一的Qname作为输入就足够了</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*; </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Subject</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">protected</span> ArrayList observers = <span class="keyword">new</span> ArrayList();</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">attach</span><span class="params">(Observer observer)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">detach</span><span class="params">(Observer observer)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">notify</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>ConcreteSubject 具体目标</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteSubject</span> <span class="keyword">extends</span> <span class="title">Subject</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">attach</span><span class="params">(Observer observer)</span> </span>&#123; observers.add(observer); &#125; </span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">detach</span><span class="params">(Observer observer)</span> </span>&#123; observers.remove(observer); &#125; </span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notify</span><span class="params">()</span> </span>&#123; </span><br><span class="line">    <span class="keyword">for</span>(Object obs:observers) &#123; 				   ((Observer)obs).update(); &#125; </span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Observer 观察者</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Observer</span> </span>&#123; <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">()</span></span>; &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>ConcreteObserver 具体观察者</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteObserver</span> <span class="keyword">implements</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">()</span></span></span><br><span class="line"><span class="function">  </span>&#123; </span><br><span class="line">    <span class="comment">//具体更新代码</span></span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="模式分析-1"><a href="#模式分析-1" class="headerlink" title="模式分析"></a>模式分析</h3><ol>
+<li>观察者模式描述了如何建立对象与对象之间的依赖关系</li>
+<li>一个目标可以有任意数目的与之相依赖的观察者，一旦目标的状态发生改变，所有的观察者都将得到通知</li>
+<li>作为对这个通知的响应，每个观察者都将即时更新自己的状态，以 与目标状态同步， 这种交互也称为发布-订阅(publish-subscribe)目标是通知的发布者，它发出通知时并不需要知道谁是它的观察者， 可以有任意数目的观察者订阅它并接收通知</li>
+</ol>
+<h3 id="优点-3"><a href="#优点-3" class="headerlink" title="优点"></a>优点</h3><ol>
+<li>实现表示层和数据逻辑层的分离</li>
+<li>在观察目标和观察者之间建立了抽象的耦合</li>
+<li>支持广播通信</li>
+<li>符合开闭原则</li>
+</ol>
+<h3 id="缺点-3"><a href="#缺点-3" class="headerlink" title="缺点"></a>缺点</h3><ol>
+<li>如果一个观察目标有很多直接或者间接的观察者，将所有观察者都通知到会花费很多时间</li>
+<li>如果观察者和观察目标之间有循环依赖的话，观察目标会触发循环调用，导致系统崩溃</li>
+<li>观察者模式没有相应的机制让观察者知道所观察的目标对象是怎样发生变化的，仅仅是知道观察目标发生了变化</li>
+</ol>
+<h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><ol>
+<li>一个抽象模型有两个方面，一个方面依赖另一个方面，将这些方面封装在独立的对象中使得他们可以各自独自地改变和复用</li>
+<li>一个对象的改变将导致其他的一个或多个对象也发生改变，而不知道具体有多少对象将要发生改变</li>
+<li>一个对象必须通知其他对象，而并不知道这些对象是谁</li>
+<li>需要在系统中创建一个触发链（链式触发机制）</li>
+</ol>
+<h3 id="模式应用-3"><a href="#模式应用-3" class="headerlink" title="模式应用"></a>模式应用</h3><ol>
+<li>委派事件模型(Delegation Event Model, DEM)：事件源对象、事件监听对象（事件处理对象）和事件对象构成了Java 事件处理模型的三要素。</li>
+<li>SAX2以及Servlet技术的事件处理机制都基于DEM</li>
+<li>凡是涉及到一对一或者一对多的对象交互场景都可以使用观察者模式。</li>
+</ol>
+<h2 id="例子-3"><a href="#例子-3" class="headerlink" title="例子"></a>例子</h2><h3 id="e1-猫狗老鼠"><a href="#e1-猫狗老鼠" class="headerlink" title="e1.猫狗老鼠"></a>e1.猫狗老鼠</h3><p>猫叫老鼠叫、狗也叫</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210624234804.png" alt="image-20210624234804147"></p>
+<h3 id="e2-自定义登陆组件"><a href="#e2-自定义登陆组件" class="headerlink" title="e2.自定义登陆组件"></a>e2.自定义登陆组件</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625131554.png" alt="image-20210625131554257" style="zoom:50%;" />
+
+<h3 id="e3-气象站"><a href="#e3-气象站" class="headerlink" title="e3.气象站"></a>e3.气象站</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625135247.png" alt="image-20210625135247091" style="zoom:50%;" />
+
+<ul>
+<li>为什么要保存对 Subject的引用呢？构造完后似乎用不着了呀？</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">CurrentConditionsDisplay</span><span class="params">(Subject weatherData)</span> </span>&#123; <span class="keyword">this</span>.weatherData = weatherData; weatherData.registerObserver(<span class="keyword">this</span>); &#125;</span><br></pre></td></tr></table></figure>
+
+<p>的确如此， 但是以后我们可能想要取消注册， 如果已经有了对Subject的引用会比较方便。</p>
+<h2 id="模式拓展-3"><a href="#模式拓展-3" class="headerlink" title="模式拓展"></a>模式拓展</h2><h3 id="JDK"><a href="#JDK" class="headerlink" title="JDK"></a>JDK</h3><p>JDK的util包中，提供了Observable类和Observer接口</p>
+<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625133847.png" alt="image-20210625133847269" style="zoom:50%;" />
+
+<p><strong>setchange()</strong></p>
+<p>setChanged()方法用来标记状态已经改变的事实，好让notifyObservers()知道当它被调 用时应该更新观察者。如果调用notifyObservers()之前没有先调用setChanged()，观察者 就“不会”被通知。(clearChanged将状态设置为false，haschanged()查看当前状态)</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">setChanged()&#123;</span><br><span class="line">  changed=<span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line">notifyObservers(Object arg)&#123;</span><br><span class="line">  <span class="keyword">if</span>(changed)&#123;</span><br><span class="line">    <span class="keyword">for</span> observer on the list&#123;</span><br><span class="line">      update();</span><br><span class="line">    &#125;</span><br><span class="line">    changed=<span class="keyword">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">notifyObservers()&#123;</span><br><span class="line">	notifyObservers(<span class="keyword">null</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>为什么需要Obeject arg：</strong></p>
+<p>如何与调用者通信，则是添加了类型为Object的参数（该参数是调用者调用Observable实例的notifyObservers(Object obj)方法时传入的，当然也可以不传）</p>
+<p><strong>Push model &amp; pull model</strong></p>
+<ul>
+<li><p>目标向观察者发送改变的详细信息，而不管它们需要与否（假设目标知道一些观察者需要的信息，使得观察者相对难复用）：推模型</p>
+<ul>
+<li>“推”（push）数据给观察者，可以把数据当作数据对象传送给 notifyObservers(arg)方法</li>
+</ul>
 </li>
-<li><p>接收到消息后，消息应该被发送到正确的服务。使用xsd作为type system的时候，一些“#any”,”#none”的token会导致歧义，可以通过将wsdl:required设置为true</p>
-</li>
-<li><p>WS寻址提供了一种消除歧义的机制：提供了默认的Action，可以唯一标识每种消息类型，也可以定义额外的元素。</p>
-</li>
-<li><p>当使用HTTP绑定或使用带有SOAP Response MEP的SOAP绑定，因为request消息中没有SOAP envelope，所以上述不可行，不过也可以构造{address}和{http location}来提供可以与操作唯一关联的位置</p>
+<li><p>目标除了最小通知外什么都不送出，而在此之后由观察者显式地向目标询问（强调目标不知道它的观察者是谁）：拉模型</p>
+<ul>
+<li>我们没有调用 notifyObservers()传送数据对象，这表示采用的做法是“拉”。</li>
+</ul>
 </li>
 </ul>
-<h5 id="分发处理的步骤？"><a href="#分发处理的步骤？" class="headerlink" title="分发处理的步骤？"></a>分发处理的步骤？</h5><ol>
-<li>识别soap消息的目标soap:address</li>
-<li>从soap:address得到wsdl:port和wsdl:portType</li>
-<li>识别它的目标wsdl:operation</li>
-<li>查找相关联的java类和方法</li>
-</ol>
-<h3 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h3><h4 id="WSDL-amp-SEI"><a href="#WSDL-amp-SEI" class="headerlink" title="WSDL &amp; SEI"></a>WSDL &amp; SEI</h4><p>SFJ：从java类开始，传递给JAX-WS处理器，比如java2wsdl，转化为web服务端点的wsdl描述</p>
-<p>SFW：使用jaws:bindlings扩展元素对wsdl源文件进行标注，或者提供包含绑定说明对外部绑定文件。</p>
-<p><strong>带来一些不足：</strong></p>
-<ol>
-<li>portType和SEI的映射关系是一对一的</li>
-<li>参数和返回值的类型映射必须与JAXB兼容</li>
-</ol>
-<p><strong>变通：</strong></p>
-<p>使用服务实现bean. 就是正常自动生成SEI，然后自定义实现interface的Impl，在Impl中引用其他的类，@resource</p>
-<p>STJW：使用静态wsdl</p>
-<h3 id="JAXB-amp-JAVA-amp-schema"><a href="#JAXB-amp-JAVA-amp-schema" class="headerlink" title="JAXB &amp; JAVA &amp;schema"></a>JAXB &amp; JAVA &amp;schema</h3><p>比如phone对应的class有三个部分，无法实现：</p>
-<ol>
-<li>先把映射方法实现为继承自 XmlAdapter的Java类，再用@XmlJavaTypeAdapter对类标注</li>
-<li>使用 JAXB schema compiler和java</li>
-<li>使用JAXB schema generator和 XSLT映射</li>
-</ol>
-<h1 id="问答题"><a href="#问答题" class="headerlink" title="问答题"></a>问答题</h1><p><strong>1.根据Java Web Service的调用模型，结合下图，举例阐述在server端和Client端的调用过程</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625223643.png" alt="image-20210625223643031"></p>
-<p><strong>服务端调用</strong></p>
-<ol>
-<li>接受来自网络传输层(例如，HTTP 或JMS端点)的SOAP消息。</li>
-<li>调用处理器(handler)来对消息进行预处理(例如，为可靠性的目的而对消息进行持久化处理，或者处理SOAP消息的标头)。</li>
-<li>决定消息的目标服务，换句话说，消息应该调用哪个WSDL操作</li>
-<li>在确定了目标WSDL操作后，决定调用哪个Java类方法。将确定的Java类/方法称为Java目标。决定Java目标的过程称为分发(dispatching)</li>
-<li>把SOAP消息传递给序列化(Srializatio)子系统，将它反序列化为Java对象，这些Java对象将作为参数传递给Java目标。</li>
-<li>使用序列化子系统生成的参数来调用Java 目标，而后得到目标方法返回的Java对象。</li>
-<li>把返回的Java对象再传递给序列化子系统，将它序列化为与目标WSDL操作指定的返回消息一致的 XML元素。</li>
-<li>把返回的XML元素包装成与目标WSDL操作相一致的SOAP响应消息。</li>
-<li>把SOAP响应消息传回给网络传输层以发送消息。</li>
-</ol>
-<p><strong>客户端调用</strong></p>
-<ol>
-<li><p>创建一个Web服务端点的实例，该服务端点实现服务端点接口(Service Endpoint Interface, SEI)。调用子系统有一个或多个工厂方法可以用于创建SEI实例。我们可以方便地创建这些实例，也可以用JNDI来访问它们。通常情况下，SEI 实例是用Java代理和调用处理器(Invocation Handler)来实现的。</p>
-</li>
-<li><p>处理 SEI实例的调用。</p>
-</li>
-<li><p>获得传递给 SEI的参数，把它们传递给序列化子系统，然后序列化为与目标服务的WSDL指定的XML模式一致的 XML元素。</p>
-</li>
-<li><p>基于目标服务的WSDL,把参数元素封装到SOAP消息中。</p>
-</li>
-<li><p>调用处理器， 它基于服务质量(Quality of Service, QoS)和其他需求对消息进行后续处理(例如，为可靠性的目的而对消息进行持久化处理，或者设置SOAP标头)</p>
-</li>
-<li><p>把消息传递给网络传输， 向目标Web服务交付消息。</p>
-</li>
-<li><p>接收来自网络传输的SOAP消息响应。</p>
-</li>
-<li><p>把SOAP响应消息传递给序列化子系统，把它反序列化为Java对象，该Java对象是SEI的返回类型指定类的实例。</p>
-</li>
-<li><p>返回反序列化的 S0AP响应消息，完成SEI的调用。</p>
-</li>
-</ol>
-<p><strong>2.两个图分别显示了Java Web Service在server和client端的调用模型，试结合两图，举例阐述在Server端和Client端的调用过程</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625223819.png" alt="image-20210625223819766"></p>
-<ol>
-<li>JWS 中，Port 组件(component, 有时也称为Port)是一个Web服务的服务器视图。可以把一个Port 组件打包为一个WAR (用于部署为一个servlet 端点)或一个EJB JAR (用于部署为一个EJB端点)。WSEE]是用于定义部署过程和打包结构的主要标准。WS-Metadata描述了如何通过标注(annotation) 来部署需要打包的类(例如，可以用WS-Metadata标注来定义代表一个Port组件的WSDL接口)。部署一个Java EE 5 Port组件的功能相当于在WSPA参考系统中部署一个子系统的功能。</li>
-<li>转移到图2-2 的顶部，第1步描述了通过Port组件可以部署Web服务，现在沿着对部署好的Web服务的调用而展开描述。服务端点(endpoint)支持通过HTTP GET来请求描述Web服务的WSDL文档。这一WSDL的结构是由JAX-WS WSDL/Java映射决定的。可以使用由JAX-WS、JAXB,以及WS-Metadata定义的标注来定制这些映射。</li>
-<li>在服务端点接收到一个通过HTTP POST发送来的SOAP请求时，就会引发部署在这个端点上的Web服务的调用。</li>
-<li>Web服务的端点通常是通过servlet来实现的，这个servlet可以监听部署服务(参见步骤1)时指定的端点URL。这个servlet不是由Port组件的开发人员指定的，而是Java EE 5内部的JWS实现的一部分。在部署Web服务时，WSEE运行时引擎会读取标注和(或)部署描述符中的配置信息，以决定服务端点的URL,并在容器内部进行配置，以便为此端点URL部署相应的监听器(listener) 。建立服务端点是WSPA中部署子系统的功能。</li>
-<li>第5步显示SOAP请求已经被转换为一组XML参数，在 WSDL中指定为参数的XML Schema组件的实例。JAX-WS运行时引擎负责从SOAP消息中提取这些参数。在WSPA的调用子系统中，这一XML参数提取过程被定义为分发处理(dispatching process)的一部分。</li>
-</ol>
-<p>//祖传试卷的标准答案到这一步就没了？？</p>
-<ol start="6">
-<li>接下来，XML参数被反序列化(eseraire)) 为Java参数。这一反序列化过程由JAXB运行时引擎进行处理，可以通过目标Java 类中的标注对反序列化加以控制(也就是定义类型映射)。JAXB运行时引擎使用内省(introspectio) 机制来检查目标类中的标注，再加上由JAXB定义的标准的Java/XML绑定信息，就可以生成目标参数的实例了。JAXB序列化和相关的标注将在第5章加以介绍。这一步相当于WSPA中的序列化子系统。</li>
-<li>在创建好了参数以后，就可以调用目标Java类/方法。在WSPA中，这一功能由调用子系统负责处理。在JavaEE5中，由JAX-WS运行时引擎来处理调用管理。提供调用方法的类可以是EJB,也可是POJO。如图2-2所示，Web服务应用程序是由经过标注的Java类组成的，JAX-WS、JAXB,以及WS-Metadata在这些类的定义中均扮演了一定角色，这些类都使用了相关JSR 中的标注。必须使用WS-Metadata标注(如@webService )来标明被调用的类(被称为服务实现bean)，<br>以表明它实现了一个Web服务，再用JAXB标注来标明这些类方法的参数和返回值。此外，对于服务实现bean, 还可以用一 些JAX-WS标注来控制WSDL的样式</li>
-<li>在调用之后， 处理过程将按与以上步骤相反的方向进行处理。Java方法返回的数据类型由JAXB进行序列化处理，以转换成XML返回值的类型的实例。这种序列化(与第6步中描述的反序列化类似)是通过对Java返回类上添加的标注来加以控制的。</li>
-<li>接下来， JAX-WS运行时引擎将收到的XML返回值的类型的实例封装到SOAP响应中。</li>
-<li>最后，SOAP响应作为HTTP响应的有效负载而被发送回请求者。</li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625223849.png" alt="image-20210625223849755"></p>
-<ol>
-<li>在客户端调用Web服务的第一步， 通常是使用某种WSDL到Java的映射工具来生成一个服务端点接口(Service Endpoint Interface, SEI。SEI 提供了对需要调用的Web服务的Java表示。在编译客户端应用程序之前，就应该先生成SEI,因为在客户端应用程序中要使用它的服务接口定义。生成SEI要使用到JAXB、JAX-WS、WS-Metadata</li>
-<li>在运行时，使用JAX-WS的javax. xml .ws . Service类的一个实例来提供被调用的Web服务的客户端视图，用一个Service .getPort方法来获取上一步中生成的SEI的运行时实例。这个运行时实例是使用Java代理(proxy) 技术而实现的，在图2-3中表示为个Proxy 实例(instance) 。如图2-3 所示，这一个Proxy实例实现了服务端点接口(SEI)。</li>
-<li>接下来，通过调用Proxy 实例上的一个SEI方法，就可以调用Web服务。传递给SEI方法的参数是在创建SEI (第1步)时生成的类的实例。这些类是JAXB根据WSDL中包含的模式而映射定义的。如图2-3所示，由Proxy实例实现的SEI也使用了WS-Metadata和JAX-WS。在SEI中会使用一些由这些 JSR定义的标注，不过，这些标注不会影响用户对SEI方法的调用。JAX-WS运行时引擎会用这些标注把JAXB参数和方法调用转换成要向Web服务发送的SOAP请求。JAX.WS运行时引擎生成好SOAP请求以后，在将它发送到Web服务端点之前，会先调用处理器(如果存在)。处理器(handler)是由用户定义的，可以对SOAP请求/响应的消息进行处理。WSEE规范定义了封装客户端处理器的过程，JAX-WS运行时引擎负责对处理器进行调用。WS-Metadata 规范也定义了用于将处理器附加到端点实现的标注。</li>
-<li>在处理 器完成处理之后，SOAP请求消息就会被发送到Web服务，Web服务再返回一个 SOAP响应。SOAP响应的处理过程顺序与前面的顺序相反。首先应用处理器，接着将SOAP响应参数进行反序列化(deserialized) (通过 JAXB运行时引擎)。</li>
-<li>最后， Proxy 实例返回一个JAXB实例作为调用的返回值。</li>
-</ol>
-<p><strong>3.结合JAX-WS，JAXB，WSEE，WS-Metada等JSR，讨论如何在Java Web Service Platform中使用 start from WSDL , start from Java , start from WSDL and Java 三种开发方式并且对比这三种开发方式</strong></p>
-<ol>
-<li><p>JWS旨在帮助Java开发者更容易地开发Web服务。因此，它偏重于 “从Java开始 “的开发模式。</p>
-<ol>
-<li><p>“从 Java 开始 “假设从开发一个 Java 类开始创建 Web 服务。<br>在大多数情况下，就是用 @WebService 来注释该类，以便将其部署为 Web 服务。JAX-WS 和 JAXB 运行时引擎将使用标准的 WSDL/Java 和 XML/Java 映射法将该类映射为 WSDL 文档。</p>
-</li>
-<li><p>在 “从Java开始 “的开发模式下，如果需要调整你的 WSDL 或 XML 类型，可以通过向类添加注解来完成。”从Java 开始”是WS-Metadata实现所要求的唯一开发模式。</p>
-<p><strong>另外，JWS也定义了 “从WSDL开始 “的开发模式。</strong></p>
-</li>
-<li><p>使用这种方法，你需要一个预先存在的 WSDL，并使用 WSDL 编译器（作为 JAX-WS 实现的一部分提供）来生成一组实现 WSDL 的 Java 程序元素。</p>
-</li>
-<li><p>使用这种方法，你可以得到一组与 WSDL 对应的 SEI。你的工作是用适当的业务逻辑实现 SEI，以实现 WSDL 定义的 Web 服务。</p>
-</li>
+<p><strong>一些缺点：</strong></p>
+<ul>
+<li>Observable是一个具体实现类，面向细节了,而未面向抽象</li>
+<li>使用Observable时需要使用继承，由于java的类单继承性，如果你的类已经继承了一个类，将不能继承Observable来实现观察者模式，并且由于setChanged和clearChanged方法都是protected的，所以你也不能通过组合来完成观察者模式</li>
+</ul>
+<h3 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625134325.png" alt="image-20210625134325318" style="zoom:67%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625134246.png" alt="image-20210625134246245" style="zoom:67%;" />
+
+<h1 id="中介者模式-Mediator-Pattern-行为型模式"><a href="#中介者模式-Mediator-Pattern-行为型模式" class="headerlink" title="中介者模式(Mediator Pattern)-行为型模式"></a>中介者模式(Mediator Pattern)-行为型模式</h1><h2 id="模式结构-7"><a href="#模式结构-7" class="headerlink" title="模式结构"></a>模式结构</h2><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625141624.png" alt="image-20210625141624224" style="zoom:67%;" />
+
+<h2 id="分析-4"><a href="#分析-4" class="headerlink" title="分析"></a>分析</h2><h3 id="定义-4"><a href="#定义-4" class="headerlink" title="定义"></a>定义</h3><p>Define an object that encapsulates how a set of objects interact. Mediator promotes <strong>loose coupling</strong> by <strong>keeping objects from referring to each other explicitly</strong>, and it lets you <strong>vary their interaction independently</strong>.</p>
+<h3 id="模式结构-8"><a href="#模式结构-8" class="headerlink" title="模式结构"></a>模式结构</h3><ul>
+<li>Mediator:中介者，定义一个接口用于和各个colleague对象通信</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Mediator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">protected</span> ArrayList colleagues;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">register</span><span class="params">(Colleague colleague)</span> </span>&#123; colleagues.add(colleague); &#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>ConcreteMediator：具体中介者</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteMediator</span> <span class="keyword">extends</span> <span class="title">Mediator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123; ...... ((Colleague)(colleagues.get(<span class="number">0</span>))).method1(); ......</span><br><span class="line"></span><br><span class="line">&#125; &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Colleague：同事类都知道他的中介者对象，当需要和其他同事通信的时候，与中介者通信</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Colleague</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">protected</span> Mediator mediator; </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Colleague</span><span class="params">(Mediator mediator)</span> </span>&#123; <span class="keyword">this</span>.mediator=mediator; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>ConcreteColleague</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteColleague</span> <span class="keyword">extends</span> <span class="title">Colleague</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ConcreteColleague</span><span class="params">(Mediator mediator)</span> </span>&#123; <span class="keyword">super</span>(mediator); &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span> </span>&#123; ......&#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">()</span> </span>&#123; mediator.operation1(); &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="模式分析-2"><a href="#模式分析-2" class="headerlink" title="模式分析"></a>模式分析</h3><ol>
+<li>使得对象之间的关系数量急剧的减少</li>
+<li>中介者的职责<ol>
+<li>中转作用（结构性）</li>
+<li>协调作用（行为性）</li>
 </ol>
 </li>
-<li><p>在 “从 WSDL 和 Java 开始 “的开发模式下，你有预先存在的 XML schema，必须与预先存在的 Java 对象（参数和返回类型）相对应。这些如果没有一个高度可定制的序列化子系统，这些问题就无法得到优雅的解决。</p>
-</li>
-<li><p>因此，几乎所有试图简化序列化问题的 Web 服务平台（例如，通过定义标准的序列化上下文，如 JAX-RPC 1.1）最终都会引入对包装代码的需求，以解决 “从 WSDL 和 Java 开始 “的问题。</p>
-<ol>
-<li>开发者使用 JAX-WS WSDL 编译器，按照从 WSDL 开始的开发模式，从现有的 WSDL 中生成一个 SEI。然后，这个 SEI 通过包装器被映射到现有的类中。</li>
+<li>中介者模式是迪米特法则的经典应用：通过创造出一个中介者对象，将系统中的对象引用的其他对象数目减少到最小</li>
+</ol>
+<h3 id="优点-4"><a href="#优点-4" class="headerlink" title="优点"></a>优点</h3><ol>
+<li>简化了对象之间的交互</li>
+<li>将各类同事解耦合</li>
+<li>减少子类生成</li>
+<li>简化对各同事类的设计和实现</li>
+</ol>
+<h3 id="缺点-4"><a href="#缺点-4" class="headerlink" title="缺点"></a>缺点</h3><p>在具体中介者类中包含了同事之间的交互细节，可能会导致具体中介类非常复杂，使得系统难以维护</p>
+<h3 id="适用条件"><a href="#适用条件" class="headerlink" title="适用条件"></a>适用条件</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625143508.png" alt="image-20210625143508130" style="zoom:67%;" />
+
+<h3 id="模式应用-4"><a href="#模式应用-4" class="headerlink" title="模式应用"></a>模式应用</h3><ol>
+<li>驱动类软件，比如设计GUI时组件的协调</li>
+<li>MVC中的Controller就是中介者，负责view和model的交互</li>
+<li>Struts中，Action作为JSP与业务对象的中介</li>
+</ol>
+<h2 id="例子-4"><a href="#例子-4" class="headerlink" title="例子"></a>例子</h2><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625142813.png" alt="image-20210625142813390" style="zoom:67%;" />
+
+<h2 id="模式拓展-4"><a href="#模式拓展-4" class="headerlink" title="模式拓展"></a>模式拓展</h2><h3 id="与迪米特法则"><a href="#与迪米特法则" class="headerlink" title="与迪米特法则"></a>与迪米特法则</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625144030.png" alt="image-20210625144030428" style="zoom: 67%;" />
+
+<h3 id="与GUI开发"><a href="#与GUI开发" class="headerlink" title="与GUI开发"></a>与GUI开发</h3><p>GUI开发中多个界面中组件的交互关系可以交给中介者</p>
+<h1 id="模版方法模式-Template-Method-Pattern-行为型模式"><a href="#模版方法模式-Template-Method-Pattern-行为型模式" class="headerlink" title="模版方法模式(Template Method Pattern)-行为型模式"></a>模版方法模式(Template Method Pattern)-行为型模式</h1><h2 id="模式结构-9"><a href="#模式结构-9" class="headerlink" title="模式结构"></a>模式结构</h2><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625145223.png" alt="image-20210625145223752" style="zoom:67%;" />
+
+<p>基于父类，将相同的代码放在父类，不同的放在子类</p>
+<h2 id="分析-5"><a href="#分析-5" class="headerlink" title="分析"></a>分析</h2><h3 id="定义-5"><a href="#定义-5" class="headerlink" title="定义"></a>定义</h3><p>Define the <strong>skeleton of an algorithm</strong> in an operation, <strong>deferring some steps to subclasses</strong>. Template Method lets subclasses <strong>redefine certain steps</strong> of an algorithm <strong>without changing the algorithm’s structure.</strong></p>
+<h3 id="模式结构-10"><a href="#模式结构-10" class="headerlink" title="模式结构"></a>模式结构</h3><p>AbstractClass: 抽象类</p>
+<p>ConcreteClass: 具体子类</p>
+<h3 id="模式分析-3"><a href="#模式分析-3" class="headerlink" title="模式分析"></a>模式分析</h3><ol>
+<li>只有类的继承关系，没有对象关联关系</li>
+<li>实现具体逻辑步骤的方法成为基本方法 (Primitive Method)， 而将这些基本方法汇总起来的方法称为模板方法(Template Method)</li>
+<li>基本方法包括<ol>
+<li>抽象方法</li>
+<li>具体方法</li>
+<li>钩子方法</li>
 </ol>
 </li>
-<li><p>另一方面，有一种情况是，从 WSDL 和 Java 开始的开发模式实际上是最容易处理的，因为当 WSDL 和 Java 都被定义时，开发者不需要做任何设计工作。也就是说，开发者不需要设计一个灵活而有用的WSDL或一个好的Java API。</p>
-</li>
 </ol>
-<p>从设计者的角度看这可能是真的，但从开发者的角度看，”从WSDL和Java开始是使用JWS工具最难解决的问题。JWS 可以从你的 Java 中生成有效的 WSDL，它可以从你的 XML Schema 中编译 Java 类，但是当涉及到将现有的 Java 映射到现有的 XML Schema 和 WSDL 时，它不能帮你太多。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">template</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  open();</span><br><span class="line">  display();</span><br><span class="line">  <span class="keyword">if</span>(isPrint())</span><br><span class="line">    &#123;</span><br><span class="line">    print();</span><br><span class="line">    &#125; </span><br><span class="line">  &#125;</span><br><span class="line"><span class="comment">//钩子方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isPrint</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">true</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>在模板方法模式中，由于面向对象的多态性，子类对象在运行时将覆盖父类对象，子类中定义的方法也将覆盖父类中定义的方法，因此程序在运行时，具体子类的基本方法将覆盖父类中定义的基本方法，子类的钩子方法 也将覆盖父类的钩子方法，从而可以通过在子类中实现的钩子方法对父类方法的执行进行约束，实现子类对父类行为的反向控制。</li>
+</ol>
+<h3 id="优点-5"><a href="#优点-5" class="headerlink" title="优点"></a>优点</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625150426.png" alt="image-20210625150426831" style="zoom:50%;" />
+
+<h3 id="缺点-5"><a href="#缺点-5" class="headerlink" title="缺点"></a>缺点</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625150454.png" alt="image-20210625150454761" style="zoom:50%;" />
+
+<h3 id="适用条件-1"><a href="#适用条件-1" class="headerlink" title="适用条件"></a>适用条件</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625150537.png" alt="image-20210625150536976" style="zoom:50%;" />
+
+<h3 id="模式应用-5"><a href="#模式应用-5" class="headerlink" title="模式应用"></a>模式应用</h3><ol>
+<li>框架开发（spring、Struts）中父类控制处理流程的逻辑顺序</li>
+<li>Junit</li>
+</ol>
+<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625150715.png" alt="image-20210625150715552" style="zoom:50%;" />
+
+
+<h2 id="例子-5"><a href="#例子-5" class="headerlink" title="例子"></a>例子</h2><h3 id="e1-银行业务"><a href="#e1-银行业务" class="headerlink" title="e1.银行业务"></a>e1.银行业务</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625150239.png" alt="image-20210625150239319" style="zoom:50%;" />
+
+<h3 id="e3-数据库操作模版"><a href="#e3-数据库操作模版" class="headerlink" title="e3.数据库操作模版"></a>e3.数据库操作模版</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625150319.png" alt="image-20210625150319668" style="zoom: 67%;" />
+
+<h2 id="模式拓展-5"><a href="#模式拓展-5" class="headerlink" title="模式拓展"></a>模式拓展</h2><h3 id="关于继承"><a href="#关于继承" class="headerlink" title="关于继承"></a>关于继承</h3><p>恰当使用继承，将可复用的一般代码移到父类（是体现继承优势的模式之一）</p>
+<h3 id="好莱坞原则"><a href="#好莱坞原则" class="headerlink" title="好莱坞原则"></a>好莱坞原则</h3><p>Don‘t call us, we’ll call you：通过覆盖父类方法实现某些具体业务逻辑，父类控制对子类的调用</p>
+<p>与依赖倒置原则一样，都是为了解耦合，但是依赖倒置更注重如何在设计中避免依赖</p>
+<h3 id="钩子方法"><a href="#钩子方法" class="headerlink" title="钩子方法"></a>钩子方法</h3><ul>
+<li>使得子类可以控制父类</li>
+<li>最简单的钩子方法可以是空方法&amp;在钩子方法中定义一个默认的实现（只会返回true）</li>
+<li>通过boolean对其他方法进行约束</li>
+</ul>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><strong>[1]</strong> <a href="http://c.biancheng.net/view/1343.html">http://c.biancheng.net/view/1343.html</a></p>
+<p><strong>[2]</strong> Head first 设计模式</p>
+<p><strong>[3]</strong> 设计模式：可复用面向对象软件的基础</p>
 ]]></content>
       <categories>
         <category>NJUSE课程</category>
       </categories>
       <tags>
-        <tag>SOA</tag>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>设计模式-3</title>
+    <url>/2021/06/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-3/</url>
+    <content><![CDATA[<h1 id="适配器模式-Adapter-Pattern-结构型模式"><a href="#适配器模式-Adapter-Pattern-结构型模式" class="headerlink" title="适配器模式(Adapter Pattern)-结构型模式"></a>适配器模式(Adapter Pattern)-结构型模式</h1><h2 id="模式结构"><a href="#模式结构" class="headerlink" title="模式结构"></a>模式结构</h2><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625152714.png" alt="image-20210625152714413" style="zoom:50%;" />
+
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p><strong>Convert the interface of a class into another interface clients expect</strong>. Adapter lets classes work together that couldn’t otherwise because of incompatible interfaces.</p>
+<h3 id="模式结构-1"><a href="#模式结构-1" class="headerlink" title="模式结构"></a>模式结构</h3><p>Target：目标抽象类</p>
+<p>Adapter：适配器类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adapter</span> <span class="keyword">extends</span> <span class="title">Adaptee</span> <span class="keyword">implements</span> <span class="title">Target</span> </span>&#123; <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span> </span>&#123; specificRequest(); &#125; &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adapter</span> <span class="keyword">extends</span> <span class="title">Target</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Adaptee adaptee; </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Adapter</span><span class="params">(Adaptee adaptee)</span> </span>&#123;</span><br><span class="line"><span class="keyword">this</span>.adaptee=adaptee; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span> </span>&#123;</span><br><span class="line">adaptee.specificRequest(); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Adaptee：适配者类</p>
+<p>Client：客户类</p>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ol>
+<li>将目标类和适配者类解耦合</li>
+<li>增加了类的透明性和复用性</li>
+<li>灵活性和拓展性都很好</li>
+<li>类适配器：由于适配器类是适配者类的子类，因此可以在适配器类中置换一些适配者的方法，使得适配器灵活性更强</li>
+<li>对象适配器：同一个适配器可以把适配者类和它的子类都适配到目标接口</li>
+</ol>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ol>
+<li>类适配器：对于java&amp;cpp这样不支持多继承的语言，一次只能适配一个适配者类，而且目标抽象类只能为抽象类</li>
+<li>对象适配器：对适配者类的方法不容易置换</li>
+</ol>
+<h3 id="适用环境"><a href="#适用环境" class="headerlink" title="适用环境"></a>适用环境</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625154304.png" alt="image-20210625154304357" style="zoom: 50%;" />
+
+<h3 id="模式应用"><a href="#模式应用" class="headerlink" title="模式应用"></a>模式应用</h3><ol>
+<li>JDBC</li>
+</ol>
+<p>每一个具体数据库引擎 （如SQL Server、Oracle、MySQL等）的JDBC驱 动软件都是一个介于JDBC接口和数据库引擎接口之 间的适配器软件</p>
+<ol start="2">
+<li>在JDK类库中也定义了一系列适配器类，如在 com.sun.imageio.plugins.common包中定义的 InputStreamAdapter类，用于包装ImageInputStream接口及其子类对象。</li>
+</ol>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><h3 id="e1-仿生机器人"><a href="#e1-仿生机器人" class="headerlink" title="e1.仿生机器人"></a>e1.仿生机器人</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625153342.png" alt="image-20210625153342631" style="zoom:50%;" />
+
+<h3 id="e2-加密适配器"><a href="#e2-加密适配器" class="headerlink" title="e2.加密适配器"></a>e2.加密适配器</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625153425.png" alt="image-20210625153425308" style="zoom:50%;" />
+
+<h2 id="模式拓展"><a href="#模式拓展" class="headerlink" title="模式拓展"></a>模式拓展</h2><h3 id="默认适配器模式（单接口适配器模式）"><a href="#默认适配器模式（单接口适配器模式）" class="headerlink" title="默认适配器模式（单接口适配器模式）"></a>默认适配器模式（单接口适配器模式）</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625154526.png" alt="image-20210625154526768" style="zoom:67%;" />
+
+<p>不需要全部实现接口的方法时候，可以先设计一个抽象类实现接口，并为接口方法提供默认实现（空方法）</p>
+<h3 id="双向适配器"><a href="#双向适配器" class="headerlink" title="双向适配器"></a>双向适配器</h3><p>如果适配器中同时包含对目标类和适配者类的引用，就是一个双向适配器</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625154705.png" alt="image-20210625154705785"></p>
+<h1 id="组合模式-Composite-Pattern-对象结构型模式"><a href="#组合模式-Composite-Pattern-对象结构型模式" class="headerlink" title="组合模式(Composite Pattern)-对象结构型模式"></a>组合模式(Composite Pattern)-对象结构型模式</h1><h2 id="模式结构-2"><a href="#模式结构-2" class="headerlink" title="模式结构"></a>模式结构</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625180143.png" alt="image-20210625180143204"></p>
+<h2 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><p>Compose objects into <strong>tree structures</strong> to <strong>represent part-whole hierarchies</strong>. Composite lets clients <strong>treat individual objects and compositions of objects uniformly</strong></p>
+<h3 id="模式结构-3"><a href="#模式结构-3" class="headerlink" title="模式结构"></a>模式结构</h3><p>Component:抽象构件</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(Component c)</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(Component c)</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Component <span class="title">getChild</span><span class="params">(<span class="keyword">int</span> i)</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">()</span></span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Leaf:叶子构件</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Leaf</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(Component c)</span> </span>&#123; <span class="comment">//异常处理或错误提示 &#125;</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(Component c)</span> </span>&#123; <span class="comment">//异常处理或错误提示 &#125;</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> Component <span class="title">getChild</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123; <span class="comment">//异常处理或错误提示 &#125;</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">()</span> </span>&#123; <span class="comment">//实现代码 &#125;</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Composite:容器构件</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Composite</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> ArrayList list = <span class="keyword">new</span> ArrayList();</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(Component c)</span> </span>&#123;</span><br><span class="line">    list.add(c); </span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(Component c)</span> </span>&#123;</span><br><span class="line">    list.remove(c); </span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> Component <span class="title">getChild</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    (Component)list.get(i);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(Object obj:list)&#123;</span><br><span class="line">    ((Component)obj).operation();</span><br><span class="line">		&#125; </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Client:客户类</p>
+<h3 id="模式分析"><a href="#模式分析" class="headerlink" title="模式分析"></a>模式分析</h3><ol>
+<li>组合模式的关键是定义了一个抽象构件类， 它既可以代表叶子， 又可以代表容器， 而客户端针对该抽象构件类进行编程， 无须知道它到底表示的是叶子还是容器，可以对其进行统一处理</li>
+<li>同时容器对象与抽象构件类之间还建立一个聚合关联关系， 在容器对象中既可以包含叶子， 也可以包含容器，以此实现递归组合，形成一个树形结构</li>
+</ol>
+<h3 id="优点-amp-缺点"><a href="#优点-amp-缺点" class="headerlink" title="优点&amp;缺点"></a>优点&amp;缺点</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625181143.png" alt="image-20210625181143751"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625181159.png" alt="image-20210625181159290"></p>
+<h3 id="适用环境-1"><a href="#适用环境-1" class="headerlink" title="适用环境"></a>适用环境</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625181225.png" alt="image-20210625181225183"></p>
+<h3 id="模式应用-1"><a href="#模式应用-1" class="headerlink" title="模式应用"></a>模式应用</h3><ol>
+<li>xml文档处理</li>
+<li>操作系统的目录结构</li>
+<li>JDK的AWT/Swing</li>
+</ol>
+<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625181312.png" alt="image-20210625181312422" style="zoom:33%;" />
+
+<h2 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h2><h3 id="e1-文件系统"><a href="#e1-文件系统" class="headerlink" title="e1.文件系统"></a>e1.文件系统</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625180534.png" alt="image-20210625180534663" style="zoom:50%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625181038.png" alt="image-20210625181038498" style="zoom:50%;" />
+
+<h3 id="e2-水果盘"><a href="#e2-水果盘" class="headerlink" title="e2.水果盘"></a>e2.水果盘</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625180959.png" alt="image-20210625180958979" style="zoom:50%;" />
+
+<h2 id="模式拓展-1"><a href="#模式拓展-1" class="headerlink" title="模式拓展"></a>模式拓展</h2><h3 id="复杂的组合模式"><a href="#复杂的组合模式" class="headerlink" title="复杂的组合模式"></a>复杂的组合模式</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625181626.png" alt="image-20210625181626457" style="zoom:50%;" />
+
+<h3 id="透明组合模式"><a href="#透明组合模式" class="headerlink" title="透明组合模式"></a>透明组合模式</h3><p>在该方式中，由于抽象构件声明了所有子类中的全部方法，所以客户端无须区别树叶对象和树枝对象，对客户端来说是透明的。但其缺点是：树叶构件本来没有 Add()、Remove() 及 GetChild() 方法，却要实现它们（空实现或抛异常），这样会带来一些安全性问题。</p>
+<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625181636.png" alt="image-20210625181636851" style="zoom:50%;" />
+
+<h3 id="安全组合模式"><a href="#安全组合模式" class="headerlink" title="安全组合模式"></a>安全组合模式</h3><p>在该方式中，将管理子构件的方法移到树枝构件中，抽象构件和树叶构件没有对子对象的管理方法，这样就避免了上一种方式的安全性问题，但由于叶子和分支有不同的接口，客户端在调用时要知道树叶对象和树枝对象的存在，所以失去了透明性。</p>
+<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625181648.png" alt="image-20210625181648002" style="zoom:50%;" />
+
+<h1 id="桥接模式-Bridge-Pattern-对象结构型"><a href="#桥接模式-Bridge-Pattern-对象结构型" class="headerlink" title="桥接模式(Bridge Pattern)-对象结构型"></a>桥接模式(Bridge Pattern)-对象结构型</h1><h2 id="模式结构-4"><a href="#模式结构-4" class="headerlink" title="模式结构"></a>模式结构</h2><p>将继承关系转换为关联关系， 从而降低了类与类之间的耦合，减少了代码编写量。</p>
+<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625194047.png" alt="image-20210625194047651" style="zoom:67%;" />
+
+<h2 id="分析-2"><a href="#分析-2" class="headerlink" title="分析"></a>分析</h2><h3 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h3><p><strong>Decouple an abstraction from its implementation</strong> so that the two can vary independently</p>
+<h3 id="模式结构-5"><a href="#模式结构-5" class="headerlink" title="模式结构"></a>模式结构</h3><p>Abstraction：抽象类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Abstraction</span> </span>&#123;</span><br><span class="line">  <span class="keyword">protected</span> Implementor impl;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setImpl</span><span class="params">(Implementor impl)</span> </span>&#123; <span class="keyword">this</span>.impl=impl; &#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>RefinedAbstraction：扩充抽象类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RefinedAbstraction</span> <span class="keyword">extends</span> <span class="title">Abstraction</span> </span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//代码</span></span><br><span class="line">	impl.operationImpl();</span><br><span class="line">	<span class="comment">//代码 </span></span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Implementor：实现类接口</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Implementor</span> </span>&#123; <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operationImpl</span><span class="params">()</span></span>; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>ConcreteImplementor：具体实现类</p>
+<h3 id="模式分析-1"><a href="#模式分析-1" class="headerlink" title="模式分析"></a>模式分析</h3><p>理解桥接模式，重点需要理解如何将抽象化(Abstraction)与实现化 (Implementation)脱耦，使得二者可以独立地变化。</p>
+<ul>
+<li>抽象化：将对象共同性质抽取出来形成类</li>
+<li>实现化：针对抽象化给出具体实现</li>
+<li>脱耦：将抽象化和实现化之间的耦合解脱开，或者说是将他们之间的强关联改成弱关联，继承变成关联</li>
+</ul>
+<h3 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625194840.png" alt="image-20210625194840226"></p>
+<h3 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625194854.png" alt="image-20210625194853999"></p>
+<h3 id="适用环境-2"><a href="#适用环境-2" class="headerlink" title="适用环境"></a>适用环境</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625194923.png" alt="image-20210625194923808"></p>
+<h3 id="模式应用-2"><a href="#模式应用-2" class="headerlink" title="模式应用"></a>模式应用</h3><h3 id="java"><a href="#java" class="headerlink" title="java"></a>java</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625194954.png" alt="image-20210625194954033"></p>
+<h3 id="一个-Java桌面软件总是带有所在操作系统的视感-LookAndFeel"><a href="#一个-Java桌面软件总是带有所在操作系统的视感-LookAndFeel" class="headerlink" title="一个 Java桌面软件总是带有所在操作系统的视感 (LookAndFeel)"></a>一个 Java桌面软件总是带有所在操作系统的视感 (LookAndFeel)</h3><p>Java为AWT中的每一个GUI构件都提供了一个Peer构件，在AWT中的Peer架构就使 用了桥接模式。</p>
+<h3 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h3><p>一个JDBC驱动程序可以 动态地将一个特定类型的数据库与一个Java应用程序绑定在一起，从而实现抽象角色与实现角色的动态耦合。</p>
+<h2 id="例子-2"><a href="#例子-2" class="headerlink" title="例子"></a>例子</h2><h3 id="e1-毛笔"><a href="#e1-毛笔" class="headerlink" title="e1.毛笔"></a>e1.毛笔</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625194720.png" alt="image-20210625194720681" style="zoom:50%;" />
+
+<h2 id="e2-跨平台视频播放器"><a href="#e2-跨平台视频播放器" class="headerlink" title="e2.跨平台视频播放器"></a>e2.跨平台视频播放器</h2><img src="/Users/xuyuxuan/Library/Application Support/typora-user-images/image-20210625194801086.png" alt="image-20210625194801086" style="zoom:50%;" />
+
+<h2 id="模式拓展-2"><a href="#模式拓展-2" class="headerlink" title="模式拓展"></a>模式拓展</h2><h3 id="适配器模式与桥接模式的联用"><a href="#适配器模式与桥接模式的联用" class="headerlink" title="适配器模式与桥接模式的联用"></a>适配器模式与桥接模式的联用</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625195144.png" alt="image-20210625195144648"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625195313.png" alt="image-20210625195313520"></p>
+<h1 id="装饰者模式-Decorator-Pattern-对象结构型"><a href="#装饰者模式-Decorator-Pattern-对象结构型" class="headerlink" title="装饰者模式(Decorator Pattern)-对象结构型"></a>装饰者模式(Decorator Pattern)-对象结构型</h1><h2 id="模式结构-6"><a href="#模式结构-6" class="headerlink" title="模式结构"></a>模式结构</h2><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625195625.png" alt="image-20210625195625624" style="zoom:50%;" />
+
+
+
+<h2 id="分析-3"><a href="#分析-3" class="headerlink" title="分析"></a>分析</h2><h3 id="定义-3"><a href="#定义-3" class="headerlink" title="定义"></a>定义</h3><p>Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality.</p>
+<h3 id="模式结构-7"><a href="#模式结构-7" class="headerlink" title="模式结构"></a>模式结构</h3><p>Component：抽象构件</p>
+<p>ConcreteComponennt：具体构件</p>
+<p>Decorator：抽象装饰类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Decorator</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Component component;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Decorator</span><span class="params">(Component component)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.component=component; </span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		component.operation(); </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ConcreteDecorator：具体装饰类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteDecorator</span> <span class="keyword">extends</span> <span class="title">Decorator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ConcreteDecorator</span><span class="params">(Component component)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>(component);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>.operation();</span><br><span class="line">		addedBehavior();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addedBehavior</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">//新增方法</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625201610.png" alt="image-20210625201610102" style="zoom:50%;" />
+
+<h3 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625201639.png" alt="image-20210625201639768" style="zoom: 67%;" />
+
+<h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625201659.png" alt="image-20210625201659662" style="zoom:50%;" />
+
+<h3 id="模式应用-3"><a href="#模式应用-3" class="headerlink" title="模式应用"></a>模式应用</h3><ol>
+<li>可以通过装饰模式动态给一些构件增加新 的行为或改善其外观显示</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">JList list = <span class="keyword">new</span> JList(); </span><br><span class="line">JScrollPane sp = <span class="keyword">new</span> JScrollPane(list);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>javaIO</li>
+</ol>
+<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625201855.png" alt="image-20210625201855445" style="zoom:50%;" />
+
+
+
+<h2 id="例子-3"><a href="#例子-3" class="headerlink" title="例子"></a>例子</h2><h3 id="e1-transformer"><a href="#e1-transformer" class="headerlink" title="e1.transformer"></a>e1.transformer</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625201439.png" alt="image-20210625201439854"></p>
+<h3 id="e2-多重加密系统"><a href="#e2-多重加密系统" class="headerlink" title="e2.多重加密系统"></a>e2.多重加密系统</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625201518.png" alt="image-20210625201518263"></p>
+<h2 id="模式拓展-3"><a href="#模式拓展-3" class="headerlink" title="模式拓展"></a>模式拓展</h2><h3 id="装饰者模式简化的问题"><a href="#装饰者模式简化的问题" class="headerlink" title="装饰者模式简化的问题"></a>装饰者模式简化的问题</h3><ul>
+<li><p>一个装饰类的接口必须与被装饰类的接口一致</p>
+</li>
+<li><p>不要把太多的逻辑和状态放到具体构件中</p>
+</li>
+<li><p>如果只有一个具体构件类而没有抽象构件类，那么抽象装饰类可以作为具体构件类的直接子类</p>
+</li>
+</ul>
+<img src="/Users/xuyuxuan/Library/Application Support/typora-user-images/image-20210625202230510.png" alt="image-20210625202230510" style="zoom:50%;" />
+
+<h3 id="透明的装饰模式"><a href="#透明的装饰模式" class="headerlink" title="透明的装饰模式"></a>透明的装饰模式</h3><p>客户端完全针对抽象编程：加密系统</p>
+<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625202343.png" alt="image-20210625202343223" style="zoom: 67%;" />
+
+<p>允许用户在客户端声明具体装饰者类型的对象，调用具体装饰者中新增的方法</p>
+<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625202524.png" alt="image-20210625202524342" style="zoom:50%;" />
+
+<h1 id="外观模式-Facade-Pattern-对象结构型"><a href="#外观模式-Facade-Pattern-对象结构型" class="headerlink" title="外观模式(Facade Pattern)-对象结构型"></a>外观模式(Facade Pattern)-对象结构型</h1><h2 id="模式结构-8"><a href="#模式结构-8" class="headerlink" title="模式结构"></a>模式结构</h2><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625182754.png" alt="image-20210625182754559" style="zoom:67%;" />
+
+<h2 id="分析-4"><a href="#分析-4" class="headerlink" title="分析"></a>分析</h2><h3 id="定义-4"><a href="#定义-4" class="headerlink" title="定义"></a>定义</h3><p>Provide <strong>a unified interface</strong> to a set of interfaces in a subsystem. Facade <strong>defines a higher-level interface</strong> that makes the subsystem easier to use.</p>
+<h3 id="模式结构-9"><a href="#模式结构-9" class="headerlink" title="模式结构"></a>模式结构</h3><p>Facade: 外观角色</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Facade</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> SubSystemA obj1 = <span class="keyword">new</span> SubSystemA();</span><br><span class="line">  <span class="keyword">private</span> SubSystemB obj2 = <span class="keyword">new</span> SubSystemB();</span><br><span class="line">  <span class="keyword">private</span> SubSystemC obj3 = <span class="keyword">new</span> SubSystemC();</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    obj1.method();</span><br><span class="line">    obj2.method();</span><br><span class="line">    obj3.method(); </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>SubSystem:子系统角色</p>
+<h3 id="模式分析-2"><a href="#模式分析-2" class="headerlink" title="模式分析"></a>模式分析</h3><ul>
+<li><p>根据“单一职责原则”，在软件中将一个系统划分为若干个子系统有利于降低整个系统的复杂性，一个常见的设计目标是使子系统间的通信和相互依赖关系达到最小，而达到该目标的途径之一就是引入一个外观对象，它为子系统的访问<strong>提供了一个简单而单一的入口。</strong></p>
+</li>
+<li><p>外观模式也是“迪米特法则”的体现，通过引入一个新的外观类可以降低原有系统的复杂度，同时降低客户类与子系统类的耦合度</p>
+</li>
+<li><p>外观模式要求一个子系统的外部与其内部的通信通过一个统一的外观对象进行，外观类将客户端与子系统的内部复杂性分隔开，使得客户 端只需要与外观对象打交道，而不需要与子系统内部的很多对象打交 道。</p>
+</li>
+<li><p>外观模式的目的在于降低系统的复杂程度。</p>
+</li>
+<li><p>外观模式从很大程度上提高了客户端使用的便捷性，使得客户端无须关心子系统的工作细节，通过外观角色即可调用相关功能。</p>
+</li>
+</ul>
+<h3 id="优点-3"><a href="#优点-3" class="headerlink" title="优点"></a>优点</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625183443.png" alt="image-20210625183443765"></p>
+<h3 id="缺点-3"><a href="#缺点-3" class="headerlink" title="缺点"></a>缺点</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625183511.png" alt="image-20210625183511851"></p>
+<h3 id="适用条件"><a href="#适用条件" class="headerlink" title="适用条件"></a>适用条件</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625183528.png" alt="image-20210625183528152"></p>
+<h3 id="模式应用-4"><a href="#模式应用-4" class="headerlink" title="模式应用"></a>模式应用</h3><h3 id="外观模式应用于JDBC数据库操作"><a href="#外观模式应用于JDBC数据库操作" class="headerlink" title="外观模式应用于JDBC数据库操作"></a>外观模式应用于JDBC数据库操作</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625183633.png" alt="image-20210625183633838" style="zoom:50%;" />
+
+<h3 id="Session外观模式是外观模式在Java-EE框架中的应用"><a href="#Session外观模式是外观模式在Java-EE框架中的应用" class="headerlink" title="Session外观模式是外观模式在Java EE框架中的应用"></a>Session外观模式是外观模式在Java EE框架中的应用</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625183655.png" alt="image-20210625183655913"></p>
+<h2 id="例子-4"><a href="#例子-4" class="headerlink" title="例子"></a>例子</h2><h3 id="e1-电源总开关"><a href="#e1-电源总开关" class="headerlink" title="e1.电源总开关"></a>e1.电源总开关</h3><img src="/Users/xuyuxuan/Library/Application Support/typora-user-images/image-20210625183306305.png" alt="image-20210625183306305" style="zoom:50%;" />
+
+<h3 id="e2-文件加密"><a href="#e2-文件加密" class="headerlink" title="e2.文件加密"></a>e2.文件加密</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625183400.png" alt="image-20210625183400377" style="zoom:67%;" />
+
+
+
+<h2 id="模式拓展-4"><a href="#模式拓展-4" class="headerlink" title="模式拓展"></a>模式拓展</h2><h3 id="一个系统多个外观类"><a href="#一个系统多个外观类" class="headerlink" title="一个系统多个外观类"></a>一个系统多个外观类</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625183902.png" alt="image-20210625183902346"></p>
+<h3 id="不要试图通过外观类为子系统增加新行为"><a href="#不要试图通过外观类为子系统增加新行为" class="headerlink" title="不要试图通过外观类为子系统增加新行为"></a>不要试图通过外观类为子系统增加新行为</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625183945.png" alt="image-20210625183945733"></p>
+<h3 id="外观模式与迪米特法则"><a href="#外观模式与迪米特法则" class="headerlink" title="外观模式与迪米特法则"></a>外观模式与迪米特法则</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625184019.png" alt="image-20210625184019569"></p>
+<h3 id="抽象外观类"><a href="#抽象外观类" class="headerlink" title="抽象外观类"></a>抽象外观类</h3><p>在外观模式中，当增加或移除子系统时需要修改外观类，这违背了“开闭原则”。如果引入抽象外观类，则在一定程度上解决了该问题。</p>
+<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625184109.png" alt="image-20210625184109149" style="zoom:50%;" />
+
+<h1 id="享元模式-Flyweight-Pattern-对象结构型模式"><a href="#享元模式-Flyweight-Pattern-对象结构型模式" class="headerlink" title="享元模式(Flyweight Pattern)-对象结构型模式"></a>享元模式(Flyweight Pattern)-对象结构型模式</h1><h2 id="模式结构-10"><a href="#模式结构-10" class="headerlink" title="模式结构"></a>模式结构</h2><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625184444.png" alt="image-20210625184444549" style="zoom:67%;" />
+
+<h2 id="分析-5"><a href="#分析-5" class="headerlink" title="分析"></a>分析</h2><h3 id="定义-5"><a href="#定义-5" class="headerlink" title="定义"></a>定义</h3><p>Use <strong>sharing</strong> to support large numbers of <strong>fine-grained</strong> objects efficiently</p>
+<p>运用共享技术有效地支持大量细粒度对象的复用。系统只使用少量的对象， 而这些对象都很相似，状态变化很小，可以实现对象的多次复用</p>
+<h3 id="模式结构-11"><a href="#模式结构-11" class="headerlink" title="模式结构"></a>模式结构</h3><p>Flyweight: 抽象享元类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Flyweight</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//内部状态作为成员属性 private String intrinsicState;</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Flyweight</span><span class="params">(String intrinsicState)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.intrinsicState = intrinsicState; </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">(String extrinsicState)</span> </span>&#123;</span><br><span class="line">		......</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ConcreteFlyweight: 具体享元类</p>
+<p>UnsharedConcreteFlyweight: 非共享具体享元类</p>
+<p>FlyweightFactory: 享元工厂类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FlyweightFactory</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> HashMap flyweights = <span class="keyword">new</span> HashMap();</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Flyweight <span class="title">getFlyweight</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(flyweights.containsKey(key))</span><br><span class="line">    &#123; </span><br><span class="line">       <span class="keyword">return</span> (Flyweight)flyweights.get(key);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123; </span><br><span class="line">       Flyweight fw = <span class="keyword">new</span> ConcreteFlyweight();</span><br><span class="line">       flyweights.put(key,fw); </span><br><span class="line">       <span class="keyword">return</span> fw;</span><br><span class="line">    &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="模式分析-3"><a href="#模式分析-3" class="headerlink" title="模式分析"></a>模式分析</h3><ol>
+<li>享元模式是一个考虑系统性能的设计模式， 通过使用享元模式可以节约内存空间，提高系统的性能。</li>
+<li>享元模式的核心在于享元工厂类，享元工厂类的作用 在于提供一个用于存储享元对象的享元池，用户需要对象时，首先从享元池中获取，如果享元池中不存在， 则创建一个新的享元对象返回给用户，并在享元池中保存该新增对象</li>
+<li>享元模式以共享的方式高效地支持大量的细粒度对象，享元对象能做到共享的关键是区分内部状态(Internal State)和外部状态(External State)。<ol>
+<li>内部状态是存储在享元对象内部并且不会随着环境变化为变化的状态</li>
+<li>外部状态是随环境改变而改变的，不可以共享的状态</li>
+</ol>
+</li>
+</ol>
+<h3 id="优点-4"><a href="#优点-4" class="headerlink" title="优点"></a>优点</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625190453.png" alt="image-20210625190453699" style="zoom:50%;" />
+
+<h3 id="缺点-4"><a href="#缺点-4" class="headerlink" title="缺点"></a>缺点</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625190438.png" alt="image-20210625190438034" style="zoom:50%;" />
+
+<h3 id="适用环境-3"><a href="#适用环境-3" class="headerlink" title="适用环境"></a>适用环境</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625190537.png" alt="image-20210625190537677" style="zoom:50%;" />
+
+<h3 id="模式应用-5"><a href="#模式应用-5" class="headerlink" title="模式应用"></a>模式应用</h3><ol>
+<li>编辑器软件</li>
+<li>JDK String</li>
+</ol>
+<h2 id="例子-5"><a href="#例子-5" class="headerlink" title="例子"></a>例子</h2><h3 id="e1-共享网络设备（无外部状态）"><a href="#e1-共享网络设备（无外部状态）" class="headerlink" title="e1.共享网络设备（无外部状态）"></a>e1.共享网络设备（无外部状态）</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625190245.png" alt="image-20210625190245437" style="zoom: 67%;" />
+
+<h3 id="e2-共享网络设备（有外部状态）"><a href="#e2-共享网络设备（有外部状态）" class="headerlink" title="e2.共享网络设备（有外部状态）"></a>e2.共享网络设备（有外部状态）</h3><img src="/Users/xuyuxuan/Library/Application Support/typora-user-images/image-20210625190311805.png" alt="image-20210625190311805" style="zoom:67%;" />
+
+<h2 id="模式拓展-5"><a href="#模式拓展-5" class="headerlink" title="模式拓展"></a>模式拓展</h2><h3 id="单纯享元模式，"><a href="#单纯享元模式，" class="headerlink" title="单纯享元模式，"></a>单纯享元模式，</h3><p>这种享元模式中的所有的具体享元类都是可以共享的，<strong>不存在非共享的具体享元类</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625190824.png" alt="image-20210625190824716"></p>
+<h3 id="复合享元模式"><a href="#复合享元模式" class="headerlink" title="复合享元模式"></a>复合享元模式</h3><p>这种享元模式中的有些享元对象是由一些单纯享元对象组合而成的，它们就是复合享元对象。虽然复合享元对象本身不能共享，但它们可以分解成单纯享元对象再被共享</p>
+<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625190917.png" alt="image-20210625190917352" style="zoom:67%;" />
+
+<h3 id="模式联用"><a href="#模式联用" class="headerlink" title="模式联用"></a>模式联用</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625190949.png" alt="image-20210625190949487"></p>
+<h1 id="代理模式-Proxy-Pattern-对象结构型模式"><a href="#代理模式-Proxy-Pattern-对象结构型模式" class="headerlink" title="代理模式(Proxy Pattern)-对象结构型模式"></a>代理模式(Proxy Pattern)-对象结构型模式</h1><h2 id="模式结构-12"><a href="#模式结构-12" class="headerlink" title="模式结构"></a>模式结构</h2><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625192725.png" alt="image-20210625192725628" style="zoom:67%;" />
+
+<h2 id="分析-6"><a href="#分析-6" class="headerlink" title="分析"></a>分析</h2><h3 id="定义-6"><a href="#定义-6" class="headerlink" title="定义"></a>定义</h3><p>Provide a <strong>surrogate or placeholder</strong> for <strong>another</strong> object to <strong>control access to it.</strong></p>
+<h3 id="模式结构-13"><a href="#模式结构-13" class="headerlink" title="模式结构"></a>模式结构</h3><p>Subject：抽象主题角色</p>
+<p>Proxy：代理主题角色</p>
+<p>RealSubject：真实主题角色</p>
+<h3 id="优点-5"><a href="#优点-5" class="headerlink" title="优点"></a>优点</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625193130.png" alt="image-20210625193130049" style="zoom:50%;" />
+
+<h3 id="缺点-5"><a href="#缺点-5" class="headerlink" title="缺点"></a>缺点</h3><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625193207.png" alt="image-20210625193207039"></p>
+<h3 id="模式应用-6"><a href="#模式应用-6" class="headerlink" title="模式应用"></a>模式应用</h3><p>EJB、Web Service等分布式技术都是代理模式的应用</p>
+<h2 id="例子-6"><a href="#例子-6" class="headerlink" title="例子"></a>例子</h2><h3 id="e1-论坛权限控制代理"><a href="#e1-论坛权限控制代理" class="headerlink" title="e1.论坛权限控制代理"></a>e1.论坛权限控制代理</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625192944.png" alt="image-20210625192944089" style="zoom:50%;" />
+
+<h3 id="e2-数学运算代理"><a href="#e2-数学运算代理" class="headerlink" title="e2.数学运算代理"></a>e2.数学运算代理</h3><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625193052.png" alt="image-20210625193051978" style="zoom:50%;" />
+
+<h2 id="模式拓展-6"><a href="#模式拓展-6" class="headerlink" title="模式拓展"></a>模式拓展</h2><ol>
+<li><p>远程代理</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210625193600.png" alt="image-20210625193600517"></p>
+</li>
+<li><p>虚拟代理：延迟操作（通过代理技术结合多线程编程将真实图片的加载放到后台来操作，不影响前台图片的浏览）</p>
+</li>
+<li><p>copy-on-write代理：虚拟代理的一种</p>
+</li>
+<li><p>保护代理：不同权限</p>
+</li>
+<li><p>缓冲代理：提供临时存储空间</p>
+</li>
+<li><p>防火墙代理</p>
+</li>
+<li><p>智能引用代理：记录对象被调用次数等</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>NJUSE课程</category>
+      </categories>
+      <tags>
+        <tag>设计模式</tag>
       </tags>
   </entry>
 </search>
