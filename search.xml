@@ -117,7 +117,7 @@
       </tags>
   </entry>
   <entry>
-    <title>leetcode新手村(1)</title>
+    <title>leetcode新手村：双指针</title>
     <url>/2021/03/23/leetcode%E6%96%B0%E6%89%8B%E6%9D%91-1/</url>
     <content><![CDATA[<h2 id="题1"><a href="#题1" class="headerlink" title="题1"></a>题1</h2><ol>
 <li>#141 <a href="https://leetcode-cn.com/problems/linked-list-cycle/">环形链表</a></li>
@@ -172,7 +172,7 @@
       </tags>
   </entry>
   <entry>
-    <title>leetcode新手村-2</title>
+    <title>leetcode新手村：动态规划</title>
     <url>/2021/03/27/leetcode%E6%96%B0%E6%89%8B%E6%9D%91-2/</url>
     <content><![CDATA[<p>动态规划，面试官的法宝。</p>
 <h2 id="题1-509"><a href="#题1-509" class="headerlink" title="题1 #509"></a>题1 #509</h2><p>#509 <a href="https://leetcode-cn.com/problems/fibonacci-number/">斐波那契数</a></p>
@@ -2420,6 +2420,98 @@
       </categories>
       <tags>
         <tag>Spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java编程思想：持有对象（第十一章）</title>
+    <url>/2021/07/14/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3%EF%BC%9A%E6%8C%81%E6%9C%89%E5%AF%B9%E8%B1%A1%EF%BC%88%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="泛型和类型安全容器"><a href="#泛型和类型安全容器" class="headerlink" title="泛型和类型安全容器"></a>泛型和类型安全容器</h1><h2 id="没有使用泛型的例子"><a href="#没有使用泛型的例子" class="headerlink" title="没有使用泛型的例子"></a>没有使用泛型的例子</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">t1</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line">    ArrayList arrayList=<span class="keyword">new</span> ArrayList();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)</span><br><span class="line">        arrayList.add(<span class="keyword">new</span> apple());</span><br><span class="line">    arrayList.add(<span class="keyword">new</span> orange());</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arrayList.size();i++)&#123;</span><br><span class="line">        ((apple)arrayList.get(i)).id();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>apple和orange是有区别的，除了都是继承自Object之外没有任何共性。但是因为ArrayList保存的是Object，所以arraylist中既可以保存apple也可以保存orange，并且不论在编译期还是运行期都不会产生问题。但是当你从arrayList中取出对象的时候，得到的只是Object的引用，必须进行强制的类型转换（在调用id方法之前）。在运行时，就会出现类型转换错误<code>java.lang.ClassCastException: pojo.orange cannot be cast to pojo.apple</code></p>
+<h2 id="使用泛型的例子"><a href="#使用泛型的例子" class="headerlink" title="使用泛型的例子"></a>使用泛型的例子</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210714172453.png" alt="image-20210714172453150"></p>
+<p>ArrayList&lt;&gt;内表示的是<strong>类型参数</strong>，指定了容器实例可以保存的类型，这样，就可以在编译期发现这个错误，这个时候，从容器中取出apple也不再需要类型转换</p>
+<p>此外，ArrayList&lt;apple&gt;中可以存放apple子类</p>
+<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p>Java容器类类库的目的是保存对象，分为两个不同的概念</p>
+<p>**Collection: **一个独立元素的序列，这些元素都服从一条或者多条规则。List必须按照插入的顺序保存元素，Queue按照排队规则来确定对象产生的顺序（通常和他们被插入的顺序相同）</p>
+<p><strong>Map:</strong> 一组成对的“键值对”对象，允许你使用键值来查找值。ArrayList允许你使用数字来查找值，因此，从某种意义来说，他将数字和对象关联在了一起。映射表（Map）允许我们使用另一个对象来查找某个对象，因此被称为关联数组，或者“字典”</p>
+<p>一般情况下，我们都是通过接口使用这些容器，但是有时候，因为一些额外的功能（比如LinkedList中包含List接口中没有的方法）就不能使用向上转型为更通用的接口</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;apple&gt; list=<span class="keyword">new</span> ArrayList&lt;apple&gt;();</span><br><span class="line">List&lt;apple&gt; list=<span class="keyword">new</span> LinkedList&lt;apple&gt;();</span><br></pre></td></tr></table></figure>
+
+<h1 id="添加一组元素"><a href="#添加一组元素" class="headerlink" title="添加一组元素"></a>添加一组元素</h1><h2 id="Arrays-asList"><a href="#Arrays-asList" class="headerlink" title="Arrays.asList()"></a>Arrays.asList()</h2><p>该方法是将数组转化成List集合的方法。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;String&gt; list = Arrays.asList(<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>,<span class="string">&quot;c&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<p>（1）该方法适用于对象型数据的数组（String、Integer…）</p>
+<p>（2）该方法不建议使用于基本数据类型的数组（byte,short,int,long,float,double,boolean）</p>
+<p>（3）该方法将数组与List列表链接起来：当更新其一个时，另一个自动更新</p>
+<p>（4）不支持add()、remove()、clear()等方法</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210714181445.png" alt="image-20210714181445338"></p>
+<p>Arrays.asList()源码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">List&lt;T&gt; <span class="title">asList</span><span class="params">(T... a)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ArrayList&lt;&gt;(a);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意这个new ArrayList&lt;&gt;是Arryas内自己定义的一个静态变量，直接继承了父类AbstractList</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractList</span>&lt;<span class="title">E</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>父类中直接抛出了异常</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> index, E element)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Collections-addAll"><a href="#Collections-addAll" class="headerlink" title="Collections.addAll()"></a>Collections.addAll()</h2><p>该方法接收一个Collection对象，以及一个数组或者用逗号分隔的列表，将元素添加到Collection中</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">t3</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Collection&lt;Integer&gt; collection=<span class="keyword">new</span> ArrayList&lt;Integer&gt;(Arrays.asList(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>));</span><br><span class="line">    Integer[] moreInt=&#123;<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;</span><br><span class="line">    collection.addAll(Arrays.asList(moreInt));</span><br><span class="line">    Collections.addAll(collection,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>);</span><br><span class="line">    Integer[] moreInt2=&#123;<span class="number">10</span>,<span class="number">11</span>&#125;;</span><br><span class="line">    Collections.addAll(collection,moreInt2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>If you’re adding elements from an array, you can use <code>Collections.addAll(col, arr)</code><ul>
+<li>Remember that varargs are also done using arrays</li>
+</ul>
+</li>
+<li>If you’re adding elements from a <code>Collection</code>, use <code>col.addAll(otherCol)</code><ul>
+<li>Do <em>NOT</em> e.g. <code>Collections.addAll(col, otherCol.toArray())</code><ul>
+<li>Such roundabout way is likely to be slower!</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>It’s not that one is supremely faster than the other<ul>
+<li>It’s about skipping unnecessary steps given the current situation</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://www.cnblogs.com/BJUT-2010/p/5577977.html">建议看一下这个帖子</a></p>
+<h1 id="容器的打印"><a href="#容器的打印" class="headerlink" title="容器的打印"></a>容器的打印</h1><p>使用容器默认实现的toString方法吗就可以生成可读性很好的结果。</p>
+<p>Collection打印出来的内容用<strong>方括号</strong>包住，<strong>逗号</strong>分隔；</p>
+<p>Map打印出来的<strong>大括号</strong>包住，键值用<strong>等号</strong>连接；</p>
+<h2 id="Collection"><a href="#Collection" class="headerlink" title="Collection"></a>Collection</h2><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210714184421.png" alt="image-20210714184421590" style="zoom:50%;" />
+
+<p>重写ToString方法后：</p>
+<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210714184645.png" alt="image-20210714184645544" style="zoom:50%;" />
+
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210714184734.png" alt="image-20210714184734809" style="zoom:50%;" />
+
+<h1 id="List"><a href="#List" class="headerlink" title="List"></a>List</h1><p>List允许它在被创建之后添加元素，移除元素，或者自我调整尺寸。</p>
+<ul>
+<li>基本的ArrayList中，长于<strong>随机访问</strong>元素，但是在List中间插入和移除元素时较慢</li>
+<li>LinkedList，通过代价较低的在List中间进行的插入和删除操作，提供了优化的<strong>顺序访问</strong>。</li>
+</ul>
+<h1 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h1><h2 id="ListIterator"><a href="#ListIterator" class="headerlink" title="ListIterator"></a>ListIterator</h2><p>迭代器是一个对象，他的工作是遍历并选择序列中的对象，而客户端程序员不必知道或关心该序列底层的结构。</p>
+<ul>
+<li>使用iterator()要求容器返回一个Iterator，Iterator将准备好返回序列的第一个元素</li>
+<li>使用next()获得序列中的下一个元素</li>
+<li>使用hasNext()检查序列中是否还有元素</li>
+<li>使用remove()将迭代器新返回的元素删除</li>
+</ul>
+<p>Example:迭代器遍历删除(要在)</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">   <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">t6</span><span class="params">()</span></span>&#123;</span><br><span class="line">        List&lt;apple&gt; apples=<span class="keyword">new</span> ArrayList&lt;apple&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)</span><br><span class="line">            apples.add(<span class="keyword">new</span> apple());</span><br><span class="line">        System.out.println(apples);</span><br><span class="line">        <span class="keyword">for</span> (Iterator&lt;apple&gt; iterator=apples.iterator();iterator.hasNext();)&#123;</span><br><span class="line">            apple appleInstance=iterator.next();</span><br><span class="line">            <span class="keyword">if</span> (appleInstance.id()==<span class="number">2</span>)&#123;</span><br><span class="line">                iterator.remove();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(apples);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h1><p>LinkedList和ArrayList一样实现了基本的List接口，但是它执行某些操作（在List中间插入和移除）时比ArrayList更加高效，但在随机访问操作方面逊色。同时LinkedList添加了可以使其作用于栈、队列的方法</p>
+<h1 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h1><p>LinkedList具有直接实现栈的所有方法，可以直接使用。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> pojo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.LinkedList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Stack</span>&lt;<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> LinkedList&lt;T&gt; storage=<span class="keyword">new</span> LinkedList&lt;T&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(T v)</span></span>&#123;</span><br><span class="line">        storage.addFirst(v);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">pop</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> storage.removeFirst();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">peek</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> storage.getFirst();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">empty</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> storage.isEmpty();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> storage.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Java1.0的stack（util.Stack）继承自Vector，拥有比栈多的行为（不要去使用）</p>
+]]></content>
+      <categories>
+        <category>Books</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
       </tags>
   </entry>
 </search>

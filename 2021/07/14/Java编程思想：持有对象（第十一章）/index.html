@@ -1,0 +1,235 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Java编程思想：持有对象（第十一章） | Coolingsky的博客</title><meta name="keywords" content="Java"><meta name="author" content="Coolingsky"><meta name="copyright" content="Coolingsky"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="泛型和类型安全容器没有使用泛型的例子12345678910public void t1()&amp;#123;    @SuppressWarnings(&quot;unchecked&quot;)    ArrayList arrayList&#x3D;new ArrayList();    for (int i&#x3D;0;i&lt;3;i++)        arrayList.add(new apple());">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java编程思想：持有对象（第十一章）">
+<meta property="og:url" content="http://example.com/2021/07/14/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3%EF%BC%9A%E6%8C%81%E6%9C%89%E5%AF%B9%E8%B1%A1%EF%BC%88%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0%EF%BC%89/index.html">
+<meta property="og:site_name" content="Coolingsky的博客">
+<meta property="og:description" content="泛型和类型安全容器没有使用泛型的例子12345678910public void t1()&amp;#123;    @SuppressWarnings(&quot;unchecked&quot;)    ArrayList arrayList&#x3D;new ArrayList();    for (int i&#x3D;0;i&lt;3;i++)        arrayList.add(new apple());">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210714165339.png">
+<meta property="article:published_time" content="2021-07-14T08:51:31.000Z">
+<meta property="article:modified_time" content="2021-07-14T13:56:25.927Z">
+<meta property="article:author" content="Coolingsky">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210714165339.png"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/fnym.png"><link rel="canonical" href="http://example.com/2021/07/14/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3%EF%BC%9A%E6%8C%81%E6%9C%89%E5%AF%B9%E8%B1%A1%EF%BC%88%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0%EF%BC%89/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-07-14 21:56:25'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/fnym.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="mailto:1029370923@qq.com"><i class="fa-fw fas fa-paper-plane"></i><span> 戳我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210714165339.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Coolingsky的博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="mailto:1029370923@qq.com"><i class="fa-fw fas fa-paper-plane"></i><span> 戳我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Java编程思想：持有对象（第十一章）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-07-14T08:51:31.000Z" title="发表于 2021-07-14 16:51:31">2021-07-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-07-14T13:56:25.927Z" title="更新于 2021-07-14 21:56:25">2021-07-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Books/">Books</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="泛型和类型安全容器"><a href="#泛型和类型安全容器" class="headerlink" title="泛型和类型安全容器"></a>泛型和类型安全容器</h1><h2 id="没有使用泛型的例子"><a href="#没有使用泛型的例子" class="headerlink" title="没有使用泛型的例子"></a>没有使用泛型的例子</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">t1</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line">    ArrayList arrayList=<span class="keyword">new</span> ArrayList();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)</span><br><span class="line">        arrayList.add(<span class="keyword">new</span> apple());</span><br><span class="line">    arrayList.add(<span class="keyword">new</span> orange());</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arrayList.size();i++)&#123;</span><br><span class="line">        ((apple)arrayList.get(i)).id();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>apple和orange是有区别的，除了都是继承自Object之外没有任何共性。但是因为ArrayList保存的是Object，所以arraylist中既可以保存apple也可以保存orange，并且不论在编译期还是运行期都不会产生问题。但是当你从arrayList中取出对象的时候，得到的只是Object的引用，必须进行强制的类型转换（在调用id方法之前）。在运行时，就会出现类型转换错误<code>java.lang.ClassCastException: pojo.orange cannot be cast to pojo.apple</code></p>
+<h2 id="使用泛型的例子"><a href="#使用泛型的例子" class="headerlink" title="使用泛型的例子"></a>使用泛型的例子</h2><p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210714172453.png" alt="image-20210714172453150"></p>
+<p>ArrayList&lt;&gt;内表示的是<strong>类型参数</strong>，指定了容器实例可以保存的类型，这样，就可以在编译期发现这个错误，这个时候，从容器中取出apple也不再需要类型转换</p>
+<p>此外，ArrayList&lt;apple&gt;中可以存放apple子类</p>
+<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p>Java容器类类库的目的是保存对象，分为两个不同的概念</p>
+<p>**Collection: **一个独立元素的序列，这些元素都服从一条或者多条规则。List必须按照插入的顺序保存元素，Queue按照排队规则来确定对象产生的顺序（通常和他们被插入的顺序相同）</p>
+<p><strong>Map:</strong> 一组成对的“键值对”对象，允许你使用键值来查找值。ArrayList允许你使用数字来查找值，因此，从某种意义来说，他将数字和对象关联在了一起。映射表（Map）允许我们使用另一个对象来查找某个对象，因此被称为关联数组，或者“字典”</p>
+<p>一般情况下，我们都是通过接口使用这些容器，但是有时候，因为一些额外的功能（比如LinkedList中包含List接口中没有的方法）就不能使用向上转型为更通用的接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;apple&gt; list=<span class="keyword">new</span> ArrayList&lt;apple&gt;();</span><br><span class="line">List&lt;apple&gt; list=<span class="keyword">new</span> LinkedList&lt;apple&gt;();</span><br></pre></td></tr></table></figure>
+
+<h1 id="添加一组元素"><a href="#添加一组元素" class="headerlink" title="添加一组元素"></a>添加一组元素</h1><h2 id="Arrays-asList"><a href="#Arrays-asList" class="headerlink" title="Arrays.asList()"></a>Arrays.asList()</h2><p>该方法是将数组转化成List集合的方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = Arrays.asList(<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>,<span class="string">&quot;c&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<p>（1）该方法适用于对象型数据的数组（String、Integer…）</p>
+<p>（2）该方法不建议使用于基本数据类型的数组（byte,short,int,long,float,double,boolean）</p>
+<p>（3）该方法将数组与List列表链接起来：当更新其一个时，另一个自动更新</p>
+<p>（4）不支持add()、remove()、clear()等方法</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210714181445.png" alt="image-20210714181445338"></p>
+<p>Arrays.asList()源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">List&lt;T&gt; <span class="title">asList</span><span class="params">(T... a)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ArrayList&lt;&gt;(a);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意这个new ArrayList&lt;&gt;是Arryas内自己定义的一个静态变量，直接继承了父类AbstractList</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractList</span>&lt;<span class="title">E</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>父类中直接抛出了异常</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> index, E element)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Collections-addAll"><a href="#Collections-addAll" class="headerlink" title="Collections.addAll()"></a>Collections.addAll()</h2><p>该方法接收一个Collection对象，以及一个数组或者用逗号分隔的列表，将元素添加到Collection中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">t3</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Collection&lt;Integer&gt; collection=<span class="keyword">new</span> ArrayList&lt;Integer&gt;(Arrays.asList(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>));</span><br><span class="line">    Integer[] moreInt=&#123;<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;</span><br><span class="line">    collection.addAll(Arrays.asList(moreInt));</span><br><span class="line">    Collections.addAll(collection,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>);</span><br><span class="line">    Integer[] moreInt2=&#123;<span class="number">10</span>,<span class="number">11</span>&#125;;</span><br><span class="line">    Collections.addAll(collection,moreInt2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>If you’re adding elements from an array, you can use <code>Collections.addAll(col, arr)</code><ul>
+<li>Remember that varargs are also done using arrays</li>
+</ul>
+</li>
+<li>If you’re adding elements from a <code>Collection</code>, use <code>col.addAll(otherCol)</code><ul>
+<li>Do <em>NOT</em> e.g. <code>Collections.addAll(col, otherCol.toArray())</code><ul>
+<li>Such roundabout way is likely to be slower!</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>It’s not that one is supremely faster than the other<ul>
+<li>It’s about skipping unnecessary steps given the current situation</li>
+</ul>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/BJUT-2010/p/5577977.html">建议看一下这个帖子</a></p>
+<h1 id="容器的打印"><a href="#容器的打印" class="headerlink" title="容器的打印"></a>容器的打印</h1><p>使用容器默认实现的toString方法吗就可以生成可读性很好的结果。</p>
+<p>Collection打印出来的内容用<strong>方括号</strong>包住，<strong>逗号</strong>分隔；</p>
+<p>Map打印出来的<strong>大括号</strong>包住，键值用<strong>等号</strong>连接；</p>
+<h2 id="Collection"><a href="#Collection" class="headerlink" title="Collection"></a>Collection</h2><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210714184421.png" alt="image-20210714184421590" style="zoom:50%;" />
+
+<p>重写ToString方法后：</p>
+<img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210714184645.png" alt="image-20210714184645544" style="zoom:50%;" />
+
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210714184734.png" alt="image-20210714184734809" style="zoom:50%;" />
+
+<h1 id="List"><a href="#List" class="headerlink" title="List"></a>List</h1><p>List允许它在被创建之后添加元素，移除元素，或者自我调整尺寸。</p>
+<ul>
+<li>基本的ArrayList中，长于<strong>随机访问</strong>元素，但是在List中间插入和移除元素时较慢</li>
+<li>LinkedList，通过代价较低的在List中间进行的插入和删除操作，提供了优化的<strong>顺序访问</strong>。</li>
+</ul>
+<h1 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h1><h2 id="ListIterator"><a href="#ListIterator" class="headerlink" title="ListIterator"></a>ListIterator</h2><p>迭代器是一个对象，他的工作是遍历并选择序列中的对象，而客户端程序员不必知道或关心该序列底层的结构。</p>
+<ul>
+<li>使用iterator()要求容器返回一个Iterator，Iterator将准备好返回序列的第一个元素</li>
+<li>使用next()获得序列中的下一个元素</li>
+<li>使用hasNext()检查序列中是否还有元素</li>
+<li>使用remove()将迭代器新返回的元素删除</li>
+</ul>
+<p>Example:迭代器遍历删除(要在)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">   <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">t6</span><span class="params">()</span></span>&#123;</span><br><span class="line">        List&lt;apple&gt; apples=<span class="keyword">new</span> ArrayList&lt;apple&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)</span><br><span class="line">            apples.add(<span class="keyword">new</span> apple());</span><br><span class="line">        System.out.println(apples);</span><br><span class="line">        <span class="keyword">for</span> (Iterator&lt;apple&gt; iterator=apples.iterator();iterator.hasNext();)&#123;</span><br><span class="line">            apple appleInstance=iterator.next();</span><br><span class="line">            <span class="keyword">if</span> (appleInstance.id()==<span class="number">2</span>)&#123;</span><br><span class="line">                iterator.remove();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(apples);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h1><p>LinkedList和ArrayList一样实现了基本的List接口，但是它执行某些操作（在List中间插入和移除）时比ArrayList更加高效，但在随机访问操作方面逊色。同时LinkedList添加了可以使其作用于栈、队列的方法</p>
+<h1 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h1><p>LinkedList具有直接实现栈的所有方法，可以直接使用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> pojo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.LinkedList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Stack</span>&lt;<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> LinkedList&lt;T&gt; storage=<span class="keyword">new</span> LinkedList&lt;T&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(T v)</span></span>&#123;</span><br><span class="line">        storage.addFirst(v);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">pop</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> storage.removeFirst();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">peek</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> storage.getFirst();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">empty</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> storage.isEmpty();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> storage.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Java1.0的stack（util.Stack）继承自Vector，拥有比栈多的行为（不要去使用）</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Coolingsky</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2021/07/14/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3%EF%BC%9A%E6%8C%81%E6%9C%89%E5%AF%B9%E8%B1%A1%EF%BC%88%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0%EF%BC%89/">http://example.com/2021/07/14/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3%EF%BC%9A%E6%8C%81%E6%9C%89%E5%AF%B9%E8%B1%A1%EF%BC%88%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0%EF%BC%89/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Coolingsky的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210714165339.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/IMG_2469.JPG" target="_blank"><img class="post-qr-code-img" src="/img/IMG_2469.JPG" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/07/13/Springboot%E5%85%A5%E9%97%A81/"><img class="next-cover" src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210709181229.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Springboot入门1</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/03/19/JAVA-collection/" title="JAVA collection"><img class="cover" src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210324152849.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-19</div><div class="title">JAVA collection</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/fnym.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Coolingsky</div><div class="author-info__description">A man can be destroyed but not defeated</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Coolingsky167"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Coolingsky167" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1029370923@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">Welcome to Coolingsky's tech blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B%E5%92%8C%E7%B1%BB%E5%9E%8B%E5%AE%89%E5%85%A8%E5%AE%B9%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">泛型和类型安全容器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B2%A1%E6%9C%89%E4%BD%BF%E7%94%A8%E6%B3%9B%E5%9E%8B%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-number">1.1.</span> <span class="toc-text">没有使用泛型的例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%B3%9B%E5%9E%8B%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-number">1.2.</span> <span class="toc-text">使用泛型的例子</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">2.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E4%B8%80%E7%BB%84%E5%85%83%E7%B4%A0"><span class="toc-number">3.</span> <span class="toc-text">添加一组元素</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Arrays-asList"><span class="toc-number">3.1.</span> <span class="toc-text">Arrays.asList()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Collections-addAll"><span class="toc-number">3.2.</span> <span class="toc-text">Collections.addAll()</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E7%9A%84%E6%89%93%E5%8D%B0"><span class="toc-number">4.</span> <span class="toc-text">容器的打印</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Collection"><span class="toc-number">4.1.</span> <span class="toc-text">Collection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Map"><span class="toc-number">4.2.</span> <span class="toc-text">Map</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#List"><span class="toc-number">5.</span> <span class="toc-text">List</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="toc-number">6.</span> <span class="toc-text">迭代器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ListIterator"><span class="toc-number">6.1.</span> <span class="toc-text">ListIterator</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LinkedList"><span class="toc-number">7.</span> <span class="toc-text">LinkedList</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Stack"><span class="toc-number">8.</span> <span class="toc-text">Stack</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/07/14/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3%EF%BC%9A%E6%8C%81%E6%9C%89%E5%AF%B9%E8%B1%A1%EF%BC%88%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0%EF%BC%89/" title="Java编程思想：持有对象（第十一章）"><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210714165339.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java编程思想：持有对象（第十一章）"/></a><div class="content"><a class="title" href="/2021/07/14/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3%EF%BC%9A%E6%8C%81%E6%9C%89%E5%AF%B9%E8%B1%A1%EF%BC%88%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0%EF%BC%89/" title="Java编程思想：持有对象（第十一章）">Java编程思想：持有对象（第十一章）</a><time datetime="2021-07-14T08:51:31.000Z" title="发表于 2021-07-14 16:51:31">2021-07-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/13/Springboot%E5%85%A5%E9%97%A81/" title="Springboot入门1"><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210709181229.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Springboot入门1"/></a><div class="content"><a class="title" href="/2021/07/13/Springboot%E5%85%A5%E9%97%A81/" title="Springboot入门1">Springboot入门1</a><time datetime="2021-07-13T03:30:45.000Z" title="发表于 2021-07-13 11:30:45">2021-07-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/11/SpringMVC%E5%85%A5%E9%97%A82/" title="SpringMVC入门2"><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210709181229.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SpringMVC入门2"/></a><div class="content"><a class="title" href="/2021/07/11/SpringMVC%E5%85%A5%E9%97%A82/" title="SpringMVC入门2">SpringMVC入门2</a><time datetime="2021-07-11T04:35:39.000Z" title="发表于 2021-07-11 12:35:39">2021-07-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/09/SpringMVC%E5%85%A5%E9%97%A8/" title="SpringMVC入门"><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210709181229.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SpringMVC入门"/></a><div class="content"><a class="title" href="/2021/07/09/SpringMVC%E5%85%A5%E9%97%A8/" title="SpringMVC入门">SpringMVC入门</a><time datetime="2021-07-09T10:11:26.000Z" title="发表于 2021-07-09 18:11:26">2021-07-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/09/mybatis%E5%85%A5%E9%97%A8/" title="mybatis入门"><img src="https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210708174329.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="mybatis入门"/></a><div class="content"><a class="title" href="/2021/07/09/mybatis%E5%85%A5%E9%97%A8/" title="mybatis入门">mybatis入门</a><time datetime="2021-07-09T10:09:23.000Z" title="发表于 2021-07-09 18:09:23">2021-07-09</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://cdn.jsdelivr.net/gh/Coolingsky167/Figure/cover/20210714165339.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Coolingsky</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a><br>
+<a href="http://www.beian.miit.gov.cn/"  style="color:#ffffff" target="_blank">苏ICP备2021014309号</a></div><div class="footer_custom_text">Welcome.</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
